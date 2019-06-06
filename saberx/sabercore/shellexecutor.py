@@ -6,7 +6,7 @@ class ShellExecutor:
 		self.command_list = kwargs.get("command_list")
 		self.logger = kwargs.get("logger")
 
-	def executeShellSingle(self, command):
+	def execute_shell_single(self, command):
 		'''
 			TODO:
 				sanity check
@@ -20,12 +20,12 @@ class ShellExecutor:
 
 		return True, output, proc_exit_code
 
-	def executeShellList(self):
+	def execute_shell_list(self):
 		for command in self.command_list:
 
 			# log the command being executed
 
-			success, reponse, proc_exit_code = self.executeShellSingle(command)
+			success, reponse, proc_exit_code = self.execute_shell_single(command)
 			if not success:
 				# log the response and proc_exit_code
 				return False
