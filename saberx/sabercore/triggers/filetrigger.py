@@ -9,4 +9,7 @@ class FileTrigger(TriggerBase):
 		if kwargs.get("position"):
 			self.position = kwargs.get("position")
 		if kwargs.get("limit"):
-			self.limit = kwargs.get("limit")	
+			self.limit = kwargs.get("limit")
+
+	def fire_trigger(self):
+		pass
