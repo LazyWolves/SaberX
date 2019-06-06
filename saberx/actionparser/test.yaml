@@ -1,0 +1,7 @@
+actiongroups:
+  - groupname: grp1
+  - description: desc1
+    actions:
+      - actionname: clear logs
+      - description: test
+      - triger:
