@@ -23,3 +23,15 @@ class FileHandler:
             return True, None
 
         return False, None
+
+    @staticmethod
+    def search_keyword(**kwargs):
+        path = kwargs.get("path")
+        regex = kwargs.get("regex")
+        limit = kwargs.get("limit")
+        position = kwargs.get("position")
+
+        is_present, error = FileHandler.is_present(path)
+
+        if not is_present:
+            return False, error
