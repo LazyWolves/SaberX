@@ -19,7 +19,7 @@ class FileHandler:
     def is_empty(path):
         is_present, error = FileHandler.is_present(path)
 
-        if not is_present:
+        if not is_present(path):
             return False, "FILE_DOES_NOT_EXISTS"
 
         if os.stat(path).st_size == 0:
@@ -63,8 +63,7 @@ class FileHandler:
         for line in lines_found:
             text = line.decode().strip()
             if pattern.search(text):
-                #return True, None
-                print (text)
+                return True, None
 
         return False, None
 
@@ -77,8 +76,16 @@ class FileHandler:
 
         is_present, error = FileHandler.is_present(path)
 
-        if not is_present:
+        if not is_present(path):
             return False, "FILE_DOES_NOT_EXISTS"
+
+        if is_empty(path):
+            return False, "FILE_IS_EMPTY"
+
+        if position == "head":
+            return read_from_head(path, regex, lines)
+        else:
+            return read_from_tail(path, regex, lines)
 
 if __name__ == "__main__":
     FileHandler.read_from_tail("filetrigger.py", '.*', 10)
