@@ -1,6 +1,7 @@
 import os
 from itertools import islice
 import re
+import traceback
 
 class FileHandler:
 
@@ -37,6 +38,35 @@ class FileHandler:
 
         return False, None
 
+    @staticmethod
+    def read_from_tail(path, regex, lines):
+        pattern = re.compile(regex)
+
+        lines_found = []
+        block_counter = -1
+        _buffer = min(4096, os.stat(path).st_size)
+
+        with open(path, 'rb') as f:
+            while len(lines_found) <= lines:
+                try:
+                    f.seek(block_counter * _buffer, os.SEEK_END)
+                except IOError:
+                    f.seek(0)
+                    lines_found = f.readlines()
+                    break
+
+                lines_found = f.readlines()
+                block_counter -= 1
+
+        lines_found = lines_found[-lines:]
+
+        for line in lines_found:
+            text = line.decode().strip()
+            if pattern.search(text):
+                #return True, None
+                print (text)
+
+        return False, None
 
     @staticmethod
     def search_keyword(**kwargs):
@@ -51,4 +81,4 @@ class FileHandler:
             return False, "FILE_DOES_NOT_EXISTS"
 
 if __name__ == "__main__":
-    FileHandler.read_from_head("filetrigger.py", '.*', 100)
+    FileHandler.read_from_tail("filetrigger.py", '.*', 10)
