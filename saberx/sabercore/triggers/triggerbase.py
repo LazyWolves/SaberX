@@ -11,11 +11,18 @@ class TriggerBase:
 
 		return False, None
 
+	def sanitise(self):
+		'''
+			This method must be implemented by child class
+		'''
+
+		pass
+
 	def get_type(self):
-		return type
+		return self.type
 
 	def get_check(self):
-		return check
+		return self.check
 
 	def is_negate(self):
-		return negate
+		return self.negate
