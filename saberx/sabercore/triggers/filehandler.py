@@ -5,10 +5,10 @@ class FileHandler:
     @staticmethod
     def is_present(path):
         if not os.path.exists(path):
-            return False, "PATH_DOES_NOT_EXISTS"
+            return False, None
 
         if not os.path.isfile(path):
-            return False, "PATH_IS_NOT_A_FILE"
+            return False, None
 
         return True, None
 
@@ -17,7 +17,7 @@ class FileHandler:
         is_present, error = FileHandler.is_present(path)
 
         if not is_present:
-            return False, error
+            return False, "FILE_DOES_NOT_EXISTS"
 
         if os.stat(path).st_size == 0:
             return True, None
