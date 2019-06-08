@@ -9,12 +9,19 @@ class ProcessHandler:
 		pattern = re.compile(regex)
 		count = 0
 
-		for proc in psutil.process_iter(attrs=['name']):
-			proc_name = proc.info['name']
-			if pattern.search(proc_name):
-				count += 1
+		try:
+			for proc in psutil.process_iter(attrs=['name']):
+				proc_name = proc.info['name']
+				if pattern.search(proc_name):
+					count += 1
 
-		return count
+			return True, count, None
+		except Exception:
+			'''
+				Log error
+			'''
+
+			return False, None, "CANNOT_ACCESS_PROCESS_NAMES"
 
 	@staticmethod
 	def check_cmdline_count(regex):
@@ -25,6 +32,6 @@ class ProcessHandler:
 		output, errors = proc.communicate()
 
 		if proc_exit_code != 0:
-			return False, errors, proc_exit_code
+			return False, None, "CANNOT_ACCESS_PROCESSES"
 
-		return True, output, proc_exit_code
+		return True, output, None
