@@ -25,7 +25,7 @@ class ProcessHandler:
 
 	@staticmethod
 	def get_cmdline_count(regex):
-		command = 'ps aux | grep {} | grep -v grep | wc -l'
+		command = 'ps aux | grep "{}" | grep -v grep | wc -l'
 
 		proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 		proc_exit_code = proc.returncode
@@ -38,7 +38,7 @@ class ProcessHandler:
 
 	@staticmethod
 	def check_name(regex):
-		response, count, error = get_name_count(regex)
+		response, count, error = ProcessHandler.get_name_count(regex)
 
 		if error:
 			return False, error
@@ -50,7 +50,7 @@ class ProcessHandler:
 
 	@staticmethod
 	def check_cmdline(regex):
-		response, count, error = get_cmdline_count(regex)
+		response, count, error = ProcessHandler.get_cmdline_count(regex)
 
 		if error:
 			return False, error
@@ -61,8 +61,21 @@ class ProcessHandler:
 		return False
 
 	@staticmethod
+	def __operate(current, count, operator):
+		return {
+			'=': lambda current, count: current == count,
+			'<': lambda current, count: current < count,
+			'>': lambda current, count: current > count,
+			'<=': lambda current, count: current <= count,
+			'>=': lambda current, count: current >= count
+		}.get(operator)(current, count)
+
+	@staticmethod
 	def check_name_count(regex, count, operation):
-		pass
+		response, count, error = ProcessHandler.get_name_count(regex)
+
+		if error:
+			return False, error
 
 	@staticmethod
 	def check_cmdline_count(regex, count, operation):

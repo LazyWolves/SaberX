@@ -83,9 +83,9 @@ class FileHandler:
             return False, None
 
         if position == "head":
-            return read_from_head(path, regex, lines)
+            return FileHandler.read_from_head(path, regex, lines)
         else:
-            return read_from_tail(path, regex, lines)
+            return FileHandler.read_from_tail(path, regex, lines)
 
 if __name__ == "__main__":
     FileHandler.read_from_tail("filetrigger.py", '.*', 10)
