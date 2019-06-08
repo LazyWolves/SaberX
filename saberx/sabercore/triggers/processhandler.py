@@ -71,12 +71,16 @@ class ProcessHandler:
 		}.get(operator)(current, count)
 
 	@staticmethod
-	def check_name_count(regex, count, operation):
-		response, count, error = ProcessHandler.get_name_count(regex)
+	def check_name_count(regex, count, operator):
+		response, current, error = ProcessHandler.get_name_count(regex)
 
 		if error:
 			return False, error
 
+		operation_result = ProcessHandler.__operate(current, count, operator)
+
+		return operation_result, None
+
 	@staticmethod
-	def check_cmdline_count(regex, count, operation):
+	def check_cmdline_count(regex, count, operator):
 		pass
