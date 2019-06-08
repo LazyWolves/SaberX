@@ -45,3 +45,25 @@ class ProcessHandler:
 
 		if count != 0:
 			return True, None
+
+		return False, None
+
+	@staticmethod
+	def check_cmdline(regex):
+		response, count, error = get_cmdline_count(regex)
+
+		if error:
+			return False, error
+
+		if count != 0:
+			return True, None
+
+		return False
+
+	@staticmethod
+	def check_name_count(regex, count, operation):
+		pass
+
+	@staticmethod
+	def check_cmdline_count(regex, count, operation):
+		pass
