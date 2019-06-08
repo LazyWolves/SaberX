@@ -1,5 +1,5 @@
 from triggerbase import TriggerBase
-from filehandler import filehandler
+from filehandler import FileHandler
 
 class FileTrigger(TriggerBase):
 	def __init__(self, **kwargs):
@@ -11,14 +11,36 @@ class FileTrigger(TriggerBase):
 			self.position = kwargs.get("position")
 		if kwargs.get("limit"):
 			self.limit = kwargs.get("limit")
+		if kwargs.get("resource"):
+			self.path = resource
 
 		self.checks = ["empty", "present", "regex"]
 		self.valid_positions = ["head", "tail"]
 
 	def fire_trigger(self):
-		pass
+		if not self.sanitise():
+			return False, "IMPROPER_ARGUMENTS"
+
+		if self.check == "present":
+			triggered, error =  FileHandler.is_present(self.path)
+			return self.eval_negate(triggered, error)
+
+		if self.check == "empty":
+			triggered, error =  FileHandler.is_empty(self.path)
+			return self.eval_negate(triggered, error)
+
+		if self.check == "regex":
+			triggered, error = FileHandler.search_keyword(path=self.path, limit=self.limit, position=self.position, regex=self.regex)
+			return self.eval_negate(triggered, error)
+
 
 	def sanitise(self):
+		if not self.path:
+			'''
+				Log error
+			'''
+			return False
+
 		if not self.type:
 			'''
 				Log the error
@@ -43,7 +65,7 @@ class FileTrigger(TriggerBase):
 			'''
 			return False
 
-		if self.position and not self.position in self.valid_positions:
+		if self.position and not (self.position in self.valid_positions):
 			'''
 				Log error
 			'''

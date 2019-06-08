@@ -80,7 +80,7 @@ class FileHandler:
             return False, "FILE_DOES_NOT_EXISTS"
 
         if is_empty(path):
-            return False, "FILE_IS_EMPTY"
+            return False, None
 
         if position == "head":
             return read_from_head(path, regex, lines)

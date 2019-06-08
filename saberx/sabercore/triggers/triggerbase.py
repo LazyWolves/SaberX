@@ -16,7 +16,16 @@ class TriggerBase:
 			This method must be implemented by child class
 		'''
 
-		pass
+		return False
+
+	def eval_nagate(self, triggered, error):
+		if error:
+			return triggered, error
+
+		if negate:
+			return not triggered, error
+
+		return triggered, error
 
 	def get_type(self):
 		return self.type
