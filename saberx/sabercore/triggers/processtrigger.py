@@ -13,3 +13,9 @@ class ProcessTrigger(TriggerBase):
 
 		self.checks = ["name", "cmdline"]
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
+
+	def fire_trigger(self):
+		pass
+
+	def sanitise(self):
+		pass
