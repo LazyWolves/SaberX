@@ -12,7 +12,7 @@ class FileTrigger(TriggerBase):
 		if kwargs.get("limit"):
 			self.limit = kwargs.get("limit")
 		if kwargs.get("resource"):
-			self.path = resource
+			self.path = kwargs.get("resource")
 
 		self.checks = ["empty", "present", "regex"]
 		self.valid_positions = ["head", "tail"]
