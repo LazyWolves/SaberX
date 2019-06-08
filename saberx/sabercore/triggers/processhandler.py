@@ -5,7 +5,7 @@ import re
 class ProcessHandler:
 
 	@staticmethod
-	def check_name_and_count(regex):
+	def get_name_count(regex):
 		pattern = re.compile(regex)
 		count = 0
 
@@ -24,7 +24,7 @@ class ProcessHandler:
 			return False, None, "CANNOT_ACCESS_PROCESS_NAMES"
 
 	@staticmethod
-	def check_cmdline_count(regex):
+	def get_cmdline_count(regex):
 		command = 'ps aux | grep {} | grep -v grep | wc -l'
 
 		proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
@@ -35,3 +35,13 @@ class ProcessHandler:
 			return False, None, "CANNOT_ACCESS_PROCESSES"
 
 		return True, output, None
+
+	@staticmethod
+	def check_name(regex):
+		response, count, error = get_name_count(regex)
+
+		if error:
+			return False, error
+
+		if count != 0:
+			return True, None
