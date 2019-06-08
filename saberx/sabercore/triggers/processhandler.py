@@ -83,4 +83,11 @@ class ProcessHandler:
 
 	@staticmethod
 	def check_cmdline_count(regex, count, operator):
-		pass
+		response, current, error = ProcessHandler.get_cmdline_count(regex)
+
+		if error:
+			return False, error
+
+		operation_result = ProcessHandler.__operate(current, count, operator)
+
+		return operation_result, None
