@@ -14,7 +14,7 @@ class FileTrigger(TriggerBase):
 		if kwargs.get("resource"):
 			self.path = kwargs.get("resource")
 
-		self.checks = ["empty", "present", "regex"]
+		self.valid_checks = ["empty", "present", "regex"]
 		self.valid_positions = ["head", "tail"]
 
 	def fire_trigger(self):
@@ -53,7 +53,7 @@ class FileTrigger(TriggerBase):
 			'''
 			return False
 
-		if not self.check in self.checks:
+		if not (self.check in self.valid_checks):
 			'''
 				Log error
 			'''

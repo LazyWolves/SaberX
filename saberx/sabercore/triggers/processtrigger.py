@@ -11,11 +11,37 @@ class ProcessTrigger(TriggerBase):
 		if kwargs.get("operation"):
 			self.path = kwargs.get("operation")
 
-		self.checks = ["name", "cmdline"]
+		self.valid_checks = ["name", "cmdline"]
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
 
 	def fire_trigger(self):
 		pass
 
 	def sanitise(self):
-		pass
+		if not self.type:
+			'''
+				log error
+			'''
+
+			return False
+
+		if not self.check:
+			'''
+				log error
+			'''
+
+			return False
+
+		if not (self.check in self.valid_checks):
+			'''
+				log error
+			'''
+
+			return False
+
+		if self.count and self.count < 0:
+			'''
+				log error
+			'''
+
+			return False
