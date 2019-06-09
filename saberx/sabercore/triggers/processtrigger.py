@@ -1,4 +1,5 @@
 from triggerbase import TriggerBase
+from processhandler import ProcessHandler
 
 class ProcessTrigger(TriggerBase):
 	def __init__(self, **kwargs):
@@ -19,7 +20,19 @@ class ProcessTrigger(TriggerBase):
 			return False, "INVALID_ARGUMENTS"
 
 		if self.check == "name":
-			pass
+			if self.count:
+				triggered, error = ProcessHandler.check_name_count(self.regex, self.count, self.operation)
+				return self.eval_negate(triggered, error)
+			 triggered, error = ProcessHandler.check_name(self.regex)
+			 return self.eval_negate(triggered, error)
+
+		if self.check == "cmdline":
+			if self.count:
+				triggered, error = ProcessHandler.check_cmdline_count(self.regex, self.count, self.operation)
+				return self.eval_negate(triggered, error)
+
+			triggered, error = ProcessHandler.check_cmdline(self.regex)
+			return self.eval_negate(triggered, error)
 
 	def sanitise(self):
 		if not self.type:
