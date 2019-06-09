@@ -15,7 +15,11 @@ class ProcessTrigger(TriggerBase):
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
 
 	def fire_trigger(self):
-		pass
+		if not self.sanitise():
+			return False, "INVALID_ARGUMENTS"
+
+		if self.check == "name":
+			pass
 
 	def sanitise(self):
 		if not self.type:
@@ -40,6 +44,20 @@ class ProcessTrigger(TriggerBase):
 			return False
 
 		if self.count and self.count < 0:
+			'''
+				log error
+			'''
+
+			return False
+
+		if self.count and not self.operation:
+			'''
+				log error
+			'''
+
+			return False
+
+		if self.operation not in self.valid_operations:
 			'''
 				log error
 			'''
