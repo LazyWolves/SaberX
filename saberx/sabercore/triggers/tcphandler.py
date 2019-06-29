@@ -44,7 +44,31 @@ class TCPHandler:
 
     @staticmethod
     def  check_connection(**kwargs):
-        pass
+
+        host = kwargs.get("host")
+        port = kwargs.get("port", 80)
+        ssl = kwargs.get("ssl", False)
+        timeout = kwargs.get("timeout", 5)
+        attemps = kwargs.get("attempts", 1)
+        threshold = kwargs.get("threshold", 1)
+
+        if ssl:
+            check = TCPHandler.check_tcp_ssl
+        else:
+            check = TCPHandler.check_tcp
+
+        failures = 0
+
+        for attemp in range(attemps):
+            check_result = check(host=host, port=port, timeout=timeout)
+
+            if not check_result:
+                failures += 1
+
+        if failures >= threshold:
+            return False
+
+        return True
 
 if __name__ == "__main__":
     print (TCPHandler.check_tcp_ssl(host="www.media.net", port=4943))
