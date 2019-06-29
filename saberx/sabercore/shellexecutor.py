@@ -12,8 +12,8 @@ class ShellExecutor:
 				sanity check
 		'''
 		proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-		proc_exit_code = proc.returncode
 		output, errors = proc.communicate()
+		proc_exit_code = proc.returncode		
 
 		if proc_exit_code != 0:
 			return False, errors, proc_exit_code

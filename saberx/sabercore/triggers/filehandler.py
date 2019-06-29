@@ -79,13 +79,13 @@ class FileHandler:
         if not is_present(path):
             return False, "FILE_DOES_NOT_EXISTS"
 
-        if is_empty(path):
+        if  FileHandler.is_empty(path):
             return False, None
 
         if position == "head":
-            return FileHandler.read_from_head(path, regex, lines)
+            return FileHandler.read_from_head(path, regex, limit)
         else:
-            return FileHandler.read_from_tail(path, regex, lines)
+            return FileHandler.read_from_tail(path, regex, limit)
 
 if __name__ == "__main__":
     FileHandler.read_from_tail("filetrigger.py", '.*', 10)

@@ -1,11 +1,11 @@
 import yaml
+import json
 
 class ActionExtractor:
 
 	def __init__(self, **kwargs):
 		self.configpath = kwargs.get("configpath")
 		self.__load_config()
-		self.__extract_actions()
 		print (json.dumps(self.config, indent=4))
 
 	def __load_config(self):

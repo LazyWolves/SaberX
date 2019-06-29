@@ -25,7 +25,7 @@ class ProcessHandler:
 
 	@staticmethod
 	def get_cmdline_count(regex):
-		command = 'ps aux | grep "{}" | grep -v grep | wc -l'
+		command = 'ps aux | grep -E "{}" | grep -v grep | wc -l'
 
 		proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 		proc_exit_code = proc.returncode

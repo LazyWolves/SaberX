@@ -23,8 +23,8 @@ class ProcessTrigger(TriggerBase):
 			if self.count:
 				triggered, error = ProcessHandler.check_name_count(self.regex, self.count, self.operation)
 				return self.eval_negate(triggered, error)
-			 triggered, error = ProcessHandler.check_name(self.regex)
-			 return self.eval_negate(triggered, error)
+			triggered, error = ProcessHandler.check_name(self.regex)
+			return self.eval_negate(triggered, error)
 
 		if self.check == "cmdline":
 			if self.count:
