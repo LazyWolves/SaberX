@@ -1,6 +1,7 @@
 import os
 import socket
 import ssl
+import traceback
 
 class TCPHandler:
 
@@ -9,8 +10,10 @@ class TCPHandler:
 
         host = kwargs.get("host")
         port = kwargs.get("port", 80)
+        timeout = kwargs.get("timeout", 5)
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(timeout)
         try:
             sock.connect((host, int(port)))
             sock.shutdown(2)
@@ -23,8 +26,10 @@ class TCPHandler:
 
         host = kwargs.get("host")
         port = kwargs.get("port", 443)
+        timeout = kwargs.get("timeout", 5)
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(timeout)
         context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
         context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1  # optional
         ssl_sock = context.wrap_socket(sock, server_hostname=host)
@@ -33,10 +38,13 @@ class TCPHandler:
             ssl_sock.connect((host, int(port)))
             ssl_sock.close()
             return True
-        except:
+        except socket.error:
             return False
 
 
     @staticmethod
     def  check_connection(**kwargs):
         pass
+
+if __name__ == "__main__":
+    print (TCPHandler.check_tcp_ssl(host="www.media.net", port=4943))
