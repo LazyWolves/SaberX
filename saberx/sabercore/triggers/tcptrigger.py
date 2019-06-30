@@ -9,16 +9,26 @@ class TCPTrigger(TriggerBase):
 			self.host = kwargs.get("host")
 		if kwargs.get("port"):
 			self.port = kwargs.get("port", 80)
+        if kwargs.get("timeout"):
+            self.timeout = kwargs.get("timeout", 5)
 		if kwargs.get("attempts"):
 			self.attempts = kwargs.get("attempts", 1)
 		if kwargs.get("threshold"):
-			self.threshold = kwargs.get("threshold", 5)
+			self.threshold = kwargs.get("threshold", 1)
         if kwargs.get("ssl"):
             self.ssl = kwargs.get("ssl", False)
 
 		self.valid_checks = ["tcp_connect", "tcp_fail"]
 
         self.PORT_MIN, self.PORT_MAX = 0, 65535
+
+    def fire_trigger(self):
+        if not self.sanitise():
+            return False, "IMPROPER_ARGUMENTS"
+
+        trigerred, error = TCPHandler.check_connection(host=self.host, port=self.port, timeout=self.timeout, attempts=self.attempts, threshold=self.threshold, check_type=self.check, ssl=self.ssl)
+
+        return self.eval_negate(trigerred, error)
 
     def sanitise(self):
         if not self.host:
@@ -30,6 +40,13 @@ class TCPTrigger(TriggerBase):
         
         if self.port < self.PORT_MIN or self.port > self.PORT_MAX:
             
+            '''
+                Log error
+            '''
+            return False
+
+        if self.timeout <= 0:
+
             '''
                 Log error
             '''
