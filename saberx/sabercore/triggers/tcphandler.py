@@ -51,7 +51,7 @@ class TCPHandler:
         timeout = kwargs.get("timeout", 5)
         attemps = kwargs.get("attempts", 1)
         threshold = kwargs.get("threshold", 1)
-        check_type = kwargs.get("check_type", "tcp_failure")
+        check_type = kwargs.get("check_type", "tcp_fail")
 
 
         if ssl:
@@ -62,13 +62,14 @@ class TCPHandler:
         count = 0
 
         for attempt in range(attemps):
+            print ("checking...")
             check_result = check(host=host, port=port, timeout=timeout)
 
             if check_result:
                 if check_type == "tcp_connect":
                     count += 1
             else:
-                if check_result == "tcp_failure":
+                if check_result == "tcp_fail":
                     count += 1
 
         if count >= threshold:
@@ -77,4 +78,4 @@ class TCPHandler:
         return False
 
 if __name__ == "__main__":
-    print (TCPHandler.check_tcp_ssl(host="www.media.net", port=4943))
+    print (TCPHandler.check_connection(host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))
