@@ -72,4 +72,3 @@ class TCPTrigger(TriggerBase):
                 Log error
             '''
             return False
-
