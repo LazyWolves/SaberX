@@ -42,3 +42,17 @@ class TCPTrigger(TriggerBase):
             '''
             return False
 
+        if self.threshold <= 0:
+
+            '''
+                Log error
+            '''
+            return False
+
+        if self.check not in self.valid_checks:
+
+            '''
+                Log error
+            '''
+            return False
+
