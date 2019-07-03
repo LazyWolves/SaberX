@@ -14,7 +14,7 @@ class CPUHandler:
 		}.get(operator)(current, count)
 
     @staticmethod
-    def get_loadavg(**kwargs):
+    def check_loadavg(**kwargs):
 
         thresholds = kwargs.get("thresholds")
         operation = kwargs.get("operation")
@@ -28,3 +28,6 @@ class CPUHandler:
             final_result = final_result and CPUHandler.__operate(loadavg[index], value, operation)
         
         return final_result, None
+
+if __name__ == "__main__":
+    print (CPUHandler.check_loadavg(thresholds=[10.0, 1.0], operation="<"))
