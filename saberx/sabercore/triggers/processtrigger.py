@@ -10,7 +10,7 @@ class ProcessTrigger(TriggerBase):
 		if kwargs.get("count"):
 			self.count = kwargs.get("count")
 		if kwargs.get("operation"):
-			self.path = kwargs.get("operation")
+			self.operation = kwargs.get("operation")
 
 		self.valid_checks = ["name", "cmdline"]
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
