@@ -24,17 +24,9 @@ class MemoryHandler:
         return MEM_TYPES.get(check)
 
     @staticmethod
-    def get_attr_val(metrics, attr):
-        return {
-            "used": metrics.used,
-            "available": metrics.available,
-            "free": metrics.free
-        }.get(attr)
-
-    @staticmethod
     def check_mem(**kwargs):
 
-        check_type = kwargs.get("type")
+        check_type = kwargs.get("check_type")
         attr = kwargs.get("attr")
         threshold = kwargs.get("threshold")
         operator = kwargs.get("operator")
@@ -42,8 +34,11 @@ class MemoryHandler:
         check = MemoryHandler.get_mem_type(check_type)
 
         metrics = check()
-        attr_val =  MemoryHandler.get_attr_val(metrics, attr)
+        attr_val =  getattr(metrics, attr)
 
         check_result = MemoryHandler.__operate(attr_val, threshold, operator)
 
         return check_result
+
+if __name__ == "__main__":
+    print (MemoryHandler.check_mem(check_type="swap", attr="free", threshold=1, operator=">"))
