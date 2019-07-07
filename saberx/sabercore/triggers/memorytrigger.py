@@ -18,4 +18,51 @@ class MemoryTrigger(TriggerBase):
 		pass
 
 	def sanitise(self):
-		pass
+		if not self.check:
+
+			'''
+				Log error
+			'''
+			return False
+
+		if not self.type:
+
+			'''
+				Log error
+			'''
+			return False
+
+		if not self.check in self.valid_checks:
+
+			'''
+				Log error
+			'''
+			return False
+
+		if not self.attr:
+
+			'''
+				Log error
+			'''
+			return False
+
+		if not self.attr in self.valid_attrs:
+
+			'''
+				Log error
+			'''
+			return False
+
+		if not self.operation:
+
+			'''
+				Log error
+			'''
+			return False
+
+		if not self.operation in self.valid_operations:
+
+			'''
+				Log error
+			'''
+			return False
