@@ -9,13 +9,19 @@ class MemoryTrigger(TriggerBase):
 			self.regex = kwargs.get("attr")
 		if kwargs.get("operation"):
 			self.operation = kwargs.get("operation")
+		if kwargs.get("threshold"):
+			self.threshold = kwargs.get("threshold")
 
 		self.valid_checks = ["virtual", "swap"]
 		self.valid_attrs = ["used", "available", "free"]
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
 
 	def fire_trigger(self):
-		pass
+		if not self.sanitise():
+			return False, "INVALID_ARGUMENTS"
+
+		triggered, error = MemoryHandler.check_mem(check_type=self.check, attr=self.attr, operation=self.operation, threshold=self.threshold)
+		return self.eval_nagate(triggered, error)
 
 	def sanitise(self):
 		if not self.check:
@@ -65,4 +71,20 @@ class MemoryTrigger(TriggerBase):
 			'''
 				Log error
 			'''
+			return False
+
+		if not self.threshold:
+
+			'''
+				Log error
+			'''
+
+			return False
+
+		if type(self.threshold) != float:
+
+			'''
+				Log error
+			'''
+
 			return False

@@ -38,7 +38,7 @@ class MemoryHandler:
 
         check_result = MemoryHandler.__operate(attr_val, threshold, operator)
 
-        return check_result
+        return check_result, None
 
 if __name__ == "__main__":
     print (MemoryHandler.check_mem(check_type="swap", attr="free", threshold=1, operator=">"))
