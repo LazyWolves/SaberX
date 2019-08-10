@@ -7,7 +7,7 @@ class ActionExecuter(object):
 
         trigger_map = {
             "FILE_TRIGGER": ActionExecuter.handle_file_trigger,
-            "PROCESS_TRIGGER": ActionExecuter.handle_process_triger,
+            "PROCESS_TRIGGER": ActionExecuter.handle_process_trigger,
             "TCP_TRIGGER": ActionExecuter.handle_tcp_trigger,
             "CPU_TRIGGER": ActionExecuter.handle_cpu_trigger,
             "MEMORY_TRIGGER": ActionExecuter.handle_memory_trigger
@@ -22,3 +22,23 @@ class ActionExecuter(object):
     @staticmethod
     def sanitize(action):
         return True
+
+    @staticmethod
+    def handle_file_trigger(**kwargs):
+        pass
+
+    staticmethod
+    def handle_process_trigger(**kwargs):
+        pass
+
+    staticmethod
+    def handle_tcp_trigger(**kwargs):
+        pass
+
+    staticmethod
+    def handle_cpu_trigger(**kwargs):
+        pass
+
+    staticmethod
+    def handle_memory_trigger(**kwargs):
+        pass
