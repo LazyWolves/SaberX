@@ -1,4 +1,4 @@
-class TriggerBase:
+class TriggerBase(object):
 	def __init__(self, **kwargs):
 		self.type = kwargs.get("type")
 		self.check = kwargs.get("check")
@@ -18,7 +18,7 @@ class TriggerBase:
 
 		return False
 
-	def eval_nagate(self, triggered, error):
+	def eval_negate(self, triggered, error):
 		if error:
 			return triggered, error
 

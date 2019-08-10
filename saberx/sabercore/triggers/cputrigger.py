@@ -1,10 +1,10 @@
-from triggerbase import TriggerBase
-from cpuhandler import CPUHandler
+from .triggerbase import TriggerBase
+from .cpuhandler import CPUHandler
 
 class CPUTrigger(TriggerBase):
 
 	def __init__(self, **kwargs):
-		TriggerBase.__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+		super(CPUTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
 		if kwargs.get("operation"):
 			self.operation = kwargs.get("operation")
@@ -20,7 +20,7 @@ class CPUTrigger(TriggerBase):
 			return False, "INVALID_ARGUMENTS"
 
 		triggered, error = CPUHandler.check_loadavg(operation=self.operation, thresholds=self.threshold)
-		return self.eval_nagate(triggered, error)
+		return self.eval_negate(triggered, error)
 
 	def sanitise(self):
 		if not self.operation:

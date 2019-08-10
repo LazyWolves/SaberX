@@ -1,9 +1,9 @@
-from triggerbase import TriggerBase
-from filehandler import FileHandler
+from .triggerbase import TriggerBase
+from .filehandler import FileHandler
 
 class FileTrigger(TriggerBase):
 	def __init__(self, **kwargs):
-		TriggerBase.__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+		super(FileTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
 		if kwargs.get("regex"):
 			self.regex = kwargs.get("regex")

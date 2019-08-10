@@ -1,12 +1,12 @@
-from triggerbase import TriggerBase
-from memoryhandler import MemoryHandler
+from .triggerbase import TriggerBase
+from .memoryhandler import MemoryHandler
 
 class MemoryTrigger(TriggerBase):
 	def __init__(self, **kwargs):
-		TriggerBase.__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+		super(MemoryTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
 		if kwargs.get("attr"):
-			self.regex = kwargs.get("attr")
+			self.attr = kwargs.get("attr")
 		if kwargs.get("operation"):
 			self.operation = kwargs.get("operation")
 		if kwargs.get("threshold"):
