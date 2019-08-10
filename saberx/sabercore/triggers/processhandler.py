@@ -58,7 +58,7 @@ class ProcessHandler:
 		if count != 0:
 			return True, None
 
-		return False
+		return False, None
 
 	@staticmethod
 	def __operate(current, count, operator):

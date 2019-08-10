@@ -25,6 +25,7 @@ class CPUHandler:
 
         for value in thresholds:
             final_result = final_result and CPUHandler.__operate(loadavg[index], value, operation)
+            index += 1
         
         return final_result, None
 
