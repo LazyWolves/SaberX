@@ -11,6 +11,7 @@ class ActionExtractor:
 	def __load_config(self):
 		with open(self.configpath) as config:
 			self.config = yaml.load(config)
+		self.__extract_action_groups()
 
 	def __extract_action_groups(self):
 		self.action_groups = self.config.get("action_groups")
