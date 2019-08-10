@@ -25,14 +25,14 @@ class ProcessHandler:
 
 	@staticmethod
 	def get_cmdline_count(regex):
-		command = 'ps aux | grep -E "{}" | grep -v grep | wc -l'
-
+		command = 'ps aux | grep -E "{}" | grep -v grep | wc -l'.format(regex)
 		proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-		proc_exit_code = proc.returncode
 		output, errors = proc.communicate()
-
+		proc_exit_code = proc.returncode
 		if proc_exit_code != 0:
 			return False, None, "CANNOT_ACCESS_PROCESSES"
+
+		output = int(output.strip())
 
 		return True, output, None
 
@@ -91,3 +91,7 @@ class ProcessHandler:
 		operation_result = ProcessHandler.__operate(current, count, operator)
 
 		return operation_result, None
+
+
+if __name__ == "__main__":
+	print (ProcessHandler.check_cmdline_count("/usr/sbin/haproxy", 2, "<="))
