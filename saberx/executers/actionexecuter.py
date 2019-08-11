@@ -8,7 +8,7 @@ from saberx.sabercore.shellexecutor import ShellExecutor
 class ActionExecuter(object):
 
     @staticmethod
-    def action_executer(action):
+    def execute_action(action):
         if not ActionExecuter.sanitize(action):
             return False
 
