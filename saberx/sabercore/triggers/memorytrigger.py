@@ -21,7 +21,7 @@ class MemoryTrigger(TriggerBase):
 			return False, "INVALID_ARGUMENTS"
 
 		triggered, error = MemoryHandler.check_mem(check_type=self.check, attr=self.attr, operation=self.operation, threshold=self.threshold)
-		return self.eval_nagate(triggered, error)
+		return self.eval_negate(triggered, error)
 
 	def sanitise(self):
 		if not self.check:
