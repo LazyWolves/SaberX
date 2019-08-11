@@ -3,6 +3,7 @@ from saberx.sabercore.triggers.processtrigger import ProcessTrigger
 from saberx.sabercore.triggers.cputrigger import CPUTrigger
 from saberx.sabercore.triggers.memorytrigger import MemoryTrigger
 from saberx.sabercore.triggers.tcptrigger import TCPTrigger
+from saberx.sabercore.shellexecutor import ShellExecutor
 
 class ActionExecuter(object):
 
@@ -31,7 +32,12 @@ class ActionExecuter(object):
                 Log the error and return False. Consider the trgger as a failure.
             '''
             return False
-        
+
+        shellExecuter = ShellExecutor(command_list=execute)
+        success = shellExecuter.execute_shell_list()
+
+        return success
+
     @staticmethod
     def sanitize(action):
         return True

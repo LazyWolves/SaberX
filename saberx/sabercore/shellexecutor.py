@@ -4,7 +4,7 @@ class ShellExecutor:
 
 	def __init__(self, **kwargs):
 		self.command_list = kwargs.get("command_list")
-		self.logger = kwargs.get("logger")
+		#self.logger = kwargs.get("logger")
 
 	def execute_shell_single(self, command):
 		'''
@@ -32,4 +32,4 @@ class ShellExecutor:
 
 			# log the response and proc_exit_code
 
-			return True
+		return True
