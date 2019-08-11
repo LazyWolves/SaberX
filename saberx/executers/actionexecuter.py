@@ -25,20 +25,35 @@ class ActionExecuter(object):
 
     @staticmethod
     def handle_file_trigger(**kwargs):
+        action_name = kwargs.get("action_name")
+        trigger = kwargs.get("trigger")
+        execute = kwargs.get("execute")
         pass
 
-    staticmethod
+    @staticmethod
     def handle_process_trigger(**kwargs):
+        action_name = kwargs.get("action_name")
+        trigger = kwargs.get("trigger")
+        execute = kwargs.get("execute")
         pass
 
-    staticmethod
+    @staticmethod
     def handle_tcp_trigger(**kwargs):
+        action_name = kwargs.get("action_name")
+        trigger = kwargs.get("trigger")
+        execute = kwargs.get("execute")
         pass
 
-    staticmethod
+    @staticmethod
     def handle_cpu_trigger(**kwargs):
+        action_name = kwargs.get("action_name")
+        trigger = kwargs.get("trigger")
+        execute = kwargs.get("execute")
         pass
 
-    staticmethod
+    @staticmethod
     def handle_memory_trigger(**kwargs):
+        action_name = kwargs.get("action_name")
+        trigger = kwargs.get("trigger")
+        execute = kwargs.get("execute")
         pass
