@@ -10,6 +10,7 @@ class ActionExecuter(object):
     @staticmethod
     def execute_action(**kwargs):
         action = kwargs.get("action")
+        thread_lock = kwargs.get("thread_lock")
 
         if not ActionExecuter.sanitize(action):
             return False
@@ -37,7 +38,8 @@ class ActionExecuter(object):
 
         if triggered:
             shellExecuter = ShellExecutor(command_list=execute)
-            success = shellExecuter.execute_shell_list()
+            with thread_lock:
+                success = shellExecuter.execute_shell_list()
             return success
 
         return True
