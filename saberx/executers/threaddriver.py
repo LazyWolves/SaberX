@@ -6,8 +6,9 @@ class ThreadExecuter:
     def __init__(self, **kwargs):
         self.__groups = kwargs.get("groups")
         self.__lock = threading.Lock()
+        self.__workers = []
 
-    def __aquire_lock()
+    def __aquire_lock(self)
         try:
             if not os.path.exists("/run/saberx/saberx.lock"):
                 with open("/run/saberx/saberx.lock", "w") as lock_file:
@@ -16,10 +17,19 @@ class ThreadExecuter:
         except Exception as e:
             return False
 
-    def __release_lock():
+    def __release_lock(self):
         try:
             if os.path.exists("/run/saberx/saberx.lock"):
                 os.unlink("/run/saberx/saberx.lock")
             return True
         except Exception as e:
             return False
+
+    def spawn_workers(self)
+        for group_index, group in enumerate(self.__groups):
+            worker = threading.Thread(self.__worker, group_id, group)
+            self.__workers.append(worker)
+            worker.start()
+
+        for worker in workers:
+            worker.join()
