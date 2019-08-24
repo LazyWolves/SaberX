@@ -30,7 +30,7 @@ class ThreadExecuter:
 
     def spawn_workers(self):
         for group_index, group in enumerate(self.__groups):
-            worker = threading.Thread(self.__worker, group_id, group)
+            worker = threading.Thread(self.__worker, group_index, group)
             self.__workers.append(worker)
             worker.start()
 
