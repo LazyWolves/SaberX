@@ -33,10 +33,12 @@ class ActionExecuter(object):
             '''
             return False
 
-        shellExecuter = ShellExecutor(command_list=execute)
-        success = shellExecuter.execute_shell_list()
+        if triggered:
+            shellExecuter = ShellExecutor(command_list=execute)
+            success = shellExecuter.execute_shell_list()
+            return success
 
-        return success
+        return True
 
     @staticmethod
     def sanitize(action):
