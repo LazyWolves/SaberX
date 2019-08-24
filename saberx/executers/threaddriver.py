@@ -34,5 +34,5 @@ class ThreadExecuter:
             self.__workers.append(worker)
             worker.start()
 
-        for worker in workers:
+        for worker in self.__workers:
             worker.join()
