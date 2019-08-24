@@ -8,7 +8,7 @@ class ThreadExecuter:
         self.__lock = threading.Lock()
         self.__workers = []
 
-    def __aquire_lock(self)
+    def __aquire_lock(self):
         try:
             if not os.path.exists("/run/saberx/saberx.lock"):
                 with open("/run/saberx/saberx.lock", "w") as lock_file:
@@ -24,8 +24,11 @@ class ThreadExecuter:
             return True
         except Exception as e:
             return False
+    
+    def __worker(self, group_id, group):
+        group_status = GroupExecuter.execute_group(group=group, thread_lock=self.__lock)
 
-    def spawn_workers(self)
+    def spawn_workers(self):
         for group_index, group in enumerate(self.__groups):
             worker = threading.Thread(self.__worker, group_id, group)
             self.__workers.append(worker)
