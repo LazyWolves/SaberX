@@ -36,8 +36,6 @@ def drive():
         '''
         exit(2)
 
-    action_groups = actionExtractor.get_action_groups()
-
     if not __clear_existing_lock(config.get("lock_dir")):
 
         '''
@@ -45,9 +43,21 @@ def drive():
         '''
         exit (2)
 
+    action_groups = actionExtractor.get_action_groups()
+
+    threadExecuter = ThreadExecuter(groups=action_groups)
+
     while True:
         if __can_aquire_lock(config.get("lock_dir")):
-            pass
+            worker_and_run_success = threadExecuter.spawn_workers()
+            if not worker_and_run_success:
+
+                '''
+                    Either lock could not be aquired or release failed. Issue has been logged.
+                    Exit SaberX
+                '''
+                exit(2)
+        time.sleep(300)
 
 
 def __clear_existing_lock(lock_dir):
