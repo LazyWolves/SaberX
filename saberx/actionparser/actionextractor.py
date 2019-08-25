@@ -6,7 +6,7 @@ class ActionExtractor:
 	def __init__(self, **kwargs):
 		self.configpath = kwargs.get("configpath")
 		self.__load_config()
-		self.action_plan_loaded = False
+		self.__action_plan_loaded = False
 		print (json.dumps(self.config, indent=4))
 
 	def __load_config(self):
@@ -15,7 +15,7 @@ class ActionExtractor:
 				self.config = yaml.load(config)
 				self.action_plan_loaded = true
 				self.__extract_action_groups()
-				self.action_plan_loaded = True
+				self.__action_plan_loaded = True
 			except Exception as e:
 
 				'''
@@ -28,6 +28,9 @@ class ActionExtractor:
 
 	def get_action_groups(self):
 		return self.action_groups
+
+	def action_plan_loaded(self):
+		return self.__action_plan_loaded
 
 if __name__ == "__main__":
 	ActionExtractor(configpath="test.yaml")
