@@ -15,3 +15,12 @@ def drive():
 
     if options.config:
         CONFIG_FILE = options.config
+    
+
+def __sanitize_config():
+
+    '''
+        sanitize the config and log issues
+    '''
+    
+    return True
