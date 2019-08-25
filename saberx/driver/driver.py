@@ -6,6 +6,7 @@ import optparse
 import os
 
 CONFIG_FILE = "saberx.config"
+LOCK_FILE = "saberx.lock"
 
 def drive():
     global CONFIG_FILE
@@ -20,12 +21,18 @@ def drive():
 
     config = __load_config()
 
-    if not __sanitize_config():
+    if not __sanitize_config(config):
         '''
             Config is not proper. Issue has been logged. Exiting SaberX
         '''
 
         exit(2)
+
+def __can_aquire_lock(lock_dir):
+    lock_file = os.path.join(lock_dir, LOCK_FILE)
+
+    if os.path.exists(lock_file):
+        return True
 
 def __load_config():
     parser = SafeConfigParser()
@@ -39,7 +46,7 @@ def __load_config():
 
     return config
 
-def __sanitize_config():
+def __sanitize_config(config):
 
     '''
         sanitize the config and log issues
