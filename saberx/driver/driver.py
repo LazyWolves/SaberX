@@ -28,12 +28,20 @@ def drive():
 
         exit(2)
 
+    actionExtractor = ActionExtractor(configpath=config.get("action_plan"))
+    action_groups = actionExtractor.get_action_groups()
+
     if not __clear_existing_lock(config.get("lock_dir")):
 
         '''
             Issue has already been logged. Existting Saberx
         '''
         exit (2)
+
+    while True:
+        if __can_aquire_lock(config.get("lock_dir")):
+            pass
+
 
 def __clear_existing_lock(lock_dir):
     lock_file = os.path.join(lock_dir, LOCK_FILE)
