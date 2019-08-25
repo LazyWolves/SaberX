@@ -28,6 +28,28 @@ def drive():
 
         exit(2)
 
+    if not __clear_existing_lock(config.get("lock_dir")):
+
+        '''
+            Issue has already been logged. Existting Saberx
+        '''
+        exit (2)
+
+def __clear_existing_lock(lock_dir):
+    lock_file = os.path.join(lock_dir, LOCK_FILE)
+
+    try:
+        if os.path.exists(lock_file):
+            os.unlink(lock_file)
+        return True
+    except Exception as e:
+
+        '''
+            Unable to clear stale lock. Log issue. Send false. Stale locks muct be removed
+            or else runs wont take place
+        '''
+        return False
+
 def __can_aquire_lock(lock_dir):
     lock_file = os.path.join(lock_dir, LOCK_FILE)
 
