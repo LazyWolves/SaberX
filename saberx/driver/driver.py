@@ -29,6 +29,13 @@ def drive():
         exit(2)
 
     actionExtractor = ActionExtractor(configpath=config.get("action_plan"))
+    if not actionExtractor.action_plan_loaded():
+
+        '''
+            Failed to load action plan. Issue has been loggeg. Exitting SaberX
+        '''
+        exit(2)
+
     action_groups = actionExtractor.get_action_groups()
 
     if not __clear_existing_lock(config.get("lock_dir")):
