@@ -15,6 +15,16 @@ def drive():
 
     if options.config:
         CONFIG_FILE = options.config
+
+    if not __sanitize_config():
+        '''
+            Config is not proper. Issue has been logged. Exiting SaberX
+        '''
+
+        exit(2)
+
+def __load_config():
+    pass
     
 
 def __sanitize_config():
