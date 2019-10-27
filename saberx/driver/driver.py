@@ -5,7 +5,7 @@ import time
 import optparse
 import os
 
-CONFIG_FILE = "/etc/saberx/saberx.config"
+CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
 
 def drive():
@@ -100,3 +100,6 @@ def __sanitize_config(config):
     '''
     
     return True
+
+if __name__ == "__main__":
+    drive()
