@@ -13,9 +13,8 @@ class ActionExtractor:
 		with open(self.configpath) as config:
 			try:
 				self.config = yaml.load(config)
-				self.action_plan_loaded = true
-				self.__extract_action_groups()
 				self.__action_plan_loaded = True
+				self.__extract_action_groups()
 			except Exception as e:
 
 				'''

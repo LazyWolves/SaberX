@@ -5,7 +5,7 @@ import time
 import optparse
 import os
 
-CONFIG_FILE = "saberx.config"
+CONFIG_FILE = "/etc/saberx/saberx.config"
 LOCK_FILE = "saberx.lock"
 
 def drive():
