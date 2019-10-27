@@ -13,7 +13,8 @@ class ThreadExecuter:
             if not os.path.exists("/run/saberx/saberx.lock"):
                 with open("/run/saberx/saberx.lock", "w") as lock_file:
                     lock_file.write(os.getpid())
-            return True
+                return True
+            return False
         except Exception as e:
             return False
 
