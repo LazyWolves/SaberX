@@ -10,9 +10,9 @@ class ThreadExecuter:
 
     def __aquire_lock(self):
         try:
-            if not os.path.exists("/run/saberx/saberx.lock"):
-                with open("/run/saberx/saberx.lock", "w") as lock_file:
-                    lock_file.write(os.getpid())
+            if not os.path.exists(self.__lock_file):
+                with open(self.__lock_file, "w") as lock_file:
+                    lock_file.write(str(os.getpid()))
                 return True
             return False
         except Exception as e:
@@ -20,8 +20,8 @@ class ThreadExecuter:
 
     def __release_lock(self):
         try:
-            if os.path.exists("/run/saberx/saberx.lock"):
-                os.unlink("/run/saberx/saberx.lock")
+            if os.path.exists(self.__lock_file):
+                os.unlink(self.__lock_file)
             return True
         except Exception as e:
             return False
@@ -29,7 +29,9 @@ class ThreadExecuter:
     def __worker(self, group_id, group):
         group_status = GroupExecuter.execute_group(group=group, thread_lock=self.__lock)
 
-    def spawn_workers(self):
+    def spawn_workers(self, lock_file):
+        self.__lock_file = lock_file
+
         if self.__aquire_lock():
             for group_index, group in enumerate(self.__groups):
                 worker = threading.Thread(self.__worker, group_index, group)

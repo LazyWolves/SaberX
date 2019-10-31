@@ -29,7 +29,7 @@ def drive():
         exit(2)
 
     actionExtractor = ActionExtractor(configpath=config.get("action_plan"))
-    if not actionExtractor.action_plan_loaded():
+    if not actionExtractor.action_plan_loaded:
 
         '''
             Failed to load action plan. Issue has been loggeg. Exitting SaberX
@@ -49,7 +49,7 @@ def drive():
 
     while True:
         if __can_aquire_lock(config.get("lock_dir")):
-            worker_and_run_success = threadExecuter.spawn_workers()
+            worker_and_run_success = threadExecuter.spawn_workers(os.path.join(config.get("lock_dir"), LOCK_FILE))
             if not worker_and_run_success:
 
                 '''
@@ -79,7 +79,9 @@ def __can_aquire_lock(lock_dir):
     lock_file = os.path.join(lock_dir, LOCK_FILE)
 
     if os.path.exists(lock_file):
-        return True
+        return False
+
+    return True
 
 def __load_config():
     parser = SafeConfigParser()
