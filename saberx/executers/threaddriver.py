@@ -34,7 +34,7 @@ class ThreadExecuter:
 
         if self.__aquire_lock():
             for group_index, group in enumerate(self.__groups):
-                worker = threading.Thread(self.__worker, group_index, group)
+                worker = threading.Thread(target=self.__worker, args=(group_index, group))
                 self.__workers.append(worker)
                 worker.start()
 
