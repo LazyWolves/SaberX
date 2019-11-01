@@ -5,18 +5,12 @@ class TCPTrigger(TriggerBase):
 	def __init__(self, **kwargs):
 		super(TCPTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
-		if kwargs.get("host"):
-			self.host = kwargs.get("host")
-		if kwargs.get("port"):
-			self.port = kwargs.get("port", 80)
-		if kwargs.get("attempts"):
-			self.attempts = kwargs.get("attempts", 1)
-		if kwargs.get("threshold"):
-			self.threshold = kwargs.get("threshold", 1)
-		if kwargs.get("timeout"):
-			self.timeout = kwargs.get("timeout", 5)
-		if kwargs.get("ssl"):
-			self.ssl = kwargs.get("ssl", False)
+		self.host = kwargs.get("host", "127.0.0.1")
+		self.port = kwargs.get("port", 80)
+		self.attempts = kwargs.get("attempts", 1)
+		self.threshold = kwargs.get("threshold", 1)
+		self.timeout = kwargs.get("timeout", 5)
+		self.ssl = kwargs.get("ssl", False)
 
 		self.valid_checks = ["tcp_connect", "tcp_fail"]
 

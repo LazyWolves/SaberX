@@ -57,7 +57,7 @@ def drive():
                     Exit SaberX
                 '''
                 exit(2)
-        time.sleep(300)
+        time.sleep(10)
 
 
 def __clear_existing_lock(lock_dir):
