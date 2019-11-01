@@ -61,7 +61,6 @@ class TCPHandler:
         count = 0
 
         for attempt in range(attemps):
-            print ("checking...", attempt)
             check_result = check(host=host, port=port, timeout=timeout)
 
             if check_result:
@@ -72,9 +71,9 @@ class TCPHandler:
                     count += 1
 
         if count >= threshold:
-            return True
+            return True, None
 
-        return False
+        return False, None
 
 if __name__ == "__main__":
     print (TCPHandler.check_connection(host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))
