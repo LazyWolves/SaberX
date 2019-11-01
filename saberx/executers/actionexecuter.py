@@ -42,7 +42,7 @@ class ActionExecuter(object):
             "MEMORY_TRIGGER": MemoryTrigger
         }
 
-        action_name = action.get("action_name")
+        action_name = action.get("actionname")
         trigger = action.get("trigger")
         execute = action.get("execute")
 

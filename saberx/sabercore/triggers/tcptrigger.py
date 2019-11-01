@@ -7,7 +7,7 @@ class TCPTrigger(TriggerBase):
 
 		self.host = kwargs.get("host", "127.0.0.1")
 		self.port = kwargs.get("port", 80)
-		self.attempts = kwargs.get("attempts", 1)
+		self.attempts = kwargs.get("attempts", 3)
 		self.threshold = kwargs.get("threshold", 1)
 		self.timeout = kwargs.get("timeout", 5)
 		self.ssl = kwargs.get("ssl", False)
@@ -66,3 +66,5 @@ class TCPTrigger(TriggerBase):
 				Log error
 			'''
 			return False
+
+		return True

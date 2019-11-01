@@ -10,7 +10,7 @@ class GroupExecuter(object):
         if not GroupExecuter.sanitize(group):
             return False
 
-        group_name = group.get("group_name")
+        group_name = group.get("groupname")
         actions = group.get("actions")
 
         for action in actions:

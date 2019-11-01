@@ -44,14 +44,13 @@ class TCPHandler:
 
     @staticmethod
     def  check_connection(**kwargs):
-
         host = kwargs.get("host")
-        port = kwargs.get("port", 80)
-        ssl = kwargs.get("ssl", False)
-        timeout = kwargs.get("timeout", 5)
-        attemps = kwargs.get("attempts", 1)
-        threshold = kwargs.get("threshold", 1)
-        check_type = kwargs.get("check_type", "tcp_fail")
+        port = kwargs.get("port")
+        ssl = kwargs.get("ssl")
+        timeout = kwargs.get("timeout")
+        attemps = kwargs.get("attempts")
+        threshold = kwargs.get("threshold")
+        check_type = kwargs.get("check_type")
 
 
         if ssl:
@@ -62,14 +61,14 @@ class TCPHandler:
         count = 0
 
         for attempt in range(attemps):
-            print ("checking...")
+            print ("checking...", attempt)
             check_result = check(host=host, port=port, timeout=timeout)
 
             if check_result:
                 if check_type == "tcp_connect":
                     count += 1
             else:
-                if check_result == "tcp_fail":
+                if check_type == "tcp_fail":
                     count += 1
 
         if count >= threshold:
