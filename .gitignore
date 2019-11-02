@@ -2,3 +2,4 @@ notes
 **/__pycache__/
 saberx.yaml
 saberx.conf
+test*
