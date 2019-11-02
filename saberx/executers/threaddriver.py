@@ -27,6 +27,7 @@ class ThreadExecuter:
             return False
     
     def __worker(self, group_id, group):
+        print ("first thread")
         group_status = GroupExecuter.execute_group(group=group, thread_lock=self.__lock)
 
     def spawn_workers(self, lock_file):

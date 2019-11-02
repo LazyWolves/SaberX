@@ -7,10 +7,8 @@ class ProcessTrigger(TriggerBase):
 
 		if kwargs.get("regex"):
 			self.regex = kwargs.get("regex")
-		if kwargs.get("count"):
-			self.count = kwargs.get("count")
-		if kwargs.get("operation"):
-			self.operation = kwargs.get("operation")
+		self.count = kwargs.get("count", 1)
+		self.operation = kwargs.get("operation", "=")
 
 		self.valid_checks = ["name", "cmdline"]
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
@@ -20,7 +18,7 @@ class ProcessTrigger(TriggerBase):
 			return False, "INVALID_ARGUMENTS"
 
 		if self.check == "name":
-			if self.count:
+			if self.count != None:
 				triggered, error = ProcessHandler.check_name_count(self.regex, self.count, self.operation)
 				return self.eval_negate(triggered, error)
 			triggered, error = ProcessHandler.check_name(self.regex)
@@ -30,7 +28,6 @@ class ProcessTrigger(TriggerBase):
 			if self.count:
 				triggered, error = ProcessHandler.check_cmdline_count(self.regex, self.count, self.operation)
 				return self.eval_negate(triggered, error)
-
 			triggered, error = ProcessHandler.check_cmdline(self.regex)
 			return self.eval_negate(triggered, error)
 
@@ -76,3 +73,5 @@ class ProcessTrigger(TriggerBase):
 			'''
 
 			return False
+
+		return True

@@ -13,7 +13,7 @@ class CPUTrigger(TriggerBase):
 			self.threshold = kwargs.get("threshold")
 
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
-		self.valid_checks = ["loadavg"]
+		self.valid_checks = ["loadaverage"]
 
 	def  fire_trigger(self):
 		if not self.sanitise():
@@ -58,3 +58,5 @@ class CPUTrigger(TriggerBase):
 					Log error
 				'''
 				return False
+
+		return True
