@@ -7,12 +7,11 @@ class FileTrigger(TriggerBase):
 
 		if kwargs.get("regex"):
 			self.regex = kwargs.get("regex")
-		if kwargs.get("position"):
-			self.position = kwargs.get("position")
-		if kwargs.get("limit"):
-			self.limit = kwargs.get("limit")
-		if kwargs.get("resource"):
-			self.path = kwargs.get("resource")
+
+		if kwargs.get("path"):
+			self.path = kwargs.get("path")
+		self.position = kwargs.get("position", "tail")
+		self.limit = kwargs.get("limit", 50)
 
 		self.valid_checks = ["empty", "present", "regex"]
 		self.valid_positions = ["head", "tail"]
@@ -70,3 +69,5 @@ class FileTrigger(TriggerBase):
 				Log error
 			'''
 			return False
+
+		return True

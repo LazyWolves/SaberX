@@ -17,11 +17,6 @@ class FileHandler:
 
     @staticmethod
     def is_empty(path):
-        is_present, error = FileHandler.is_present(path)
-
-        if not is_present(path):
-            return False, "FILE_DOES_NOT_EXISTS"
-
         if os.stat(path).st_size == 0:
             return True, None
 
@@ -76,10 +71,12 @@ class FileHandler:
 
         is_present, error = FileHandler.is_present(path)
 
-        if not is_present(path):
+        if not is_present:
             return False, "FILE_DOES_NOT_EXISTS"
 
-        if  FileHandler.is_empty(path):
+        is_empty, error = FileHandler.is_empty(path)
+
+        if is_empty:
             return False, None
 
         if position == "head":
