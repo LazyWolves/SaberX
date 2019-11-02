@@ -5,10 +5,9 @@ class MemoryTrigger(TriggerBase):
 	def __init__(self, **kwargs):
 		super(MemoryTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
-		if kwargs.get("attr"):
-			self.attr = kwargs.get("attr")
-		if kwargs.get("operation"):
-			self.operation = kwargs.get("operation")
+		self.attr = kwargs.get("attr", "used")
+		self.operation = kwargs.get("operation", ">")
+
 		if kwargs.get("threshold"):
 			self.threshold = kwargs.get("threshold")
 
@@ -88,3 +87,5 @@ class MemoryTrigger(TriggerBase):
 			'''
 
 			return False
+
+		return True

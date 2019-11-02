@@ -29,7 +29,7 @@ class MemoryHandler:
         check_type = kwargs.get("check_type")
         attr = kwargs.get("attr")
         threshold = kwargs.get("threshold")
-        operator = kwargs.get("operator")
+        operator = kwargs.get("operation")
 
         check = MemoryHandler.get_mem_type(check_type)
 
