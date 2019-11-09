@@ -2,5 +2,5 @@ notes
 **/__pycache__/
 saberx.yaml
 saberx.conf
-test*
+stest*
 clean.sh
