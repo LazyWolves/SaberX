@@ -41,3 +41,32 @@ class TestTCPTrigger:
 
         assert triggered == True
         assert error == None
+
+    def test_ssl(self):
+        tcpTrigger = TCPTrigger(
+                        host="127.0.0.1",
+                        port=80,
+                        attempts=3,
+                        threshold=1,
+                        check="tcp_fail",
+                        ssl=True
+                    )
+
+        triggered, error = tcpTrigger.fire_trigger()
+
+        assert triggered == True
+        assert error == None
+
+        tcpTrigger = TCPTrigger(
+                        host="google.com",
+                        port=443,
+                        attempts=3,
+                        threshold=1,
+                        check="tcp_connect",
+                        ssl=True
+                    )
+
+        triggered, error = tcpTrigger.fire_trigger()
+
+        assert triggered == True
+        assert error == None
