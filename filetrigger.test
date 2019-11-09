@@ -1,5 +1,0 @@
-This function creates a file for
-testing file trigger. This string will be
-dumped in a file. The file will then be passed as
-a parameter to file trigger to test the read from head
-and read from tail features with limit.

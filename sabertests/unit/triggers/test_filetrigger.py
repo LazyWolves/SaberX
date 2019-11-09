@@ -14,6 +14,11 @@ and read from tail features with limit.
         with open("filetrigger.test", "w") as f:
             f.write(content)
 
+    def create_empty(self):
+
+        with open("filetrigger.test", "w") as f:
+            f.write("")
+
     def remove_file(self, filename):
         os.unlink(filename)
 
@@ -111,3 +116,36 @@ and read from tail features with limit.
 
         assert trigerred == False
         assert error == None
+
+    def test_file_empty(self):
+        file_name = "./filetrigger.test"
+
+        self.create_empty()
+
+        fileTrigger = FileTrigger(
+                        type="FILE_TRIGGER",
+                        check="empty",
+                        path=file_name,
+                    )
+
+        trigerred, error = fileTrigger.fire_trigger()
+
+        assert trigerred == True
+        assert error == None
+
+        self.remove_file(file_name)
+
+        self.create_file()
+
+        fileTrigger = FileTrigger(
+                        type="FILE_TRIGGER",
+                        check="empty",
+                        path=file_name,
+                    )
+
+        trigerred, error = fileTrigger.fire_trigger()
+
+        assert trigerred == False
+        assert error == None
+
+        self.remove_file(file_name)
