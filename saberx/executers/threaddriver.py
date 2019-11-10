@@ -31,16 +31,16 @@ class ThreadExecuter:
                 self.__logger.critical("Unable to release lock file : Exception : {}".format(str(e)))
             return False
     
-    def __worker(self, group_id, group):
+    def __worker(self, group_id, group, logger):
         print ("first thread")
-        group_status = GroupExecuter.execute_group(group=group, thread_lock=self.__lock)
+        group_status = GroupExecuter.execute_group(group=group, thread_lock=self.__lock, logger=logger)
 
     def spawn_workers(self, lock_file):
         self.__lock_file = lock_file
 
         if self.__aquire_lock():
             for group_index, group in enumerate(self.__groups):
-                worker = threading.Thread(target=self.__worker, args=(group_index, group))
+                worker = threading.Thread(target=self.__worker, args=(group_index, group, self.__logger))
                 self.__workers.append(worker)
                 worker.start()
 

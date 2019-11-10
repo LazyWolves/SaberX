@@ -30,6 +30,7 @@ class ActionExecuter(object):
         '''
         action = kwargs.get("action")
         thread_lock = kwargs.get("thread_lock")
+        logger = kwargs.get("logger")
 
         if not ActionExecuter.sanitize(action):
             return False
@@ -50,9 +51,14 @@ class ActionExecuter(object):
         triggered, error = triggerHandler.fire_trigger()
 
         if error:
+
             '''
                 Log the error and return False. Consider the trgger as a failure.
             '''
+
+            if logger:
+                logger.critical("Action {actionname} failed with error : {error}".format(actionname=action_name, error=str(error)))
+
             return False
 
         if triggered:
