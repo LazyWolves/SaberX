@@ -8,7 +8,7 @@ class MemoryTrigger(TriggerBase):
 		self.attr = kwargs.get("attr", "used")
 		self.operation = kwargs.get("operation", ">")
 
-		if kwargs.get("threshold"):
+		if kwargs.get("threshold") != None:
 			self.threshold = kwargs.get("threshold")
 
 		self.valid_checks = ["virtual", "swap"]
