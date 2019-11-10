@@ -4,6 +4,7 @@ class ShellExecutor:
 
 	def __init__(self, **kwargs):
 		self.command_list = kwargs.get("command_list")
+		self.logger = kwargs.get("logger")
 		#self.logger = kwargs.get("logger")
 
 	def execute_shell_single(self, command):
@@ -16,6 +17,9 @@ class ShellExecutor:
 		proc_exit_code = proc.returncode		
 
 		if proc_exit_code != 0:
+
+			if self.logger:
+				self.logger.critical("Shell executer failed with error : {errors}".format(errors=errors))
 			return False, errors, proc_exit_code
 
 		return True, output, proc_exit_code

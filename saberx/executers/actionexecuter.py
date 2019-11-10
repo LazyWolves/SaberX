@@ -62,7 +62,7 @@ class ActionExecuter(object):
             return False
 
         if triggered:
-            shellExecuter = ShellExecutor(command_list=execute)
+            shellExecuter = ShellExecutor(command_list=execute, logger=logger)
             with thread_lock:
                 success = shellExecuter.execute_shell_list()
             return success
