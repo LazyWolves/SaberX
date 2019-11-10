@@ -4,9 +4,11 @@ from configparser import SafeConfigParser
 import time
 import optparse
 import os
+import logging
 
 CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
+LOG_FILE = "/etc/saberx/saberx.log"
 
 def drive():
     global CONFIG_FILE
@@ -28,11 +30,13 @@ def drive():
 
         exit(2)
 
-    actionExtractor = ActionExtractor(configpath=config.get("action_plan"))
+    logger = __setup_logging(LOG_FILE)
+
+    actionExtractor = ActionExtractor(configpath=config.get("action_plan"), logger=logger)
     if not actionExtractor.action_plan_loaded:
 
         '''
-            Failed to load action plan. Issue has been loggeg. Exitting SaberX
+            Failed to load action plan. Issue has been logged. Exitting SaberX
         '''
         exit(2)
 
@@ -102,6 +106,18 @@ def __sanitize_config(config):
     '''
     
     return True
+
+def __setup_logging(log_file):
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    logger_handler = logging.FileHandler(log_file)
+    logger_handler.setLevel(logging.DEBUG)
+    logger_formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
+                            datefmt='%Y-%m-%d %H:%M:%S')
+    logger_handler.setFormatter(logger_formatter)
+    logger.addHandler(logger_handler)
+
+    return logger
 
 if __name__ == "__main__":
     drive()

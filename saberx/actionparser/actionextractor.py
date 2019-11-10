@@ -5,6 +5,7 @@ class ActionExtractor:
 
 	def __init__(self, **kwargs):
 		self.configpath = kwargs.get("configpath")
+		self.logger = kwargs.get("logger")
 		self.action_plan_loaded = self.__load_config()
 
 	def __load_config(self):
