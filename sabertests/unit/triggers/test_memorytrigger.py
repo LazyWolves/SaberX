@@ -19,8 +19,8 @@ class TestMemoryTrigger:
         memoryTrigger = MemoryTrigger(
                         type="MEMORY_TRIGGER",
                         attr="used",
-                        threshold=10.0,
-                        operation='>',
+                        threshold=0.0,
+                        operation='>=',
                         check="swap"
                     )
         

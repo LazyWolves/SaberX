@@ -19,6 +19,8 @@ class ActionExtractor:
 				'''
 					Log issue
 				'''
+
+				self.logger.critical("Failed to parse YAML : Exception : {}".format(str(e)))
 				return False
 
 	def __extract_action_groups(self):

@@ -40,7 +40,7 @@ def drive():
         '''
         exit(2)
 
-    if not __clear_existing_lock(config.get("lock_dir")):
+    if not __clear_existing_lock(config.get("lock_dir"), logger):
 
         '''
             Issue has already been logged. Existting Saberx
@@ -49,7 +49,7 @@ def drive():
 
     action_groups = actionExtractor.get_action_groups()
 
-    threadExecuter = ThreadExecuter(groups=action_groups)
+    threadExecuter = ThreadExecuter(groups=action_groups, logger=logger)
 
     while True:
         if __can_aquire_lock(config.get("lock_dir")):
@@ -64,7 +64,7 @@ def drive():
         time.sleep(10)
 
 
-def __clear_existing_lock(lock_dir):
+def __clear_existing_lock(lock_dir, logger):
     lock_file = os.path.join(lock_dir, LOCK_FILE)
 
     try:
@@ -77,6 +77,9 @@ def __clear_existing_lock(lock_dir):
             Unable to clear stale lock. Log issue. Send false. Stale locks muct be removed
             or else runs wont take place
         '''
+
+        logger.critical("Unable to remove lock file : Exeption : {}".format(str(e)))
+
         return False
 
 def __can_aquire_lock(lock_dir):

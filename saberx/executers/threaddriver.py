@@ -7,6 +7,7 @@ class ThreadExecuter:
         self.__groups = kwargs.get("groups")
         self.__lock = threading.Lock()
         self.__workers = []
+        self.__logger = kwargs.get("logger")
 
     def __aquire_lock(self):
         try:
@@ -16,6 +17,8 @@ class ThreadExecuter:
                 return True
             return False
         except Exception as e:
+            if self.__logger:
+                self.__logger.critical("Unable to aquire lock file : Exception : {}".format(str(e)))
             return False
 
     def __release_lock(self):
@@ -24,6 +27,8 @@ class ThreadExecuter:
                 os.unlink(self.__lock_file)
             return True
         except Exception as e:
+            if self.__logger:
+                self.__logger.critical("Unable to release lock file : Exception : {}".format(str(e)))
             return False
     
     def __worker(self, group_id, group):
@@ -43,11 +48,16 @@ class ThreadExecuter:
                 worker.join()
             lock_released = self.__release_lock()
             if not lock_released:
+
                 '''
                     Log lock issue. The lock must be released at this step or else
                     future runs wont take place. Issue must be fixed why lock is not
                     being released.
                 '''
+
+                if self.__logger:
+                    self.__logger.critical("Lock could not be released. This needs to be fixed for future runs")
+
                 return False
 
             # Run succeeded

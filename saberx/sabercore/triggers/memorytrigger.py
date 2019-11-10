@@ -72,7 +72,7 @@ class MemoryTrigger(TriggerBase):
 			'''
 			return False
 
-		if not self.threshold:
+		if self.threshold == None:
 
 			'''
 				Log error
