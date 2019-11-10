@@ -13,20 +13,19 @@ class ActionExecuter(object):
         '''
         The layout of a action will be as follows:
 
-        action_1:
-	        action_name: string
-	        trigger:
-		        type: TCP_TRIGGER
-		        check: tcp_connect | tcp_fail
-		        host: host_name
-		        port: port
-		        negate: true | false
-		        attemp: number
-		        threshold: number
-		        ssl: true | false
-	        execute:
-	        - command1
-	        - command2
+	    action_name: string
+	    trigger:
+		    type: TCP_TRIGGER
+		    check: tcp_connect | tcp_fail
+		    host: host_name
+		    port: port
+		    negate: true | false
+		    attemp: number
+		    threshold: number
+		    ssl: true | false
+	    execute:
+	    - command1
+	    - command2
         '''
         action = kwargs.get("action")
         thread_lock = kwargs.get("thread_lock")
