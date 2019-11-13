@@ -8,7 +8,7 @@ class TestProcessTrigger:
                             check="cmdline",
                             regex=".*init.*",
                             count=1,
-                            operation='='
+                            operation='>='
                         )
 
         trigered, error = processTrigger.fire_trigger()
