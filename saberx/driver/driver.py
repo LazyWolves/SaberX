@@ -8,9 +8,19 @@ import logging
 
 CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
-LOG_FILE = "/etc/saberx/saberx.log"
+LOG_FILE = "/var/log/saberx.log"
 
 def drive():
+    """
+        **Method for starting Saberx**
+
+        This is the entry point for saberx. It will load the config file
+        and the action plan. Spawn threads to execute each group and start
+        and continue the state loop.
+
+        Returns:
+            None: Returns nothing
+    """
     global CONFIG_FILE
 
     # parse args
@@ -18,6 +28,7 @@ def drive():
     parser.add_option('-f', action="store", dest="config", help="Config file.")
     options, args = parser.parse_args()
 
+    # if config file is provided then load it.
     if options.config:
         CONFIG_FILE = options.config
 
@@ -52,6 +63,8 @@ def drive():
     threadExecuter = ThreadExecuter(groups=action_groups, logger=logger)
 
     while True:
+
+        # threads should be spwaned only if a lock can be aquired.
         if __can_aquire_lock(config.get("lock_dir")):
             worker_and_run_success = threadExecuter.spawn_workers(os.path.join(config.get("lock_dir"), LOCK_FILE))
             if not worker_and_run_success:
@@ -65,6 +78,20 @@ def drive():
 
 
 def __clear_existing_lock(lock_dir, logger):
+    """
+        **Method for clearing existing lock**
+
+        This method clears any existing lock if present.
+
+        Args:
+            lock_dir (string) : Directory where lock file is generated
+            logger (logging) : object for logging
+
+        Returns:
+            bool : Whether lock could be cleared
+
+    """
+
     lock_file = os.path.join(lock_dir, LOCK_FILE)
 
     try:
@@ -83,6 +110,20 @@ def __clear_existing_lock(lock_dir, logger):
         return False
 
 def __can_aquire_lock(lock_dir):
+    """
+        **Method for checking if lock can be aquired**
+
+        This method checks if lock can be aquired. If can be aquired then
+        it returns true, else false.
+
+        Args:
+            lock_dir (string) : Directory where lock file is generated
+
+        Returns:
+            bool : Whether lock could be aquired
+
+    """
+
     lock_file = os.path.join(lock_dir, LOCK_FILE)
 
     if os.path.exists(lock_file):
@@ -91,6 +132,16 @@ def __can_aquire_lock(lock_dir):
     return True
 
 def __load_config():
+    """
+        **Method for loading config into python dict**
+
+        This method parses the conf file and creates the corresponding python dict
+
+        Returns:
+            dict : Whether lock could be cleared
+
+    """
+
     parser = SafeConfigParser()
     parser.read(CONFIG_FILE)
 
@@ -111,6 +162,19 @@ def __sanitize_config(config):
     return True
 
 def __setup_logging(log_file):
+    """
+        **Method for setting up logging**
+
+        Takes a log file location and creates a logging object using it
+
+        Args:
+            log_file (string) : Path to log file
+
+        Returns:
+            logging : logging object
+
+    """
+
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     logger_handler = logging.FileHandler(log_file)
