@@ -13,6 +13,12 @@ from saberx.sabercore.shellexecutor import ShellExecutor
 
 class ActionExecuter(object):
 
+    """
+        class for handling execution of a given action.
+        This class mostly comrises of status function.
+    """
+
+
     @staticmethod
     def execute_action(**kwargs):
 
