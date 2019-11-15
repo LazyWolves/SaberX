@@ -1,3 +1,9 @@
+"""
+.. module:: driver
+   :synopsis: Module for executing a given action.
+
+"""
+
 from saberx.sabercore.triggers.filetrigger import FileTrigger
 from saberx.sabercore.triggers.processtrigger import ProcessTrigger
 from saberx.sabercore.triggers.cputrigger import CPUTrigger
@@ -10,23 +16,35 @@ class ActionExecuter(object):
     @staticmethod
     def execute_action(**kwargs):
 
-        '''
-        The layout of a action will be as follows:
+        """
+            **Method to execute a given action**
 
-	    action_name: string
-	    trigger:
-		    type: TCP_TRIGGER
-		    check: tcp_connect | tcp_fail
-		    host: host_name
-		    port: port
-		    negate: true | false
-		    attemp: number
-		    threshold: number
-		    ssl: true | false
-	    execute:
-	    - command1
-	    - command2
-        '''
+            This method executes a given action. It fires the associated trigger using the
+            required trigger handler if trigger is successfull, executes the desired commands.
+
+            The layout of a action will be as follows:
+
+	        action_name: string
+	        trigger:
+		        type: TCP_TRIGGER
+		        check: tcp_connect | tcp_fail
+		        host: host_name
+		        port: port
+		        negate: true | false
+		        attemp: number
+		        threshold: number
+		        ssl: true | false
+	        execute:
+	        - command1
+	        - command2
+
+            Args:
+                kwargs : Object containing action, thread lock and logger
+
+            Returns:
+                bool : Success or failure for this action
+        """
+
         action = kwargs.get("action")
         thread_lock = kwargs.get("thread_lock")
         logger = kwargs.get("logger")
@@ -34,6 +52,7 @@ class ActionExecuter(object):
         if not ActionExecuter.sanitize(action):
             return False
 
+        # map associating trigger type with corresponding method
         trigger_map = {
             "FILE_TRIGGER": FileTrigger,
             "PROCESS_TRIGGER": ProcessTrigger,
@@ -61,6 +80,11 @@ class ActionExecuter(object):
             return False
 
         if triggered:
+
+            '''
+                If triggered, desired commands are executed using
+                shell executer.
+            '''
             shellExecuter = ShellExecutor(command_list=execute, logger=logger)
             with thread_lock:
                 success = shellExecuter.execute_shell_list()
