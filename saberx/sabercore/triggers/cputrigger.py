@@ -1,5 +1,5 @@
 """
-.. module:: driver
+.. module:: cputrigger
    :synopsis: Module for firing CPU trigger.
 """
 
