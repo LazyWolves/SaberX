@@ -1,8 +1,22 @@
+"""
+.. module:: processtrigger
+   :synopsis: Module for firing process trigger.
+"""
+
 from .triggerbase import TriggerBase
 from .processhandler import ProcessHandler
 
 class ProcessTrigger(TriggerBase):
+
+	"""
+		**Class for creating process trigger**
+	"""
 	def __init__(self, **kwargs):
+
+		"""
+			**Method for initialing memory trigger**
+
+		"""
 		super(ProcessTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
 		if kwargs.get("regex"):
@@ -14,6 +28,16 @@ class ProcessTrigger(TriggerBase):
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
 
 	def fire_trigger(self):
+
+		"""
+			**Method to fire the trigger**
+
+			This method first sanitises the parameters, calls process handler
+			to evaluate the trigger conditions and returns trigger status
+
+			Returns:
+				bool : Trigger fired or not
+		"""
 		if not self.sanitise():
 			return False, "INVALID_ARGUMENTS"
 
@@ -32,6 +56,13 @@ class ProcessTrigger(TriggerBase):
 			return self.eval_negate(triggered, error)
 
 	def sanitise(self):
+
+		"""
+			**Method to check validity of the params**
+
+			Returns:
+				bool : params are proper or not
+		"""
 		if not self.type:
 			'''
 				log error

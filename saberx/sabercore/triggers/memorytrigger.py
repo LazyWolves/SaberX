@@ -31,7 +31,6 @@ class MemoryTrigger(TriggerBase):
 
 	def fire_trigger(self):
 
-
 		"""
 			**Method to fire the trigger**
 

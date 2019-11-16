@@ -1,6 +1,6 @@
 """
 .. module:: memoryhandler
-   :synopsis: Module for firing memory trigger.
+   :synopsis: Module for performing the memory trigger operation.
 """
 
 import os
