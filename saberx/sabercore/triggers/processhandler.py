@@ -179,17 +179,7 @@ class ProcessHandler:
 			**Method to get the Number of regex filtered processes by cmd and perform the deired operation**
 
 			Args:
-				regex (string): Regex to filter p"""
-			**Method to get the Number of regex filtered processes and perform the deired operation**
-
-			Args:
 				regex (string): Regex to filter processes
-				count (string): Threshold
-				operation (string): Desired operation
-
-			Returns:
-				bool, string : Result, error if any
-		"""rocesses
 				count (string): Threshold
 				operation (string): Desired operation
 
