@@ -1,8 +1,22 @@
+"""
+.. module:: memorytrigger
+   :synopsis: Module for firing memory trigger.
+"""
+
 from .triggerbase import TriggerBase
 from .memoryhandler import MemoryHandler
 
 class MemoryTrigger(TriggerBase):
+
+	"""
+		**Class for creating memory trigger**
+	"""
 	def __init__(self, **kwargs):
+
+		"""
+			**Method for initialing CPU trigger**
+
+		"""
 		super(MemoryTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
 		self.attr = kwargs.get("attr", "used")
@@ -16,6 +30,17 @@ class MemoryTrigger(TriggerBase):
 		self.valid_operations = ["=", "<", ">", "<=", ">="]
 
 	def fire_trigger(self):
+
+
+		"""
+			**Method to fire the trigger**
+
+			This method first sanitises the parameters, calls memory handler
+			to evaluate the trigger conditions and returns trigger status
+
+			Returns:
+				bool : Trigger fired or not
+		"""
 		if not self.sanitise():
 			return False, "INVALID_ARGUMENTS"
 
@@ -23,6 +48,13 @@ class MemoryTrigger(TriggerBase):
 		return self.eval_negate(triggered, error)
 
 	def sanitise(self):
+
+		"""
+			**Method to check validity of the params**
+
+			Returns:
+				bool : params are proper or not
+		"""
 		if not self.check:
 
 			'''

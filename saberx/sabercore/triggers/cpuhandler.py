@@ -21,8 +21,8 @@ class CPUHandler:
             and performs the desired operation.
 
             Args:
-                current (Integer) : Current value of load average
-                count (Integer) : Given threshold
+                current (Float) : Current value of load average
+                count (Float) : Given threshold
                 operator (string) : Given operator
 
             Returns:
