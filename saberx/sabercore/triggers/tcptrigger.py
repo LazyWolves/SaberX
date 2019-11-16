@@ -1,7 +1,17 @@
+"""
+.. module:: tcptrigger
+   :synopsis: Module for firing tcp trigger.
+"""
+
 from .triggerbase import TriggerBase
 from .tcphandler import TCPHandler
 
 class TCPTrigger(TriggerBase):
+
+	"""
+		**Method for initialing memory trigger**
+
+	"""
 	def __init__(self, **kwargs):
 		super(TCPTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
 
@@ -17,6 +27,16 @@ class TCPTrigger(TriggerBase):
 		self.PORT_MIN, self.PORT_MAX = 0, 65535
 
 	def fire_trigger(self):
+
+		"""
+			**Method to fire the trigger**
+
+			This method first sanitises the parameters, calls tcp handler
+			to evaluate the trigger conditions and returns trigger status
+
+			Returns:
+				bool : Trigger fired or not
+		"""
 		if not self.sanitise():
 			return False, "IMPROPER_ARGUMENTS"
 
@@ -25,6 +45,13 @@ class TCPTrigger(TriggerBase):
 		return self.eval_negate(trigerred, error)
 
 	def sanitise(self):
+
+		"""
+			**Method to check validity of the params**
+
+			Returns:
+				bool : params are proper or not
+		"""
 		if not self.host:
 
 			'''

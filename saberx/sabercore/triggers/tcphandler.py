@@ -1,3 +1,8 @@
+"""
+.. module:: tcphandler
+   :synopsis: Module for evaluating tcptrigger trigger.
+"""
+
 import os
 import socket
 import ssl
@@ -5,8 +10,23 @@ import traceback
 
 class TCPHandler:
 
+    """
+        **Class containing TCP handler methods**
+    """
+
     @staticmethod
     def check_tcp(**kwargs):
+        """
+            **Check tcp connection to a host**
+
+            This method tries to open a tcp connection to a host.
+
+            Args:
+                kwargs (dict): dict containing host, port and timeout
+
+            Returns:
+                bool: Whether the tcp connection could be established or not.
+        """
 
         host = kwargs.get("host")
         port = kwargs.get("port", 80)
@@ -23,6 +43,18 @@ class TCPHandler:
 
     @staticmethod
     def check_tcp_ssl(**kwargs):
+
+        """
+            **Check tcp connection with ssl to a host**
+
+            This method tries to open a ssl tcp connection to a host.
+
+            Args:
+                kwargs (dict): dict containing host, port and timeout
+
+            Returns:
+                bool: Whether the tcp connection could be established or not.
+        """
 
         host = kwargs.get("host")
         port = kwargs.get("port", 443)
@@ -44,6 +76,20 @@ class TCPHandler:
 
     @staticmethod
     def  check_connection(**kwargs):
+
+        """
+            **Method to evaluate the TCP trigger**
+
+            This method evaulates the TCP trigger. Calls the
+            desired methods to check tcp (normal or ssl) to a
+            host.
+
+            Args:
+                kwargs (dict): dict containing host, port, ssl, timeout, attempts, threshold, check_type
+
+            Returns:
+                bool, error: status, error if any
+        """
         host = kwargs.get("host")
         port = kwargs.get("port")
         ssl = kwargs.get("ssl")
