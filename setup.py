@@ -38,7 +38,7 @@ def get_dependencies():
     lines = [line.strip() for line in lines]
     return lines
 
-setup(name='elasticpyproxy-1.0-djmgit',
+setup(name='saberx-1.0',
       version='1.0',
       description='Self healing monitoring system',
       long_description=readme(),
