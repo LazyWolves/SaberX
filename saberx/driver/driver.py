@@ -12,9 +12,11 @@ import optparse
 import os
 import logging
 
+# global constants used by driver
 CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
 LOG_FILE = "/var/log/saberx.log"
+SLEEP_PERIOD = 10
 
 def drive():
     """
@@ -64,6 +66,9 @@ def drive():
         '''
         exit (2)
 
+    # get the sleep time from conf if available
+    sleep_period = int(config.get("sleep_period", SLEEP_PERIOD))
+
     action_groups = actionExtractor.get_action_groups()
 
     threadExecuter = ThreadExecuter(groups=action_groups, logger=logger)
@@ -72,6 +77,7 @@ def drive():
 
         # threads should be spwaned only if a lock can be aquired.
         if __can_aquire_lock(config.get("lock_dir")):
+            logger.info("Proceeding with saberx run")
             worker_and_run_success = threadExecuter.spawn_workers(os.path.join(config.get("lock_dir"), LOCK_FILE))
             if not worker_and_run_success:
 
@@ -80,7 +86,8 @@ def drive():
                     Exit SaberX
                 '''
                 exit(2)
-        time.sleep(10)
+            logger.info("Saberx run finished successfully")
+        time.sleep(sleep_period)
 
 
 def __clear_existing_lock(lock_dir, logger):
