@@ -1,6 +1,6 @@
 """
-.. module:: driver
-   :synopsis: Module for executing a given action.
+.. module:: actionexecuter
+   :synopsis: Module for executing an action
 
 """
 

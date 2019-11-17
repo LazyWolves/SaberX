@@ -1,5 +1,5 @@
 """
-.. module:: driver
+.. module:: groupexecuter
    :synopsis: Module for executing a group of actions.
 
 """

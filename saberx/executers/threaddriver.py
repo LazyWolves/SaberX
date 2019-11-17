@@ -1,6 +1,6 @@
 """
-.. module:: driver
-   :synopsis: Module for executing a group of actions.
+.. module:: threaddriver
+   :synopsis: Module for spawning threads and executing groups.
 """
 
 from saberx.executers.groupexecuter import GroupExecuter
