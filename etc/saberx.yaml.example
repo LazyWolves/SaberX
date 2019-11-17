@@ -1,0 +1,61 @@
+actiongroups:
+- groupname: grp1
+  actions:
+  - actionname: action_1
+    trigger:
+      type: TCP_TRIGGER
+      check: tcp_fail
+      host: 127.0.0.1
+      port: 8899
+      attempts: 3
+      threshold: 1
+    execute:
+    - "echo test>stest"
+- groupname: grp2
+  actions:
+  - actionname: action_2
+    trigger:
+      type: PROCESS_TRIGGER
+      check: cmdline
+      regex: "k.* start"
+      count: 1
+      operation: '>='
+    execute:
+    - "echo process>stest2"
+- groupname: grp3
+  actions:
+  - actionname: action_3
+    trigger:
+      type: CPU_TRIGGER
+      check: loadaverage
+      threshold:
+      - 10.0
+      - 10.0
+      - 10.0
+      operation: '<'
+    execute:
+    - "echo cpu>stest3"
+- groupname: grp4
+  actions:
+  - actionname: action_4
+    trigger:
+      type: MEMORY_TRIGGER
+      check: virtual
+      attr: used
+      threshold: 10.0
+      operation: '<'
+      negate: true
+    execute:
+    - "echo memory>stest4"
+- groupname: grp5
+  actions:
+  - actionname: action_5
+    trigger:
+      type: FILE_TRIGGER
+      check: regex
+      path: "/home/deep/SaberX/saberx.yaml"
+      regex: ".*act[a-z]{2}ns"
+      limit: 10
+      position: head
+    execute:
+    - "echo file>stest5"
