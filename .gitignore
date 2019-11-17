@@ -4,3 +4,6 @@ saberx.yaml
 saberx.conf
 stest*
 clean.sh
+saberx_1.0.egg-info
+dist
+build

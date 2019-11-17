@@ -15,7 +15,7 @@ import logging
 # global constants used by driver
 CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
-LOG_FILE = "/var/log/saberx.log"
+LOG_FILE = "/var/log/saberx/saberx.log"
 SLEEP_PERIOD = 10
 
 def drive():

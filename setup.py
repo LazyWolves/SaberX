@@ -53,7 +53,7 @@ setup(name='saberx-1.0',
       author='Deepjyoti Mondal',
       author_email='djmdeveloper060796@gmail.com',
       license='GPL',
-      packages=setuptools.find_packages(),
+      packages=setuptools.find_packages() + ['saberx.executers'],
       install_requires=get_dependencies(),
       entry_points={
           'console_scripts': ['saberx=saberx.driver.driver:drive'],
@@ -62,4 +62,5 @@ setup(name='saberx-1.0',
       zip_safe=False)
 
 if __name__ == "__main__":
+  print (setuptools.find_packages())
   pre_setup()
