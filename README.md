@@ -2,7 +2,7 @@
 
 ## Saberx
 
-Saberx is a trigger based monitoring, alerting and action executing system which can be used for self healing. Saberx watches
+Saberx is a trigger based monitoring, alerting and action execution system which can be used for self healing. Saberx watches
 for specific events in your system and fires its trigger when any such event happens. In reply to the firing of any such trigger,
 you can execute an action, like sending alert to you alert management system or any command to heal your system.
 
