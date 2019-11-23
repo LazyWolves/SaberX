@@ -353,5 +353,9 @@ Example:
   In the above example, the trigger will be fired if the number of processes in the system having command line matching the
   given regex is greater than or equal to 1.
   
+  ### CPU_TRIGGER
+  
+  
+  
   
 
