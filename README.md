@@ -220,5 +220,6 @@ For example, in the above scanario, if command 1 in action_1 in grp_1 fails (thr
 action_1 will be marked as a failure and action_2 in grp1 will be skipped in that run. However this wont affect any action
 in grp2.
 
-
+In short, if you want your actions to be evaluated concurrently with no **dependency** between them, consider putting them in
+separate groups. If you want your actions to be synchronous, then put them in same group.
 
