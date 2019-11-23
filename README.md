@@ -298,7 +298,7 @@ Example:
     execute:
     - "command 1"
 ```
-- The type tells what kind of trigger it is. It is mandatory for all triggers.
+- ```type``` tells what kind of trigger it is. It is mandatory for all triggers.
 
 - ```check``` denotes what we want to check. If we want to fire our trigger on tcp failure then we have to set this to
   ```tcp_failure```. If we want it to fire on tcp connect, then we have to set this to ```tcp_connect```
@@ -318,8 +318,10 @@ Example:
 
 ### PROCESS_TRIGGER
 
-Process trigger watches for processes with given name or commandline arguments matcing given patterm (regex). If saberx
-finds a process with the matching conditionals, then it fires this trigger.
+Process trigger watches for processes with given name/regex or commandline arguments matcing given regex. If saberx
+finds a process with the matching conditionals, then it fires this trigger based on certain conditions.
+For example you can instruct saberx to fire process trigger if there are more than (or less than or equal to) 5 (or any number)
+process with the name "nginx" running in the system.
 
 Example:
 
@@ -332,5 +334,24 @@ Example:
       count: 1
       operation: '>='
     execute:
-    - "command 1
+    - "command 1"
 ```
+
+- ```type``` tells what kind of trigger it is. It is mandatory for all triggers.
+
+- ```check``` can be set to either ```name``` or ```cmdline```. If set to name then saberx will look for name and if set to
+  cmdline then it will look out for processes with arguments matching the given regex.
+  
+- ```regex``` is the regex pattern to match against the process name or command line arguments.
+
+- ```count``` can be any integer. Saberx checks if the number of desired procsses in the system are greater than or less than
+  or equal to (as configured) ```count``` then the trigger is fired.
+  
+- ```operation``` can be anything among ```<, >, <=, >=, =```. This is how Saberx will compare the number of desired processes
+  against the provided ```count``` in order to fire the trigger.
+  
+  In the above example, the trigger will be fired if the number of processes in the system having command line matching the
+  given regex is greater than or equal to 1.
+  
+  
+
