@@ -269,4 +269,38 @@ in any action is fired, it executes the commands present in that action's execut
 Once all the threads have done their job, the lock file is deleted and Saberx waits for the next run. If Saberx is unable to
 delete the lock file it throws error and exits.
 
+## Triggers
+
+Saberx provides the following 5 triggers as of now:
+
+- TCP_TRGIGGER
+- PROCESS_TRIGGER
+- CPU_TRIGGER
+- MEMORY_TRIGGER
+- FILE_TRIGGER
+
+### TCP_TRIGGER
+
+TCP_TRIGGER watches for tcp connection to a given host and port. It gets triggered when it succeeds/fails in creating normal/ssl
+connection to a given host and port.
+
+For example:
+
+```
+- actionname: action_1
+    trigger:
+      type: TCP_TRIGGER
+      check: tcp_fail
+      host: 127.0.0.1
+      port: 8899
+      attempts: 3
+      threshold: 1  
+    execute:
+    - "command 1"
+```
+- The type tells what kind of trigger it is. It is mandatory for all triggers.
+
+- ```check``` denotes what we want to check. If we want to fire our trigger on tcp failure then we have to set this to
+  ```tcp_failure```. If we want it to fire on tcp connect, then we have to set this to ```tcp_connect```
+
 
