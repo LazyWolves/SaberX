@@ -223,3 +223,35 @@ in grp2.
 In short, if you want your actions to be evaluated concurrently with no **dependency** between them, consider putting them in
 separate groups. If you want your actions to be synchronous, then put them in same group.
 
+### Execute section
+
+Each trigger should have an execute section. This section/key contains a list of commands to be executed if the corresponding
+trigger is fired. Lets take an example:
+
+```
+  actiongroups:
+- groupname: grp1
+  actions:
+  - actionname: action_1
+    trigger:
+      type: TCP_TRIGGER
+      check: tcp_fail
+      host: 127.0.0.1
+      port: 80
+      attempts: 3
+      threshold: 2
+    execute:
+    - "command 1"
+    - "command 2"
+    - "command 3"
+    - "command 4"
+```
+
+In this example, if the above trigger fails, that is saberx is unable to open connection to 127.0.0.1:80, then Saberx will try to
+execute all the 4 commands one after the other synchronously.
+
+Omce again, it is to be noted over here that if any of the commands fail, the rest of the command will be ignored in that run.
+
+Saberx marks the execution of a command as failure if, the command throws an error/exception or it returns a non 0 return code.
+
+
