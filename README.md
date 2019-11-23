@@ -213,5 +213,12 @@ fired it will run commands or simply pass), it will try to evaluate the second t
 The second thread responsible for grp2 will also be excuting concurrently along with grp1 and hence the action contained with
 in grp2 (and hence the trigger and execute sections) will be evaluated concurrently to the actions present in grp1.
 
+Here another important thing worth noting is, if in the same group, one action's execute section fails, that action is marked as
+a failure and all the remaining actions in that group will be ignored.
+
+For example, in the above scanario, if command 1 in action_1 in grp_1 fails (throws exception, returns non 0 exit code), then
+action_1 will be marked as a failure and action_2 in grp1 will be skipped in that run. However this wont affect any action
+in grp2.
+
 
 
