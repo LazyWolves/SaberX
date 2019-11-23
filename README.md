@@ -459,7 +459,31 @@ Example:
   default its False. For example in case of file trigger, if type if ```present``` and the file is absent, trigger status will
   be false. However if ```negate``` is set to true, then it will fire the trugger since the status will not become true.
   
+  ## Running Saberx
   
+  Saberx can be ran easily by just typing the following:
+  
+  ``` sudo saberx``` or ```sudo saberx &```
+  
+  In the above saberx is run with superuser priviledges. However if all the actions/commands that you want saberx to
+  perform can be done by a normal user, then saberx can be run with that user.
+  
+  The preferred method to run saberx on Debian based linux systems would be by creating a service file for it.
+  
+  ```
+[Unit]
+Description=Systemd service for vision
+After=network.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/usr/bin/vision
+
+[Install]
+WantedBy=multi-user.target
+```
+
   
   
   
