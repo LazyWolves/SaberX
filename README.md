@@ -454,6 +454,10 @@ Example:
   
   - ```position``` denotes whether to search for the given regex in the file from head or tail. Value can be either of
     ```head``` or ```tail```.
+    
+  For all of the above mentioned triggers, ```negate``` param can be used. It simply negates the status of the trigger. By
+  default its False. For example in case of file trigger, if type if ```present``` and the file is absent, trigger status will
+  be false. However if ```negate``` is set to true, then it will fire the trugger since the status will not become true.
   
   
   
