@@ -254,4 +254,19 @@ Omce again, it is to be noted over here that if any of the commands fail, the re
 
 Saberx marks the execution of a command as failure if, the command throws an error/exception or it returns a non 0 return code.
 
+## What happens in Saberx run
+
+Before Saberx initiates a run, it tries to aquire a lock. It does so by trying to create a lock file in the configured lock
+directory (present in /etc/saberx/saberx.conf).
+
+If Saberx fails to create the file, the run fails. If a lock file is already present, it means the previous run is not yet
+finished, so it does nothing and waits for the next turn.
+
+If it succeeds in creating the lock file, then the run begins. Saberx first parses the action yaml, extarcts all the groups.
+Following that it spawns one thread for each group. Each thread evaluates the actions of the concerned groups. Whenever a triiger
+in any action is fired, it executes the commands present in that action's execute section.
+
+Once all the threads have done their job, the lock file is deleted and Saberx waits for the next run. If Saberx is unable to
+delete the lock file it throws error and exits.
+
 
