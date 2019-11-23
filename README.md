@@ -140,7 +140,7 @@ This is the main conf file. It contains path to the yaml file containg the actio
 ```lock_dir``` is the directory where saberx stores a lock file. This file acts as a lock making sure the next run of saberx
 takes place only after the previous run has ended and all old threads are gone.
 
-```sleep_period``` is the amount of time saberx will wait before initiating the next run.
+```sleep_period``` is the amount of time (in seconds) saberx will wait before initiating the next run.
 
 ## How Saberx works
 
@@ -303,4 +303,16 @@ For example:
 - ```check``` denotes what we want to check. If we want to fire our trigger on tcp failure then we have to set this to
   ```tcp_failure```. If we want it to fire on tcp connect, then we have to set this to ```tcp_connect```
 
+- ```host``` tells the host to connect to. Can be hostname or IP address. Default is ```127.0.0.1```.
+
+- ```port``` tell the port of the host to connect to. Default is ```80```.
+
+- ```ssl``` need to be set to True we want to create TCP connection with SSL or else False. Default is ```False```.
+
+- ```timeout``` is the time in seconds after which saberx will give up trying to establish the connection and report as failure.
+  Default is 5.
+
+- ```attempts``` is the number of times saberx should try to establish a connection to the given host, port. Default is 3.
+
+- ```threshold``` is the minimum number of success or failure saberx must enounter in order to report the same.
 
