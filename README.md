@@ -154,7 +154,7 @@ Each group comprises of a list of actions.
 
 Each action comprises of a **trigger** and a **execute** section.
 
-The important and interesting thing to be notes here is Saberx executes all the groups concurrently. It spawns a thread
+The important and interesting thing to be notes here is Saberx evaluates all the groups concurrently. It spawns a thread
 for each group. So two actions in two different group will be executed concurrently. However, inside the same group, the
 actions are executed synchronously.
 
@@ -198,6 +198,20 @@ actiongroups:
     execute:
     - "command 1"
 ```
+
+In the above action yaml, grp1 and grp2 will be run concurrently. Saberx will spawn two threads and allocate one group to each
+thread. This would mean both the TCP triggers will be evaluated concurrently on each run with the process trigger 
+(more on process trigger below). However both tcp triggers will be evaluated synchronously. That is first saberx will evaluate
+the tcp trigger for port 80 and then for port 443.
+
+If the above seems to be confusing, the here is a small description of the control flow for the above config.
+
+At the start of each run, Saberx will spawn a thread for each group. In this case there will be two threads in total. The thread
+responsible for a group, lets consider the first group, will first evaluate grp1, once it is done with grp1 (if trigger is
+fired it will run commands or simply pass), it will try to evaluate the second trigger (the one for port 443).
+
+The second thread responsible for grp2 will also be excuting concurrently along with grp1 and hence the action contained with
+in grp2 (and hence the trigger and execute sections) will be evaluated concurrently to the actions present in grp1.
 
 
 
