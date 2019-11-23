@@ -228,29 +228,28 @@ in grp2.
 In short, if you want your actions to be evaluated concurrently with no **dependency** between them, consider putting them in
 separate groups. If you want your actions to be synchronous, then put them in same group.
 
-### Execute section
+Execute section
+==================
 
 Each trigger should have an execute section. This section/key contains a list of commands to be executed if the corresponding
-trigger is fired. Lets take an example:
+trigger is fired. Lets take an example::
 
-``
-  actiongroups:
-- groupname: grp1
-  actions:
-  - actionname: action_1
-    trigger:
-      type: TCP_TRIGGER
-      check: tcp_fail
-      host: 127.0.0.1
-      port: 80
-      attempts: 3
-      threshold: 2
-    execute:
-    - "command 1"
-    - "command 2"
-    - "command 3"
-    - "command 4"
-``
+    actiongroups:
+    - groupname: grp1
+    actions:
+    - actionname: action_1
+        trigger:
+        type: TCP_TRIGGER
+        check: tcp_fail
+        host: 127.0.0.1
+        port: 80
+        attempts: 3
+        threshold: 2
+        execute:
+        - "command 1"
+        - "command 2"
+        - "command 3"
+        - "command 4"
 
 In this example, if the above trigger fails, that is saberx is unable to open connection to 127.0.0.1:80, then Saberx will try to
 execute all the 4 commands one after the other synchronously.
@@ -259,7 +258,8 @@ Omce again, it is to be noted over here that if any of the commands fail, the re
 
 Saberx marks the execution of a command as failure if, the command throws an error/exception or it returns a non 0 return code.
 
-## What happens in Saberx run
+What happens in Saberx run
+==============================
 
 Before Saberx initiates a run, it tries to aquire a lock. It does so by trying to create a lock file in the configured lock
 directory (present in /etc/saberx/saberx.conf).
@@ -274,7 +274,8 @@ in any action is fired, it executes the commands present in that action's execut
 Once all the threads have done their job, the lock file is deleted and Saberx waits for the next run. If Saberx is unable to
 delete the lock file it throws error and exits.
 
-## Triggers
+Triggers
+************
 
 Saberx provides the following 5 triggers as of now:
 
@@ -284,25 +285,25 @@ Saberx provides the following 5 triggers as of now:
 - MEMORY_TRIGGER
 - FILE_TRIGGER
 
-### TCP_TRIGGER
+TCP_TRIGGER
+==============
 
 TCP_TRIGGER watches for tcp connection to a given host and port. It gets triggered when it succeeds/fails in creating normal/ssl
 connection to a given host and port.
 
-Example:
+Example::
 
-``
-- actionname: action_1
-    trigger:
-      type: TCP_TRIGGER
-      check: tcp_fail
-      host: 127.0.0.1
-      port: 8899
-      attempts: 3
-      threshold: 1  
-    execute:
-    - "command 1"
-``
+    - actionname: action_1
+        trigger:
+        type: TCP_TRIGGER
+        check: tcp_fail
+        host: 127.0.0.1
+        port: 8899
+        attempts: 3
+        threshold: 1  
+        execute:
+        - "command 1"
+
 - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
 
 - ``check`` denotes what we want to check. If we want to fire our trigger on tcp failure then we have to set this to
@@ -321,16 +322,16 @@ Example:
 
 - ``threshold`` is the minimum number of success or failure saberx must enounter in order to report the same.
 
-### PROCESS_TRIGGER
+PROCESS_TRIGGER
+===================
 
 Process trigger watches for processes with given name/regex or commandline arguments matcing given regex. If saberx
 finds a process with the matching conditionals, then it fires this trigger based on certain conditions.
 For example you can instruct saberx to fire process trigger if there are more than (or less than or equal to) 5 (or any number)
 process with the name "nginx" running in the system.
 
-Example:
+Example::
 
-``
 - actionname: action_2
     trigger:
       type: PROCESS_TRIGGER
@@ -340,7 +341,6 @@ Example:
       operation: '>='
     execute:
     - "command 1"
-``
 
 - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
 
