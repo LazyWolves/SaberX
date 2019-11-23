@@ -380,13 +380,42 @@ Example:
   
   - ```check``` as of now can only be ```loadaverage```
   
-  - ```threshold``` is a list of thresholds for 1, 5 and 15 min load average.
+  - ```threshold``` is a list of thresholds for 1, 5 and 15 min load average. must be ```float```
   
   - ```operation``` is the operation to be performed in order to compare current loadaverage with the thresholds. This can be
     set to either of ```<, >, <=, >=, =```.
   
+  ### MEMORY_TRIGGER
   
+  MEMORY_TRIGER watches over the memory of the system and fires the trigger if a given metric (used, free, available) of the
+  given type of memory (swap or virtual) breaches the given threshold.
   
+  Example:
+  
+  ```
+  - actionname: action_4
+    trigger:
+      type: MEMORY_TRIGGER
+      check: virtual
+      attr: used
+      threshold: 5368709120.0
+      operation: '>'
+    execute:
+    - "command 1"
+  ```
+  
+  The above trigger gets fired when used virtual memory in the system goes above 5368709120.0.
+  
+  - ```type``` tells what kind of trigger it is. It is mandatory for all triggers.
+  
+  - ```check``` can be either ```virtual``` or ```swap```. It denotes the type of memory to check.
+  
+  - ```attr``` can be either of ```used, free or available```. Default is ```used```.
+  
+  - ```threshold``` is the breach value. Must be ```float```.
+  
+  - ```operation``` is the operation to be performed in order to compare current memory metric with the threshold. This can be
+    set to either of ```<, >, <=, >=, =```. Default is ```>```
   
   
   
