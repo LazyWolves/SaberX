@@ -355,6 +355,40 @@ Example:
   
   ### CPU_TRIGGER
   
+  CPU trigger watches over the loadaverage of the system. If the loadaverage (1, 5, 15) is more, less or equal (as desired) than
+  the configured valu, this trigger will get fired.
+  
+  Example:
+  
+  ```
+  - actionname: action_3
+    trigger:
+      type: CPU_TRIGGER
+      check: loadaverage
+      threshold:
+      - 10.0
+      - 10.0
+      - 10.0
+      operation: '>'
+    execute:
+    - "command 1"
+  ```
+  
+  The above trigger will get fired if last 1, 5 and 15 min load average is greater than 10.0.
+  
+  - ```type``` tells what kind of trigger it is. It is mandatory for all triggers.
+  
+  - ```check``` as of now can only be ```loadaverage```
+  
+  - ```threshold``` is a list of thresholds for 1, 5 and 15 min load average.
+  
+  - ```operation``` is the operation to be performed in order to compare current loadaverage with the thresholds. This can be
+    set to either of ```<, >, <=, >=, =```.
+  
+  
+  
+  
+  
   
   
   
