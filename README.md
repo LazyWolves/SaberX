@@ -61,14 +61,48 @@ sleep_period = 5
 
 ```
 
-```Note: The above example assumes that you have Apache web server installed and configured to receive connections at port 80.
-   It also assumes that apache is being managed by systemd which is the default case in most debian systems```
+**Note**
+```
+Note: The above example assumes that you have Apache web server installed and configured to receive connections at port 80
+It also assumes that Apache is being managed by systemd, which is the default case with most debian based systems.
+```
 
 Make sure the server is up and running.
 
 Now start saberx by just typing  ```saberx```. Optionally you can start saberx using ```saberx &``` to push it to background.
-Alternatively you can create a service file for saberx (more on that later).
+Alternatively you can create a systemd service file for saberx (more on that later). The user with which saberx is being run
+should have permission to restart Apache2.
 
-In 
+In order to simulate an issue (refusal of connections at port 80), we will intentionally stop apache2:
+
+```
+sudo systemctl stop apache2
+
+```
+
+This will cause Apache2 to stop listening and port 80 and start rejecting connections. It will not take apache more than 5
+seconds (since that is the sleep time we have configured and can be reduced) to detect that Apache is refusing connections at
+port 80 and it will fire the TCPTrigger we have defined. Once that happens, the action we have provided will get excuted, thereby
+restarting Apache.
+
+### Understanding the config
+
+```
+  actiongroups:
+- groupname: grp1
+  actions:
+  - actionname: action_1
+    trigger:
+      type: TCP_TRIGGER
+      check: tcp_fail
+      host: 127.0.0.1
+      port: 80
+      attempts: 3
+      threshold: 2
+    execute:
+    - "systemctl restart apache2"
+```
+
+The above is the Trigger and action configuration. It contains only one action group: grp1 and grp 1 contains only one action: action_1
 
 
