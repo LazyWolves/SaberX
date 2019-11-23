@@ -284,7 +284,7 @@ Saberx provides the following 5 triggers as of now:
 TCP_TRIGGER watches for tcp connection to a given host and port. It gets triggered when it succeeds/fails in creating normal/ssl
 connection to a given host and port.
 
-For example:
+Example:
 
 ```
 - actionname: action_1
@@ -316,3 +316,21 @@ For example:
 
 - ```threshold``` is the minimum number of success or failure saberx must enounter in order to report the same.
 
+### PROCESS_TRIGGER
+
+Process trigger watches for processes with given name or commandline arguments matcing given patterm (regex). If saberx
+finds a process with the matching conditionals, then it fires this trigger.
+
+Example:
+
+```
+- actionname: action_2
+    trigger:
+      type: PROCESS_TRIGGER
+      check: cmdline
+      regex: "k.* start"
+      count: 1
+      operation: '>='
+    execute:
+    - "command 1
+```
