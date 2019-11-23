@@ -14,7 +14,7 @@ Saberx provides many more such triggers like filetrigger (watching over files), 
 CPUTrigger (watching over CPU), memory trigger (watching over memory) and the already described TCP trigger (watching over
 ports).
 
-Currently Saberx only supports Linux.
+**Currently Saberx only supports Linux.**
 
 ## Getting started with Saberx
 
@@ -141,6 +141,63 @@ This is the main conf file. It contains path to the yaml file containg the actio
 takes place only after the previous run has ended and all old threads are gone.
 
 ```sleep_period``` is the amount of time saberx will wait before initiating the next run.
+
+## How Saberx works
+
+This setion describes how Saberx works, what it does and how it does and how to configure it properly.
+
+### Actions and Groups
+
+As already mentioned above, in the yaml file (which we will refer as the **action yaml**), we can provide a list of groups.
+
+Each group comprises of a list of actions.
+
+Each action comprises of a **trigger** and a **execute** section.
+
+The important and interesting thing to be notes here is Saberx executes all the groups concurrently. It spawns a thread
+for each group. So two actions in two different group will be executed concurrently. However, inside the same group, the
+actions are executed synchronously.
+
+Lets take an example:
+
+```
+actiongroups:
+- groupname: grp1
+  actions:
+  - actionname: action_1
+    trigger:
+      type: TCP_TRIGGER
+      check: tcp_fail
+      host: 127.0.0.1
+      port: 80
+      attempts: 3
+      threshold: 1
+    execute:
+    - "command 1"
+    - "command 2"
+  - actionname: action_2
+    trigger:
+      type: TCP_TRIGGER
+      check: tcp_fail
+      host: 127.0.0.1
+      port: 443
+      attempts: 3
+      threshold: 1
+    execute:
+    - "command 1"
+    - "command 2"
+- groupname: grp2
+  actions:
+  - actionname: action_1
+    trigger:
+      type: PROCESS_TRIGGER
+      check: cmdline
+      regex: "nginx"
+      count: 1
+      operation: '>='
+    execute:
+    - "command 1"
+```
 
 
 
