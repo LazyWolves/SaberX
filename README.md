@@ -14,6 +14,8 @@ Saberx provides many more such triggers like filetrigger (watching over files), 
 CPUTrigger (watching over CPU), memory trigger (watching over memory) and the already described TCP trigger (watching over
 ports).
 
+Currently Saberx only supports Linux.
+
 ## Getting started with Saberx
 
 ### Installing Saberx
@@ -118,6 +120,27 @@ connection port 80. ```threshold``` is the minimum number of times the tcp conne
 above example if saberx fails to open TCP connection to 127.0.0.1:80 twice out of the three times it will try, then the trigger
 will get fired.
 
+Under ```execute``` we give a list of commands to be executed when a trigger is fired. It can be any linux commnad or script
+that needs to be executed. It is to be noted that if any command in the list of command fails or throws error or exit code if non
+0, the rest of the commands after that is ignored.
+
+```
+
+[DEFAULT]
+
+action_plan = /etc/saberx/saberx.yaml
+lock_dir = /run
+sleep_period = 5
+
+```
+This is the main conf file. It contains path to the yaml file containg the actions and triggers.
+
+```action_plan``` is the path to the yaml file containing actions and triggers (the one mentioned above)
+
+```lock_dir``` is the directory where saberx stores a lock file. This file acts as a lock making sure the next run of saberx
+takes place only after the previous run has ended and all old threads are gone.
+
+```sleep_period``` is the amount of time saberx will wait before initiating the next run.
 
 
 
