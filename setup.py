@@ -62,5 +62,4 @@ setup(name='saberx-1.0',
       zip_safe=False)
 
 if __name__ == "__main__":
-  print (setuptools.find_packages())
   pre_setup()
