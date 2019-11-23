@@ -416,6 +416,21 @@ Example:
   
   - ```operation``` is the operation to be performed in order to compare current memory metric with the threshold. This can be
     set to either of ```<, >, <=, >=, =```. Default is ```>```
+    
+  ### FILE_TRIGGER
+  
+  ```
+  - actionname: action_5
+    trigger:
+      type: FILE_TRIGGER
+      check: regex
+      path: "/home/deep/SaberX/saberx.yaml"
+      regex: ".*act[a-z]{2}ns"
+      limit: 10
+      position: head
+    execute:
+    - "command 1"
+  ```
   
   
   
