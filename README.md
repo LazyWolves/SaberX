@@ -470,23 +470,3 @@ Example:
   
   The preferred method to run saberx on Debian based linux systems would be by creating a service file for it.
   
-  ```
-[Unit]
-Description=Systemd service for vision
-After=network.target
-
-[Service]
-User=root
-Group=root
-ExecStart=/usr/bin/vision
-
-[Install]
-WantedBy=multi-user.target
-```
-
-  
-  
-  
-  
-  
-
