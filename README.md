@@ -103,6 +103,21 @@ restarting Apache.
     - "systemctl restart apache2"
 ```
 
-The above is the Trigger and action configuration. It contains only one action group: grp1 and grp 1 contains only one action: action_1
+The above is the Trigger and action configuration. It contains only one action group: grp1 and grp 1 contains only one action: action_1. There can be multiple action groups and each group can contain multiple triggers. More on this later.
+
+The type of the Trigger we used above is ```TCP_TRIGGER```. This triiger is only used to check tcp connections to given
+host, port.
+
+```check``` is set to ```tcp_fail```. This essectially means that the trigger will get fired when saberx fails to open a
+tcp connection to the give host, port.
+
+```host``` is the host we are monitoring and ```port``` is the respective port we are openning the TCP connection to.
+
+```attempts``` indicate the number of attempts we are going to make. Here saberx tries to make 3 attempts at openning a tcp
+connection port 80. ```threshold``` is the minimum number of times the tcp connection should fail to fire the trigger. So. in the
+above example if saberx fails to open TCP connection to 127.0.0.1:80 twice out of the three times it will try, then the trigger
+will get fired.
+
+
 
 
