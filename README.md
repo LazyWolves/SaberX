@@ -345,10 +345,10 @@ Example:
 - ```regex``` is the regex pattern to match against the process name or command line arguments.
 
 - ```count``` can be any integer. Saberx checks if the number of desired procsses in the system are greater than or less than
-  or equal to (as configured) ```count``` then the trigger is fired.
+  or equal to (as configured) ```count``` then the trigger is fired. Default is ```1```.
   
 - ```operation``` can be anything among ```<, >, <=, >=, =```. This is how Saberx will compare the number of desired processes
-  against the provided ```count``` in order to fire the trigger.
+  against the provided ```count``` in order to fire the trigger. Default is ```=```.
   
   In the above example, the trigger will be fired if the number of processes in the system having command line matching the
   given regex is greater than or equal to 1.
@@ -383,7 +383,7 @@ Example:
   - ```threshold``` is a list of thresholds for 1, 5 and 15 min load average. must be ```float```
   
   - ```operation``` is the operation to be performed in order to compare current loadaverage with the thresholds. This can be
-    set to either of ```<, >, <=, >=, =```.
+    set to either of ```<, >, <=, >=, =```. Default is ```>```.
   
   ### MEMORY_TRIGGER
   
@@ -419,18 +419,43 @@ Example:
     
   ### FILE_TRIGGER
   
+  FILE_TRIGGER is fired when a certain condtion is met in a file. For example this trigger can be configured such that
+  if the last 10 lines of a log file has a certain text (pattern given by a regex), then this trigger will get fired.
+  It can also be made to fire if a certain file is present,  empty.
+  
   ```
   - actionname: action_5
     trigger:
       type: FILE_TRIGGER
       check: regex
-      path: "/home/deep/SaberX/saberx.yaml"
+      path: "/var/log/apache2/error.log"
       regex: ".*act[a-z]{2}ns"
       limit: 10
       position: head
     execute:
     - "command 1"
   ```
+  
+  The above trigger gets fired when the apache2 error log file given by the path param has something matching the given regex
+  in the first 10 lines.
+  
+  - ```type``` tells what kind of trigger it is. It is mandatory for all triggers.
+  
+  - ```check``` can be wither of ```empty, present, regex```. Seting it to empty fires the trigger when the file is empty,
+    present fires it when the file is present. Setting it regex will search for the regex inside the file along with other
+    params.
+    
+  - ```path``` is the path of the file resourse. Must be abosulute path.
+  
+  - ```regex``` is the regex (pattern) to search in the file.
+  
+  - ```limit``` is the limit for the number of lines (from bottom or top) to search the regex in. Must be as integer.
+    Default is ```50```.
+  
+  - ```position``` denotes whether to search for the given regex in the file from head or tail. Value can be either of
+    ```head``` or ```tail```.
+  
+  
   
   
   
