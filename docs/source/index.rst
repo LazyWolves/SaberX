@@ -332,15 +332,15 @@ process with the name "nginx" running in the system.
 
 Example::
 
-- actionname: action_2
-    trigger:
-      type: PROCESS_TRIGGER
-      check: cmdline
-      regex: "k.* start"
-      count: 1
-      operation: '>='
-    execute:
-    - "command 1"
+  - actionname: action_2
+      trigger:
+        type: PROCESS_TRIGGER
+        check: cmdline
+        regex: "k.* start"
+        count: 1
+        operation: '>='
+      execute:
+      - "command 1"
 
 - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
 
@@ -355,125 +355,126 @@ Example::
 - ``operation`` can be anything among ``<, >, <=, >=, =``. This is how Saberx will compare the number of desired processes
   against the provided ``count`` in order to fire the trigger. Default is ``=``.
   
-  In the above example, the trigger will be fired if the number of processes in the system having command line matching the
-  given regex is greater than or equal to 1.
+In the above example, the trigger will be fired if the number of processes in the system having command line matching the
+given regex is greater than or equal to 1.
   
-  ### CPU_TRIGGER
+CPU_TRIGGER
+===============
   
-  CPU trigger watches over the loadaverage of the system. If the loadaverage (1, 5, 15) is more, less or equal (as desired) than
-  the configured valu, this trigger will get fired.
+CPU trigger watches over the loadaverage of the system. If the loadaverage (1, 5, 15) is more, less or equal (as desired) than
+the configured value, this trigger will get fired.
+
+Example::
   
-  Example:
+    - actionname: action_3
+      trigger:
+        type: CPU_TRIGGER
+        check: loadaverage
+        threshold:
+        - 10.0
+        - 10.0
+        - 10.0
+        operation: '>'
+      execute:
+      - "command 1"
   
-  ``
-  - actionname: action_3
-    trigger:
-      type: CPU_TRIGGER
-      check: loadaverage
-      threshold:
-      - 10.0
-      - 10.0
-      - 10.0
-      operation: '>'
-    execute:
-    - "command 1"
-  ``
+The above trigger will get fired if last 1, 5 and 15 min load average is greater than 10.0.
   
-  The above trigger will get fired if last 1, 5 and 15 min load average is greater than 10.0.
+- ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
   
-  - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
+- ``check`` as of now can only be ``loadaverage``
   
-  - ``check`` as of now can only be ``loadaverage``
+- ``threshold`` is a list of thresholds for 1, 5 and 15 min load average. must be ``float``
   
-  - ``threshold`` is a list of thresholds for 1, 5 and 15 min load average. must be ``float``
+- ``operation`` is the operation to be performed in order to compare current loadaverage with the thresholds. This can be
+  set to either of ``<, >, <=, >=, =``. Default is ``>``.
   
-  - ``operation`` is the operation to be performed in order to compare current loadaverage with the thresholds. This can be
-    set to either of ``<, >, <=, >=, =``. Default is ``>``.
+MEMORY_TRIGGER
+===================
   
-  ### MEMORY_TRIGGER
+MEMORY_TRIGER watches over the memory of the system and fires the trigger if a given metric (used, free, available) of the
+given type of memory (swap or virtual) breaches the given threshold.
   
-  MEMORY_TRIGER watches over the memory of the system and fires the trigger if a given metric (used, free, available) of the
-  given type of memory (swap or virtual) breaches the given threshold.
+  Example::
   
-  Example:
+    - actionname: action_4
+      trigger:
+        type: MEMORY_TRIGGER
+        check: virtual
+        attr: used
+        threshold: 5368709120.0
+        operation: '>'
+      execute:
+      - "command 1"
+
   
-  ``
-  - actionname: action_4
-    trigger:
-      type: MEMORY_TRIGGER
-      check: virtual
-      attr: used
-      threshold: 5368709120.0
-      operation: '>'
-    execute:
-    - "command 1"
-  ``
+The above trigger gets fired when used virtual memory in the system goes above 5368709120.0.
   
-  The above trigger gets fired when used virtual memory in the system goes above 5368709120.0.
+- ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
   
-  - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
+- ``check`` can be either ``virtual`` or ``swap``. It denotes the type of memory to check.
   
-  - ``check`` can be either ``virtual`` or ``swap``. It denotes the type of memory to check.
+- ``attr`` can be either of ``used, free or available``. Default is ``used``.
   
-  - ``attr`` can be either of ``used, free or available``. Default is ``used``.
+- ``threshold`` is the breach value. Must be ``float``.
   
-  - ``threshold`` is the breach value. Must be ``float``.
-  
-  - ``operation`` is the operation to be performed in order to compare current memory metric with the threshold. This can be
-    set to either of ``<, >, <=, >=, =``. Default is ``>``
+- ``operation`` is the operation to be performed in order to compare current memory metric with the threshold. This can be
+  set to either of ``<, >, <=, >=, =``. Default is ``>``
     
-  ### FILE_TRIGGER
+FILE_TRIGGER
+=================
   
-  FILE_TRIGGER is fired when a certain condtion is met in a file. For example this trigger can be configured such that
-  if the last 10 lines of a log file has a certain text (pattern given by a regex), then this trigger will get fired.
-  It can also be made to fire if a certain file is present,  empty.
+FILE_TRIGGER is fired when a certain condtion is met in a file. For example this trigger can be configured such that
+if the last 10 lines of a log file has a certain text (pattern given by a regex), then this trigger will get fired.
+It can also be made to fire if a certain file is present,  empty.
+
+  Example::
   
-  ``
-  - actionname: action_5
-    trigger:
-      type: FILE_TRIGGER
-      check: regex
-      path: "/var/log/apache2/error.log"
-      regex: ".*act[a-z]{2}ns"
-      limit: 10
-      position: head
-    execute:
-    - "command 1"
-  ``
+    - actionname: action_5
+      trigger:
+        type: FILE_TRIGGER
+        check: regex
+        path: "/var/log/apache2/error.log"
+        regex: ".*act[a-z]{2}ns"
+        limit: 10
+        position: head
+      execute:
+      - "command 1"
   
-  The above trigger gets fired when the apache2 error log file given by the path param has something matching the given regex
-  in the first 10 lines.
+The above trigger gets fired when the apache2 error log file given by the path param has something matching the given regex
+in the first 10 lines.
   
-  - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
+- ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
   
-  - ``check`` can be wither of ``empty, present, regex``. Seting it to empty fires the trigger when the file is empty,
-    present fires it when the file is present. Setting it regex will search for the regex inside the file along with other
-    params.
+- ``check`` can be wither of ``empty, present, regex``. Seting it to empty fires the trigger when the file is empty,
+  present fires it when the file is present. Setting it regex will search for the regex inside the file along with other
+  params.
     
-  - ``path`` is the path of the file resourse. Must be abosulute path.
+- ``path`` is the path of the file resourse. Must be abosulute path.
   
-  - ``regex`` is the regex (pattern) to search in the file.
+- ``regex`` is the regex (pattern) to search in the file.
   
-  - ``limit`` is the limit for the number of lines (from bottom or top) to search the regex in. Must be as integer.
-    Default is ``50``.
+- ``limit`` is the limit for the number of lines (from bottom or top) to search the regex in. Must be as integer.
+  Default is ``50``.
   
-  - ``position`` denotes whether to search for the given regex in the file from head or tail. Value can be either of
-    ``head`` or ``tail``.
+- ``position`` denotes whether to search for the given regex in the file from head or tail. Value can be either of
+  ``head`` or ``tail``.
     
-  For all of the above mentioned triggers, ``negate`` param can be used. It simply negates the status of the trigger. By
-  default its False. For example in case of file trigger, if type if ``present`` and the file is absent, trigger status will
-  be false. However if ``negate`` is set to true, then it will fire the trugger since the status will not become true.
+For all of the above mentioned triggers, ``negate`` param can be used. It simply negates the status of the trigger. By
+default its False. For example in case of file trigger, if type if ``present`` and the file is absent, trigger status will
+be false. However if ``negate`` is set to true, then it will fire the trugger since the status will not become true.
   
-  ## Running Saberx
+Running Saberx
+*****************
   
-  Saberx can be ran easily by just typing the following:
+Saberx can be ran easily by just typing the following:
   
-  `` sudo saberx`` or ``sudo saberx &``
+``sudo saberx`` or ``sudo saberx &``
   
-  In the above saberx is run with superuser priviledges. However if all the actions/commands that you want saberx to
-  perform can be done by a normal user, then saberx can be run with that user.
+In the above saberx is run with superuser priviledges. However if all the actions/commands that you want saberx to
+perform can be done by a normal user, then saberx can be run with that user.
   
-  The preferred method to run saberx on Debian based linux systems would be by creating a service file for it.
+The preferred method to run saberx on Debian based linux systems would be by creating a service file for it.
   
 
 ==================================
