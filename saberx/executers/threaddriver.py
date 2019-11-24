@@ -10,7 +10,7 @@ import os
 class ThreadExecuter:
 
     """
-        **Class for spawning and managing threads for executing groups
+        **Class for spawning and managing threads for executing groups**
     """
 
     def __init__(self, **kwargs):
