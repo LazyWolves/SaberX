@@ -355,8 +355,7 @@ Example:
   
   ### CPU_TRIGGER
   
-  CPU trigger watches over the loadaverage of the system. If the loadaverage (1, 5, 15) is more, less or equal (as desired) than
-  the configured valu, this trigger will get fired.
+  CPU trigger watches over the loadaverage of the system. If the loadaverage (1, 5, 15) is more, less or equal (as desired) than the configured value, this trigger will get fired.
   
   Example:
   
@@ -387,8 +386,7 @@ Example:
   
   ### MEMORY_TRIGGER
   
-  MEMORY_TRIGER watches over the memory of the system and fires the trigger if a given metric (used, free, available) of the
-  given type of memory (swap or virtual) breaches the given threshold.
+  MEMORY_TRIGER watches over the memory of the system and fires the trigger if a given metric (used, free, available) of the given type of memory (swap or virtual) breaches the given threshold.
   
   Example:
   
