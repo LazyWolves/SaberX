@@ -47,19 +47,19 @@ and as a response to this trigger we will restart Apache.
 
 Open **/etc/saberx/saberx.yaml** and paste the following in it::
 
-    actiongroups:
-    - groupname: grp1
+  actiongroups:
+  - groupname: grp1
     actions:
     - actionname: action_1
-        trigger:
+      trigger:
         type: TCP_TRIGGER
         check: tcp_fail
         host: 127.0.0.1
         port: 80
         attempts: 3
         threshold: 2
-        execute:
-        - "systemctl restart apache2"
+      execute:
+      - "systemctl restart apache2"
 
 
 Open **/etc/saberx/saberx.conf** and paste the following::
@@ -98,19 +98,19 @@ Understanding the config
 
 ::
 
-    actiongroups:
-    - groupname: grp1
+  actiongroups:
+  - groupname: grp1
     actions:
     - actionname: action_1
-        trigger:
+      trigger:
         type: TCP_TRIGGER
         check: tcp_fail
         host: 127.0.0.1
         port: 80
         attempts: 3
         threshold: 2
-        execute:
-        - "systemctl restart apache2"
+      execute:
+      - "systemctl restart apache2"
 
 The above is the Trigger and action configuration. It contains only one action group: grp1 and grp 1 contains only one action: action_1. There can be multiple action groups and each group can contain multiple triggers. More on this later.
 
@@ -169,42 +169,42 @@ actions are executed synchronously.
 
 Lets take an example::
 
-    actiongroups:
-    - groupname: grp1
+  actiongroups:
+  - groupname: grp1
     actions:
     - actionname: action_1
-        trigger:
+      trigger:
         type: TCP_TRIGGER
         check: tcp_fail
         host: 127.0.0.1
         port: 80
         attempts: 3
         threshold: 1
-        execute:
-        - "command 1"
-        - "command 2"
+      execute:
+      - "command 1"
+      - "command 2"
     - actionname: action_2
-        trigger:
+      trigger:
         type: TCP_TRIGGER
         check: tcp_fail
         host: 127.0.0.1
         port: 443
         attempts: 3
         threshold: 1
-        execute:
-        - "command 1"
-        - "command 2"
-    - groupname: grp2
+      execute:
+      - "command 1"
+      - "command 2"
+  - groupname: grp2
     actions:
     - actionname: action_1
-        trigger:
+      trigger:
         type: PROCESS_TRIGGER
         check: cmdline
         regex: "nginx"
         count: 1
         operation: '>='
-        execute:
-        - "command 1"
+      execute:
+      - "command 1"
 
 In the above action yaml, actiongroups grp1 and grp2 will be run concurrently. Saberx will spawn two threads and allocate one group to each
 thread. This would mean both the TCP triggers will be evaluated concurrently on each run with the process trigger 
@@ -236,22 +236,22 @@ Execute section
 Each trigger should have an execute section. This section/key contains a list of commands to be executed if the corresponding
 trigger is fired. Lets take an example::
 
-    actiongroups:
-    - groupname: grp1
+  actiongroups:
+  - groupname: grp1
     actions:
     - actionname: action_1
-        trigger:
+      trigger:
         type: TCP_TRIGGER
         check: tcp_fail
         host: 127.0.0.1
         port: 80
         attempts: 3
         threshold: 2
-        execute:
-        - "command 1"
-        - "command 2"
-        - "command 3"
-        - "command 4"
+      execute:
+      - "command 1"
+      - "command 2"
+      - "command 3"
+      - "command 4"
 
 In this example, if the above trigger fails, that is saberx is unable to open connection to 127.0.0.1:80, then Saberx will try to
 execute all the 4 commands one after the other synchronously.
@@ -296,15 +296,15 @@ connection to a given host and port.
 Example::
 
     - actionname: action_1
-        trigger:
+      trigger:
         type: TCP_TRIGGER
         check: tcp_fail
         host: 127.0.0.1
         port: 8899
         attempts: 3
         threshold: 1  
-        execute:
-        - "command 1"
+      execute:
+      - "command 1"
 
 - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
 
@@ -335,14 +335,14 @@ process with the name "nginx" running in the system.
 Example::
 
   - actionname: action_2
-      trigger:
-        type: PROCESS_TRIGGER
-        check: cmdline
-        regex: "k.* start"
-        count: 1
-        operation: '>='
-      execute:
-      - "command 1"
+    trigger:
+      type: PROCESS_TRIGGER
+      check: cmdline
+      regex: "k.* start"
+      count: 1
+      operation: '>='
+    execute:
+    - "command 1"
 
 - ``type`` tells what kind of trigger it is. It is mandatory for all triggers.
 
@@ -368,17 +368,17 @@ the configured value, this trigger will get fired.
 
 Example::
   
-    - actionname: action_3
-      trigger:
-        type: CPU_TRIGGER
-        check: loadaverage
-        threshold:
-        - 10.0
-        - 10.0
-        - 10.0
-        operation: '>'
-      execute:
-      - "command 1"
+  - actionname: action_3
+    trigger:
+      type: CPU_TRIGGER
+      check: loadaverage
+      threshold:
+      - 10.0
+      - 10.0
+      - 10.0
+      operation: '>'
+    execute:
+    - "command 1"
   
 The above trigger will get fired if last 1, 5 and 15 min load average is greater than 10.0.
   
@@ -397,17 +397,17 @@ MEMORY_TRIGGER
 MEMORY_TRIGER watches over the memory of the system and fires the trigger if a given metric (used, free, available) of the
 given type of memory (swap or virtual) breaches the given threshold.
   
-  Example::
+Example::
   
-    - actionname: action_4
-      trigger:
-        type: MEMORY_TRIGGER
-        check: virtual
-        attr: used
-        threshold: 5368709120.0
-        operation: '>'
-      execute:
-      - "command 1"
+  - actionname: action_4
+    trigger:
+      type: MEMORY_TRIGGER
+      check: virtual
+      attr: used
+      threshold: 5368709120.0
+      operation: '>'
+    execute:
+    - "command 1"
 
   
 The above trigger gets fired when used virtual memory in the system goes above 5368709120.0.
@@ -430,18 +430,18 @@ FILE_TRIGGER is fired when a certain condtion is met in a file. For example this
 if the last 10 lines of a log file has a certain text (pattern given by a regex), then this trigger will get fired.
 It can also be made to fire if a certain file is present,  empty.
 
-  Example::
+Example::
   
-    - actionname: action_5
-      trigger:
-        type: FILE_TRIGGER
-        check: regex
-        path: "/var/log/apache2/error.log"
-        regex: ".*act[a-z]{2}ns"
-        limit: 10
-        position: head
-      execute:
-      - "command 1"
+  - actionname: action_5
+    trigger:
+      type: FILE_TRIGGER
+      check: regex
+      path: "/var/log/apache2/error.log"
+      regex: ".*act[a-z]{2}ns"
+      limit: 10
+      position: head
+    execute:
+    - "command 1"
   
 The above trigger gets fired when the apache2 error log file given by the path param has something matching the given regex
 in the first 10 lines.
