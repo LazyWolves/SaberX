@@ -22,7 +22,7 @@ ports).
 
 Saberx can be simply installed using following steps:
 
-- Clone/download this repository
+- Clone/download the master branch
 - Enter into the repo
 - Run ```sudo python3 setup.py install```
 - Verify installation using ```saberx --help```
