@@ -3,6 +3,9 @@
 If you fing any bug in Saberx or have an idea for a cool feature, please create a new issue.
 If it is a bug then the title should be prefixed [BUG]. Please see the below template for filing a bug.
 
+All the development work should take place in dev brach. Hence all the pull requests should be made against
+the dev branch. Periodically dev branch will be merged to master branch.
+
 Template for BUG
 
 ```
