@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/djmgit/SaberX.svg?branch=master)](https://travis-ci.org/djmgit/SaberX)
 
-## Saberx
+## SaberX
 
-Saberx is a trigger based monitoring, alerting and action execution system which can be used for self healing. Saberx watches
+SaberX is a trigger based monitoring, alerting and action execution system which can be used for self healing. SaberX watches
 for specific events in your system and fires its trigger when any such event happens. In reply to the firing of any such trigger,
 you can execute an action, like sending alert to you alert management system or any command to heal your system.
 
@@ -10,17 +10,17 @@ A very simple example would be waching your apache server and making sure its ac
 you can configure saberx to fire a trigger for this. When such a trigger gets fired, you may send a curl request call
 to your alert manager to raise a alert and at the same time restart your apache server.
 
-Saberx provides many more such triggers like filetrigger (watching over files), Process trigger (watching over processes),
+SaberX provides many more such triggers like filetrigger (watching over files), Process trigger (watching over processes),
 CPUTrigger (watching over CPU), memory trigger (watching over memory) and the already described TCP trigger (watching over
 ports).
 
-**Currently Saberx only supports Linux.**
+**Currently SaberX only supports Linux.**
 
-## Getting started with Saberx
+## Getting started with SaberX
 
-### Installing Saberx
+### Installing SaberX
 
-Saberx can be simply installed using following steps:
+SaberX can be simply installed using following steps:
 
 - Clone/download master branch.
 - Enter into the repo
@@ -142,9 +142,9 @@ takes place only after the previous run has ended and all old threads are gone.
 
 ```sleep_period``` is the amount of time (in seconds) saberx will wait before initiating the next run.
 
-## How Saberx works
+## How SaberX works
 
-This setion describes how Saberx works, what it does and how it does and how to configure it properly.
+This setion describes how SaberX works, what it does and how it does and how to configure it properly.
 
 ### Actions and Groups
 
@@ -154,7 +154,7 @@ Each group comprises of a list of actions.
 
 Each action comprises of a **trigger** and a **execute** section.
 
-The important and interesting thing to be notes here is Saberx evaluates all the groups concurrently. It spawns a thread
+The important and interesting thing to be notes here is SaberX evaluates all the groups concurrently. It spawns a thread
 for each group. So two actions in two different group will be executed concurrently. However, inside the same group, the
 actions are executed synchronously.
 
@@ -199,14 +199,14 @@ actiongroups:
     - "command 1"
 ```
 
-In the above action yaml, grp1 and grp2 will be run concurrently. Saberx will spawn two threads and allocate one group to each
+In the above action yaml, grp1 and grp2 will be run concurrently. SaberX will spawn two threads and allocate one group to each
 thread. This would mean both the TCP triggers will be evaluated concurrently on each run with the process trigger 
 (more on process trigger below). However both tcp triggers will be evaluated synchronously. That is first saberx will evaluate
 the tcp trigger for port 80 and then for port 443.
 
 If the above seems to be confusing, the here is a small description of the control flow for the above config.
 
-At the start of each run, Saberx will spawn a thread for each group. In this case there will be two threads in total. The thread
+At the start of each run, SaberX will spawn a thread for each group. In this case there will be two threads in total. The thread
 responsible for a group, lets consider the first group, will first evaluate grp1, once it is done with grp1 (if trigger is
 fired it will run commands or simply pass), it will try to evaluate the second trigger (the one for port 443).
 
@@ -247,31 +247,31 @@ trigger is fired. Lets take an example:
     - "command 4"
 ```
 
-In this example, if the above trigger fails, that is saberx is unable to open connection to 127.0.0.1:80, then Saberx will try to
+In this example, if the above trigger fails, that is saberx is unable to open connection to 127.0.0.1:80, then SaberX will try to
 execute all the 4 commands one after the other synchronously.
 
 Omce again, it is to be noted over here that if any of the commands fail, the rest of the command will be ignored in that run.
 
-Saberx marks the execution of a command as failure if, the command throws an error/exception or it returns a non 0 return code.
+SaberX marks the execution of a command as failure if, the command throws an error/exception or it returns a non 0 return code.
 
-## What happens in Saberx run
+## What happens in SaberX run
 
-Before Saberx initiates a run, it tries to aquire a lock. It does so by trying to create a lock file in the configured lock
+Before SaberX initiates a run, it tries to aquire a lock. It does so by trying to create a lock file in the configured lock
 directory (present in /etc/saberx/saberx.conf).
 
-If Saberx fails to create the file, the run fails. If a lock file is already present, it means the previous run is not yet
+If SaberX fails to create the file, the run fails. If a lock file is already present, it means the previous run is not yet
 finished, so it does nothing and waits for the next turn.
 
-If it succeeds in creating the lock file, then the run begins. Saberx first parses the action yaml, extarcts all the groups.
+If it succeeds in creating the lock file, then the run begins. SaberX first parses the action yaml, extarcts all the groups.
 Following that it spawns one thread for each group. Each thread evaluates the actions of the concerned groups. Whenever a triiger
 in any action is fired, it executes the commands present in that action's execute section.
 
-Once all the threads have done their job, the lock file is deleted and Saberx waits for the next run. If Saberx is unable to
+Once all the threads have done their job, the lock file is deleted and SaberX waits for the next run. If SaberX is unable to
 delete the lock file it throws error and exits.
 
 ## Triggers
 
-Saberx provides the following 5 triggers as of now:
+SaberX provides the following 5 triggers as of now:
 
 - TCP_TRGIGGER
 - PROCESS_TRIGGER
@@ -344,10 +344,10 @@ Example:
   
 - ```regex``` is the regex pattern to match against the process name or command line arguments.
 
-- ```count``` can be any integer. Saberx checks if the number of desired procsses in the system are greater than or less than
+- ```count``` can be any integer. SaberX checks if the number of desired procsses in the system are greater than or less than
   or equal to (as configured) ```count``` then the trigger is fired. Default is ```1```.
   
-- ```operation``` can be anything among ```<, >, <=, >=, =```. This is how Saberx will compare the number of desired processes
+- ```operation``` can be anything among ```<, >, <=, >=, =```. This is how SaberX will compare the number of desired processes
   against the provided ```count``` in order to fire the trigger. Default is ```=```.
   
   In the above example, the trigger will be fired if the number of processes in the system having command line matching the
@@ -457,9 +457,9 @@ Example:
   default its False. For example in case of file trigger, if type if ```present``` and the file is absent, trigger status will
   be false. However if ```negate``` is set to true, then it will fire the trugger since the status will not become true.
   
-  ## Running Saberx
+  ## Running SaberX
   
-  Saberx can be ran easily by just typing the following:
+  SaberX can be ran easily by just typing the following:
   
   ``` sudo saberx``` or ```sudo saberx &```
   
