@@ -1,3 +1,4 @@
 pytest
 psutil
 flake8
+pytest-cov
