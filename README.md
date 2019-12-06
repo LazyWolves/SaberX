@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/djmgit/SaberX.svg?branch=master)](https://travis-ci.org/djmgit/SaberX)
+[![Build Status](https://travis-ci.org/LazyWolves/SaberX.svg?branch=dev)](https://travis-ci.org/LazyWolves/SaberX)
 
 ## SaberX
 
