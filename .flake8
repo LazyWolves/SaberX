@@ -1,6 +1,5 @@
 [flake8]
 ignore = 
-   E101
    E111
    E116
    E117

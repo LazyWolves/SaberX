@@ -31,11 +31,11 @@ class MemoryHandler:
         """
         return {
             '=': lambda current, count: current == count,
-			'<': lambda current, count: current < count,
-			'>': lambda current, count: current > count,
-			'<=': lambda current, count: current <= count,
-			'>=': lambda current, count: current >= count
-		}.get(operator)(current, count)
+            '<': lambda current, count: current < count,
+            '>': lambda current, count: current > count,
+            '<=': lambda current, count: current <= count,
+            '>=': lambda current, count: current >= count
+        }.get(operator)(current, count)
 
     @staticmethod
     def get_mem_type(check):
