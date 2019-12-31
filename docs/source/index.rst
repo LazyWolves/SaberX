@@ -44,6 +44,7 @@ use your own custom registry url for building dependencies then you can try one 
 Create a file called ```.pydistutils.cfg``` under your home directory with the below content:
 
 ::
+
     [easy_install]
     index-url = https://your-custom.url
 
@@ -54,7 +55,7 @@ If you want to develop SaberX then you can also install SaberX in development mo
 custom registry url. In this case you do not require the ```.pydistutils.cfg``` file. Just use the
 below mentioned command for installing SaberX.
 
-``sudo python3 setup.py develop --index-url=https://your-custom.url ``
+``sudo python3 setup.py develop --index-url=https://your-custom.url``
 
 This is will install SaberX in development mode. You can make changes to source on the fly and
 when you run SaberX, changes will be reflected, you will not have to build SaberX again and again.
