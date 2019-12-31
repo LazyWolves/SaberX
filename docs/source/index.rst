@@ -38,6 +38,32 @@ SaberX can be simply installed using following steps:
 - Run ``sudo python3 setup.py install``
 - Verify installation using ``saberx --help``
 
+It is to be noted that the ```setuptools``` pulls dependencies from ```pypi.org```. If you want to
+use your own custom registry url for building dependencies then you can try one of the below mentioned ways.
+
+Create a file called ```.pydistutils.cfg``` under your home directory with the below content:
+
+```
+[easy_install]
+index-url = https://your-custom.url
+
+```
+
+Once this file has been created you can continue with the normal installation procedure mentioned above.
+The registry url provided by you will be used rather than PyPi.
+
+If you want to develop SaberX then you can also install SaberX in development mode with your
+custom registry url. In this case you do not require the ```.pydistutils.cfg``` file. Just use the
+below mentioned command for installing SaberX.
+
+```
+sudo python3 setup.py develop --index-url=https://your-custom.url
+
+```
+
+This is will install SaberX in development mode. You can make changes to source on the fly and
+when you run SaberX, changes will be reflected, you will not have to build SaberX again and again.
+
 Setting up a simple Trigger and action
 =============================================
 
