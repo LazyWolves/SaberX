@@ -39,7 +39,7 @@ def get_dependencies():
     return lines
 
 setup(name='saberx-1.0',
-      version='1.0',
+      version='1.0.1',
       description='Self healing monitoring system',
       long_description=readme(),
       classifiers=[
