@@ -54,7 +54,7 @@ def drive():
     logger = __setup_logging(LOG_FILE)
 
     actionExtractor = ActionExtractor(
-        configpath=config.get("action_plan"), 
+        configpath=config.get("action_plan"),
         logger=logger)
     if not actionExtractor.action_plan_loaded:
 
@@ -87,7 +87,7 @@ def drive():
             if not worker_and_run_success:
 
                 '''
-                    Either lock could not be aquired or release failed. 
+                    Either lock could not be aquired or release failed.
                     Issue has been logged.
 
                     Exit SaberX
@@ -121,7 +121,7 @@ def __clear_existing_lock(lock_dir, logger):
     except Exception as e:
 
         '''
-            Unable to clear stale lock. Log issue. Send false. Stale locks muct 
+            Unable to clear stale lock. Log issue. Send false. Stale locks muct
             be removed or else runs wont take place
         '''
 
@@ -158,7 +158,7 @@ def __load_config():
     """
         **Method for loading config into python dict**
 
-        This method parses the conf file and creates the corresponding python 
+        This method parses the conf file and creates the corresponding python
         dict
 
         Returns:
@@ -183,7 +183,7 @@ def __sanitize_config(config):
     '''
         sanitize the config and log issues
     '''
-    
+
     return True
 
 

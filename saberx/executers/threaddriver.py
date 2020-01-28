@@ -29,7 +29,7 @@ class ThreadExecuter:
         """
             **Method to aquire lock**
 
-            This method is called to aquire lock before the threads are 
+            This method is called to aquire lock before the threads are
             spawned.
             The lock verifies that the previuos run has ended completely before
             the next run begins
@@ -57,8 +57,8 @@ class ThreadExecuter:
         """
             **Method to release lock**
 
-            This method is used to release a aquired lock. After all the 
-            threads have finished their work, this method is called to release 
+            This method is used to release a aquired lock. After all the
+            threads have finished their work, this method is called to release
             the lock.
 
             Returns:
@@ -74,13 +74,13 @@ class ThreadExecuter:
                     "Unable to release lock file : "
                     "Exception : {}".format(str(e)))
             return False
-    
+
     def __worker(self, group_id, group, logger):
 
         """
             **Method to execute a group of actions**
 
-            This function is the target of the thread spawned. Each thread 
+            This function is the target of the thread spawned. Each thread
             calls this method and assigns a given group to it.
 
             Args:
@@ -100,7 +100,7 @@ class ThreadExecuter:
             ** Method to spawn threads**
 
             This method is used to spawn new threads to execute groups.
-            Each thread calls the __worker fuction as target with a given 
+            Each thread calls the __worker fuction as target with a given
             group.
 
             Args:
@@ -129,8 +129,8 @@ class ThreadExecuter:
             if not lock_released:
 
                 '''
-                    Log lock issue. The lock must be released at this step or 
-                    else future runs wont take place. Issue must be fixed why 
+                    Log lock issue. The lock must be released at this step or
+                    else future runs wont take place. Issue must be fixed why
                     lock is not being released.
                 '''
 

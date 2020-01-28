@@ -134,7 +134,7 @@ class FileHandler:
             execute the trigger
 
             Args:
-                kwargs (dict): Dict containing path, pattern, limit and 
+                kwargs (dict): Dict containing path, pattern, limit and
                 position to read the file from
 
             Returns:

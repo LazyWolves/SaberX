@@ -19,8 +19,8 @@ class FileTrigger(TriggerBase):
 
         """
         super(FileTrigger, self).__init__(
-            type=kwargs.get("type"), 
-            check=kwargs.get("check"), 
+            type=kwargs.get("type"),
+            check=kwargs.get("check"),
             negate=kwargs.get("negate"))
 
         if kwargs.get("regex"):
@@ -58,9 +58,9 @@ class FileTrigger(TriggerBase):
 
         if self.check == "regex":
             triggered, error = FileHandler.search_keyword(
-                path=self.path, 
-                limit=self.limit, 
-                position=self.position, 
+                path=self.path,
+                limit=self.limit,
+                position=self.position,
                 regex=self.regex)
             return self.eval_negate(triggered, error)
 

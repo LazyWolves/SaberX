@@ -34,7 +34,7 @@ class ShellExecutor:
                 command (string): command tp be exeuted
 
             Returns:
-                bool, output, proc_exit_code: status of the command execution, 
+                bool, output, proc_exit_code: status of the command execution,
                 output of the command, return code
 
         """
@@ -44,10 +44,10 @@ class ShellExecutor:
                 sanity check
         '''
         proc = subprocess.Popen(
-            command, 
-            shell=True, 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE, 
+            command,
+            shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             universal_newlines=True)
         output, errors = proc.communicate()
         proc_exit_code = proc.returncode

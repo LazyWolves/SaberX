@@ -24,7 +24,7 @@ class ProcessHandler:
             name matches the given regex
 
             Args:
-                regex (string): String containing regex for filtering 
+                regex (string): String containing regex for filtering
                 process names
 
             Returns:
@@ -61,7 +61,7 @@ class ProcessHandler:
             cmdline matches the given regex
 
             Args:
-                regex (string): String containing regex for filtering process 
+                regex (string): String containing regex for filtering process
                 cmdline
 
             Returns:
@@ -72,9 +72,9 @@ class ProcessHandler:
         # by the process name
         command = 'ps aux | grep -E "{}" | grep -v grep | wc -l'.format(regex)
         proc = subprocess.Popen(
-            command, shell=True, 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE, 
+            command, shell=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             universal_newlines=True)
         output, errors = proc.communicate()
         proc_exit_code = proc.returncode
@@ -115,7 +115,7 @@ class ProcessHandler:
         """
             **Method for checking if a process exists by cmdline text**
 
-            This method checks if there is any process whose cmdline arg 
+            This method checks if there is any process whose cmdline arg
             matches the given pattern
 
             Args:
@@ -141,7 +141,7 @@ class ProcessHandler:
             **Method to evaluate the required operation**
 
             Args:
-                current (Integer) : Current number of processes filtered by the 
+                current (Integer) : Current number of processes filtered by the
                 given regex
                 count (Integer) : Desired threshold
                 operator (String) : The operation to be performed
@@ -161,7 +161,7 @@ class ProcessHandler:
     def check_name_count(regex, count, operator):
 
         """
-            **Method to get the Number of regex filtered processes and perform 
+            **Method to get the Number of regex filtered processes and perform
             the deired operation**
 
             Args:
@@ -185,7 +185,7 @@ class ProcessHandler:
     def check_cmdline_count(regex, count, operator):
 
         """
-            **Method to get the Number of regex filtered processes by cmd and 
+            **Method to get the Number of regex filtered processes by cmd and
             perform the deired operation**
 
             Args:

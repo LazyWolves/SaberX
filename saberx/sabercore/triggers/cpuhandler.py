@@ -18,7 +18,7 @@ class CPUHandler:
         """
             **Method for comparing given count with current cpu load everage.**
 
-            Thos metho takes the current value and the threshold for load 
+            Thos metho takes the current value and the threshold for load
             average and performs the desired operation.
 
             Args:
@@ -43,7 +43,7 @@ class CPUHandler:
         """
             **Method to check loadaverage**
 
-            This method evaluates the trigger param and descied whether the 
+            This method evaluates the trigger param and descied whether the
             trigger is fired or not.
 
             Args:

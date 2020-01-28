@@ -25,8 +25,8 @@ class ActionExecuter(object):
         """
             **Method to execute a given action**
 
-            This method executes a given action. It fires the associated 
-            trigger using the required trigger handler if trigger is 
+            This method executes a given action. It fires the associated
+            trigger using the required trigger handler if trigger is
             successfull, executes the desired commands.
 
             The layout of a action will be as follows:
@@ -78,7 +78,7 @@ class ActionExecuter(object):
         if error:
 
             '''
-                Log the error and return False. Consider the trgger as a 
+                Log the error and return False. Consider the trgger as a
                 failure.
             '''
 

@@ -19,8 +19,8 @@ class MemoryTrigger(TriggerBase):
 
         """
         super(MemoryTrigger, self).__init__(
-            type=kwargs.get("type"), 
-            check=kwargs.get("check"), 
+            type=kwargs.get("type"),
+            check=kwargs.get("check"),
             negate=kwargs.get("negate"))
 
         self.attr = kwargs.get("attr", "used")
@@ -48,9 +48,9 @@ class MemoryTrigger(TriggerBase):
             return False, "INVALID_ARGUMENTS"
 
         triggered, error = MemoryHandler.check_mem(
-            check_type=self.check, 
-            attr=self.attr, 
-            operation=self.operation, 
+            check_type=self.check,
+            attr=self.attr,
+            operation=self.operation,
             threshold=self.threshold)
         return self.eval_negate(triggered, error)
 

@@ -19,8 +19,8 @@ class ProcessTrigger(TriggerBase):
 
         """
         super(ProcessTrigger, self).__init__(
-            type=kwargs.get("type"), 
-            check=kwargs.get("check"), 
+            type=kwargs.get("type"),
+            check=kwargs.get("check"),
             negate=kwargs.get("negate"))
 
         if kwargs.get("regex"):

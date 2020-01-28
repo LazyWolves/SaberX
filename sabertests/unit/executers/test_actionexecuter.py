@@ -4,9 +4,9 @@ from saberx.executers.actionexecuter import ActionExecuter
 
 
 class TestActionExecuter:
-    
+
     def test_action_executer(self):
-        
+
         action = {
             "actionname": "action_1",
             "trigger": {
@@ -23,7 +23,7 @@ class TestActionExecuter:
         }
 
         status = ActionExecuter.execute_action(
-            action=action, 
+            action=action,
             thread_lock=threading.Lock())
 
         assert status
@@ -36,4 +36,3 @@ class TestActionExecuter:
             assert "test" in f.read()
 
         os.unlink("actionexecuter_test")
-    

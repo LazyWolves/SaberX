@@ -20,7 +20,7 @@ class CPUTrigger(TriggerBase):
 
         """
         super(CPUTrigger, self).__init__(
-            type=kwargs.get("type"), check=kwargs.get("check"), 
+            type=kwargs.get("type"), check=kwargs.get("check"),
             negate=kwargs.get("negate"))
 
         self.operation = kwargs.get("operation", ">")

@@ -2,7 +2,7 @@ from saberx.sabercore.triggers.tcptrigger import TCPTrigger
 
 
 class TestTCPTrigger:
-    
+
     def test_non_ssl(self):
         tcpTrigger = TCPTrigger(
             type="TCP_TRIGGER",
@@ -10,7 +10,7 @@ class TestTCPTrigger:
             port=5555,
             attempts=3,
             threshold=1,
-            check="tcp_fail"    
+            check="tcp_fail"
         )
 
         triggered, error = tcpTrigger.fire_trigger()
@@ -24,7 +24,7 @@ class TestTCPTrigger:
             port=5555,
             attempts=3,
             threshold=1,
-            check="tcp_fail"    
+            check="tcp_fail"
         )
 
         triggered, error = tcpTrigger.fire_trigger()
@@ -38,7 +38,7 @@ class TestTCPTrigger:
             port=80,
             attempts=3,
             threshold=1,
-            check="tcp_connect"    
+            check="tcp_connect"
         )
 
         triggered, error = tcpTrigger.fire_trigger()

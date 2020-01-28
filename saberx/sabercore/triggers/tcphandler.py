@@ -83,7 +83,7 @@ class TCPHandler:
             host.
 
             Args:
-                kwargs (dict): dict containing host, port, ssl, timeout, 
+                kwargs (dict): dict containing host, port, ssl, timeout,
                 attempts, threshold, check_type
 
             Returns:
