@@ -26,7 +26,7 @@ class MemoryTrigger(TriggerBase):
         self.attr = kwargs.get("attr", "used")
         self.operation = kwargs.get("operation", ">")
 
-        if kwargs.get("threshold") != None:
+        if kwargs.get("threshold") is not None:
             self.threshold = kwargs.get("threshold")
 
         self.valid_checks = ["virtual", "swap"]
@@ -111,7 +111,7 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if self.threshold == None:
+        if self.threshold is None:
 
             '''
                 Log error

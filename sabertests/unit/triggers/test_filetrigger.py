@@ -40,7 +40,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert trigerred
-        assert error == None
+        assert error is None
 
         fileTrigger = FileTrigger(
             type="FILE_TRIGGER",
@@ -54,7 +54,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert not trigerred
-        assert error == None
+        assert error is None
 
         fileTrigger = FileTrigger(
             type="FILE_TRIGGER",
@@ -68,7 +68,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert trigerred
-        assert error == None
+        assert error is None
 
         fileTrigger = FileTrigger(
             type="FILE_TRIGGER",
@@ -82,7 +82,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert not trigerred
-        assert error == None
+        assert error is None
 
         self.remove_file(file_name)
 
@@ -100,7 +100,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert trigerred
-        assert error == None
+        assert error is None
 
         self.remove_file(file_name)
 
@@ -116,7 +116,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert not trigerred
-        assert error == None
+        assert error is None
 
     def test_file_empty(self):
         file_name = "./filetrigger.test"
@@ -132,7 +132,7 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert trigerred
-        assert error == None
+        assert error is None
 
         self.remove_file(file_name)
 
@@ -147,6 +147,6 @@ and read from tail features with limit.
         trigerred, error = fileTrigger.fire_trigger()
 
         assert not trigerred
-        assert error == None
+        assert error is None
 
         self.remove_file(file_name)

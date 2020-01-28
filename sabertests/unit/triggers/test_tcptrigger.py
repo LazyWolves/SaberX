@@ -16,7 +16,7 @@ class TestTCPTrigger:
         triggered, error = tcpTrigger.fire_trigger()
 
         assert triggered
-        assert error == None
+        assert error is None
 
         tcpTrigger = TCPTrigger(
             type="TCP_TRIGGER",
@@ -44,7 +44,7 @@ class TestTCPTrigger:
         triggered, error = tcpTrigger.fire_trigger()
 
         assert triggered
-        assert error == None
+        assert error is None
 
     def test_ssl(self):
         tcpTrigger = TCPTrigger(
@@ -60,7 +60,7 @@ class TestTCPTrigger:
         triggered, error = tcpTrigger.fire_trigger()
 
         assert triggered
-        assert error == None
+        assert error is None
 
         tcpTrigger = TCPTrigger(
             type="TCP_TRIGGER",
@@ -75,4 +75,4 @@ class TestTCPTrigger:
         triggered, error = tcpTrigger.fire_trigger()
 
         assert triggered
-        assert error == None
+        assert error is None

@@ -46,7 +46,7 @@ class ProcessTrigger(TriggerBase):
             return False, "INVALID_ARGUMENTS"
 
         if self.check == "name":
-            if self.count != None:
+            if self.count is not None:
                 triggered, error = ProcessHandler.check_name_count(
                     self.regex, self.count, self.operation)
                 return self.eval_negate(triggered, error)

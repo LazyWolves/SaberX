@@ -15,7 +15,7 @@ class TestProcessTrigger:
         trigered, error = processTrigger.fire_trigger()
 
         assert trigered
-        assert error == None
+        assert error is None
 
         processTrigger = ProcessTrigger(
             type="PROCESS_TRIGER",
@@ -29,4 +29,4 @@ class TestProcessTrigger:
         trigered, error = processTrigger.fire_trigger()
 
         assert trigered
-        assert error == None
+        assert error is None

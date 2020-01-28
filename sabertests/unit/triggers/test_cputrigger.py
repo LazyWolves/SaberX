@@ -14,7 +14,7 @@ class TestCPUTrigger:
         trigerred, error = cpuTrigger.fire_trigger()
 
         assert trigerred
-        assert error == None
+        assert error is None
 
         cpuTrigger = CPUTrigger(
             type="CPU_TRIGGER",

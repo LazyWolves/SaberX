@@ -15,7 +15,7 @@ class TestMemoryTrigger:
         triggered, error = memoryTrigger.fire_trigger()
 
         assert triggered
-        assert error == None
+        assert error is None
 
         memoryTrigger = MemoryTrigger(
             type="MEMORY_TRIGGER",
@@ -28,4 +28,4 @@ class TestMemoryTrigger:
         triggered, error = memoryTrigger.fire_trigger()
 
         assert triggered
-        assert error == None
+        assert error is None
