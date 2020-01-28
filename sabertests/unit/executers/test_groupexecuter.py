@@ -42,7 +42,7 @@ class TestGroupExecuter:
         status = GroupExecuter.execute_group(
             group=group, thread_lock=threading.Lock())
 
-        assert status == True
+        assert status
 
         files = os.listdir(".")
         assert "actionexecuter_test" in files

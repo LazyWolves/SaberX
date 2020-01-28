@@ -15,7 +15,7 @@ class TestTCPTrigger:
 
         triggered, error = tcpTrigger.fire_trigger()
 
-        assert triggered == True
+        assert triggered
         assert error == None
 
         tcpTrigger = TCPTrigger(
@@ -29,7 +29,7 @@ class TestTCPTrigger:
 
         triggered, error = tcpTrigger.fire_trigger()
 
-        assert triggered == False
+        assert not triggered
         assert error == "IMPROPER_ARGUMENTS"
 
         tcpTrigger = TCPTrigger(
@@ -43,7 +43,7 @@ class TestTCPTrigger:
 
         triggered, error = tcpTrigger.fire_trigger()
 
-        assert triggered == True
+        assert triggered
         assert error == None
 
     def test_ssl(self):
@@ -59,7 +59,7 @@ class TestTCPTrigger:
 
         triggered, error = tcpTrigger.fire_trigger()
 
-        assert triggered == True
+        assert triggered
         assert error == None
 
         tcpTrigger = TCPTrigger(
@@ -74,5 +74,5 @@ class TestTCPTrigger:
 
         triggered, error = tcpTrigger.fire_trigger()
 
-        assert triggered == True
+        assert triggered
         assert error == None

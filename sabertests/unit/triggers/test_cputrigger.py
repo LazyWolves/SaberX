@@ -13,7 +13,7 @@ class TestCPUTrigger:
 
         trigerred, error = cpuTrigger.fire_trigger()
 
-        assert trigerred == True
+        assert trigerred
         assert error == None
 
         cpuTrigger = CPUTrigger(
@@ -25,5 +25,5 @@ class TestCPUTrigger:
 
         trigerred, error = cpuTrigger.fire_trigger()
 
-        assert trigerred == False
+        assert not trigerred
         assert error == "INVALID_ARGUMENTS"

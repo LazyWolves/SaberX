@@ -13,7 +13,7 @@ class TestShellExecuter:
             shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code == 0
-        assert status == True
+        assert status
 
         files = os.listdir("./")
 
@@ -31,7 +31,7 @@ class TestShellExecuter:
 
         assert proc_exit_code == 0
         assert "test" in output
-        assert status == True
+        assert status
 
         command = "cat invalid"
 
@@ -39,7 +39,7 @@ class TestShellExecuter:
             shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code != 0
-        assert status == False
+        assert not status
 
         os.unlink("./shelltest")
 
@@ -54,7 +54,7 @@ class TestShellExecuter:
 
         status = shellExecutor.execute_shell_list()
 
-        assert status == True
+        assert status
 
         files = os.listdir("./")
 
@@ -73,7 +73,7 @@ class TestShellExecuter:
 
         status = shellExecutor.execute_shell_list()
 
-        assert status == False
+        assert not status
 
         files = os.listdir("./")
 

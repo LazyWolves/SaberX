@@ -39,7 +39,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == True
+        assert trigerred
         assert error == None
 
         fileTrigger = FileTrigger(
@@ -53,7 +53,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == False
+        assert not trigerred
         assert error == None
 
         fileTrigger = FileTrigger(
@@ -67,7 +67,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == True
+        assert trigerred
         assert error == None
 
         fileTrigger = FileTrigger(
@@ -81,7 +81,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == False
+        assert not trigerred
         assert error == None
 
         self.remove_file(file_name)
@@ -99,7 +99,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == True
+        assert trigerred
         assert error == None
 
         self.remove_file(file_name)
@@ -115,7 +115,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == False
+        assert not trigerred
         assert error == None
 
     def test_file_empty(self):
@@ -131,7 +131,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == True
+        assert trigerred
         assert error == None
 
         self.remove_file(file_name)
@@ -146,7 +146,7 @@ and read from tail features with limit.
 
         trigerred, error = fileTrigger.fire_trigger()
 
-        assert trigerred == False
+        assert not trigerred
         assert error == None
 
         self.remove_file(file_name)

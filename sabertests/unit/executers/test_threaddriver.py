@@ -49,7 +49,7 @@ class TestThreadDriver:
 
         status = threadExecuter.spawn_workers("saber.lock")
 
-        assert status == True
+        assert status
 
         files = os.listdir(".")
 

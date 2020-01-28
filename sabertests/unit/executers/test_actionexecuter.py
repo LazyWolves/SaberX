@@ -26,7 +26,7 @@ class TestActionExecuter:
             action=action, 
             thread_lock=threading.Lock())
 
-        assert status == True
+        assert status
 
         files = os.listdir()
 
