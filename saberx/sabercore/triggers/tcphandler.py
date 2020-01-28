@@ -75,7 +75,7 @@ class TCPHandler:
 
 
     @staticmethod
-    def  check_connection(**kwargs):
+    def check_connection(**kwargs):
 
         """
             **Method to evaluate the TCP trigger**

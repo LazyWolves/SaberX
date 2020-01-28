@@ -28,7 +28,7 @@ class CPUTrigger(TriggerBase):
         self.valid_operations = ["=", "<", ">", "<=", ">="]
         self.valid_checks = ["loadaverage"]
 
-    def  fire_trigger(self):
+    def fire_trigger(self):
 
         """
             **Method to fire the trigger**
