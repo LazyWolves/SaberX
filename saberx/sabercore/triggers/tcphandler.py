@@ -74,7 +74,6 @@ class TCPHandler:
         except socket.error:
             return False
 
-
     @staticmethod
     def check_connection(**kwargs):
 
@@ -98,7 +97,6 @@ class TCPHandler:
         attemps = kwargs.get("attempts")
         threshold = kwargs.get("threshold")
         check_type = kwargs.get("check_type")
-
 
         if ssl:
             check = TCPHandler.check_tcp_ssl

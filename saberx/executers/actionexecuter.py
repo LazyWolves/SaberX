@@ -19,7 +19,6 @@ class ActionExecuter(object):
         This class mostly comrises of status function.
     """
 
-
     @staticmethod
     def execute_action(**kwargs):
 

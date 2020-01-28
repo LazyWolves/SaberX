@@ -57,7 +57,6 @@ class FileTrigger(TriggerBase):
             triggered, error = FileHandler.search_keyword(path=self.path, limit=self.limit, position=self.position, regex=self.regex)
             return self.eval_negate(triggered, error)
 
-
     def sanitise(self):
         if not self.path:
             '''

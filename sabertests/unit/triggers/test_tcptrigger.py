@@ -46,7 +46,6 @@ class TestTCPTrigger:
         assert triggered == True
         assert error == None
 
-
     def test_ssl(self):
         tcpTrigger = TCPTrigger(
             type="TCP_TRIGGER",

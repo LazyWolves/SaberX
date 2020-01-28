@@ -40,7 +40,6 @@ class TestShellExecuter:
 
         os.unlink("./shelltest")
 
-
     def test_shell_executer_list(self):
 
         command_list = [
