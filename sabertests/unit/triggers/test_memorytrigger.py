@@ -2,7 +2,7 @@ from saberx.sabercore.triggers.memorytrigger import MemoryTrigger
 
 
 class TestMemoryTrigger:
-    
+
     def test_memory_trigger(self):
         memoryTrigger = MemoryTrigger(
             type="MEMORY_TRIGGER",
@@ -11,7 +11,7 @@ class TestMemoryTrigger:
             operation='>',
             check="virtual"
         )
-        
+
         triggered, error = memoryTrigger.fire_trigger()
 
         assert triggered
@@ -24,7 +24,7 @@ class TestMemoryTrigger:
             operation='>=',
             check="swap"
         )
-        
+
         triggered, error = memoryTrigger.fire_trigger()
 
         assert triggered

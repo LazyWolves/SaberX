@@ -25,7 +25,7 @@ and read from tail features with limit.
 
     def test_filetrigger(self):
         self.create_file()
-        
+
         file_name = "filetrigger.test"
 
         fileTrigger = FileTrigger(
