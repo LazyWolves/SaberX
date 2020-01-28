@@ -3,10 +3,8 @@
    :synopsis: Module for evaluating tcptrigger trigger.
 """
 
-import os
 import socket
 import ssl
-import traceback
 
 
 class TCPHandler:

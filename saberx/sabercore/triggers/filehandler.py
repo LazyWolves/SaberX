@@ -6,7 +6,6 @@
 import os
 from itertools import islice
 import re
-import traceback
 
 
 class FileHandler:

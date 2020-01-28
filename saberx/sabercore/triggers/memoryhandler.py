@@ -3,7 +3,6 @@
    :synopsis: Module for performing the memory trigger operation.
 """
 
-import os
 import psutil
 
 

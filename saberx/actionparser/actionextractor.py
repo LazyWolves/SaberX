@@ -1,5 +1,4 @@
 import yaml
-import json
 
 
 class ActionExtractor:
