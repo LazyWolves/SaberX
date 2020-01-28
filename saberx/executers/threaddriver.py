@@ -29,7 +29,8 @@ class ThreadExecuter:
         """
             **Method to aquire lock**
 
-            This method is called to aquire lock before the threads are spwaned.
+            This method is called to aquire lock before the threads are 
+            spawned.
             The lock verifies that the previuos run has ended completely before
             the next run begins
 
@@ -46,7 +47,9 @@ class ThreadExecuter:
             return False
         except Exception as e:
             if self.__logger:
-                self.__logger.critical("Unable to aquire lock file : Exception : {}".format(str(e)))
+                self.__logger.critical(
+                    "Unable to aquire lock file : Exception : {}"
+                    .format(str(e)))
             return False
 
     def __release_lock(self):
@@ -54,8 +57,9 @@ class ThreadExecuter:
         """
             **Method to release lock**
 
-            This method is used to release a aquired lock. After all the threads have finished
-            their work, this method is called to release the lock.
+            This method is used to release a aquired lock. After all the 
+            threads have finished their work, this method is called to release 
+            the lock.
 
             Returns:
                 bool : Successfully released the lock or not
@@ -66,7 +70,9 @@ class ThreadExecuter:
             return True
         except Exception as e:
             if self.__logger:
-                self.__logger.critical("Unable to release lock file : Exception : {}".format(str(e)))
+                self.__logger.critical(
+                    "Unable to release lock file : "
+                    "Exception : {}".format(str(e)))
             return False
     
     def __worker(self, group_id, group, logger):
@@ -74,8 +80,8 @@ class ThreadExecuter:
         """
             **Method to execute a group of actions**
 
-            This function is the target of the thread spawned. Each thread calls this
-            method and assigns a given group to it.
+            This function is the target of the thread spawned. Each thread 
+            calls this method and assigns a given group to it.
 
             Args:
                 group_id (Integer) : Id of the group
@@ -85,7 +91,8 @@ class ThreadExecuter:
             Returns:
                 None : Returns nothing
         """
-        group_status = GroupExecuter.execute_group(group=group, thread_lock=self.__lock, logger=logger)
+        group_status = GroupExecuter.execute_group(
+            group=group, thread_lock=self.__lock, logger=logger)
 
     def spawn_workers(self, lock_file):
 
@@ -93,7 +100,8 @@ class ThreadExecuter:
             ** Method to spawn threads**
 
             This method is used to spawn new threads to execute groups.
-            Each thread calls the __worker fuction as target with a given group.
+            Each thread calls the __worker fuction as target with a given 
+            group.
 
             Args:
                 lock_file (string) : Path to lock file
@@ -108,7 +116,8 @@ class ThreadExecuter:
 
             # Iterate over the groups and spawn a thread for each group
             for group_index, group in enumerate(self.__groups):
-                worker = threading.Thread(target=self.__worker, args=(group_index, group, self.__logger))
+                worker = threading.Thread(target=self.__worker, args=(
+                    group_index, group, self.__logger))
                 self.__workers.append(worker)
                 worker.start()
 
@@ -120,13 +129,15 @@ class ThreadExecuter:
             if not lock_released:
 
                 '''
-                    Log lock issue. The lock must be released at this step or else
-                    future runs wont take place. Issue must be fixed why lock is not
-                    being released.
+                    Log lock issue. The lock must be released at this step or 
+                    else future runs wont take place. Issue must be fixed why 
+                    lock is not being released.
                 '''
 
                 if self.__logger:
-                    self.__logger.critical("Lock could not be released. This needs to be fixed for future runs")
+                    self.__logger.critical(
+                        "Lock could not be released. "
+                        "This needs to be fixed for future runs")
 
                 return False
 

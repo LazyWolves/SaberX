@@ -18,7 +18,10 @@ class MemoryTrigger(TriggerBase):
             **Method for initialing CPU trigger**
 
         """
-        super(MemoryTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(MemoryTrigger, self).__init__(
+            type=kwargs.get("type"), 
+            check=kwargs.get("check"), 
+            negate=kwargs.get("negate"))
 
         self.attr = kwargs.get("attr", "used")
         self.operation = kwargs.get("operation", ">")
@@ -44,7 +47,11 @@ class MemoryTrigger(TriggerBase):
         if not self.sanitise():
             return False, "INVALID_ARGUMENTS"
 
-        triggered, error = MemoryHandler.check_mem(check_type=self.check, attr=self.attr, operation=self.operation, threshold=self.threshold)
+        triggered, error = MemoryHandler.check_mem(
+            check_type=self.check, 
+            attr=self.attr, 
+            operation=self.operation, 
+            threshold=self.threshold)
         return self.eval_negate(triggered, error)
 
     def sanitise(self):

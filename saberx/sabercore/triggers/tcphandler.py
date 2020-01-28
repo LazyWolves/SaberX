@@ -85,7 +85,8 @@ class TCPHandler:
             host.
 
             Args:
-                kwargs (dict): dict containing host, port, ssl, timeout, attempts, threshold, check_type
+                kwargs (dict): dict containing host, port, ssl, timeout, 
+                attempts, threshold, check_type
 
             Returns:
                 bool, error: status, error if any
@@ -122,4 +123,5 @@ class TCPHandler:
 
 
 if __name__ == "__main__":
-    print(TCPHandler.check_connection(host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))
+    print(TCPHandler.check_connection(
+        host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))

@@ -34,7 +34,8 @@ class ShellExecutor:
                 command (string): command tp be exeuted
 
             Returns:
-                bool, output, proc_exit_code: status of the command execution, output of the command, return code
+                bool, output, proc_exit_code: status of the command execution, 
+                output of the command, return code
 
         """
 
@@ -42,14 +43,21 @@ class ShellExecutor:
             TODO:
                 sanity check
         '''
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        proc = subprocess.Popen(
+            command, 
+            shell=True, 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE, 
+            universal_newlines=True)
         output, errors = proc.communicate()
         proc_exit_code = proc.returncode
 
         if proc_exit_code != 0:
 
             if self.logger:
-                self.logger.critical("Shell executer failed with error : {errors}".format(errors=errors))
+                self.logger.critical(
+                    "Shell executer failed with error : {errors}"
+                    .format(errors=errors))
             return False, errors, proc_exit_code
 
         return True, output, proc_exit_code
@@ -61,8 +69,8 @@ class ShellExecutor:
 
             This method executes a list of shell commands.
 
-            It is to be notes that, if a single command fails, the remaning commands
-            adter the failed command will be ignored.
+            It is to be notes that, if a single command fails, the remaining
+            commands after the failed command will be ignored.
 
             Returns:
                 bool: status of execution of the commands.
@@ -71,7 +79,9 @@ class ShellExecutor:
 
             # log the command being executed
 
-            success, reponse, proc_exit_code = self.execute_shell_single(command)
+            success, reponse, proc_exit_code = \
+                self.execute_shell_single(command)
+
             if not success:
                 # log the response and proc_exit_code
                 return False

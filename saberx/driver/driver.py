@@ -53,7 +53,9 @@ def drive():
 
     logger = __setup_logging(LOG_FILE)
 
-    actionExtractor = ActionExtractor(configpath=config.get("action_plan"), logger=logger)
+    actionExtractor = ActionExtractor(
+        configpath=config.get("action_plan"), 
+        logger=logger)
     if not actionExtractor.action_plan_loaded:
 
         '''
@@ -80,11 +82,14 @@ def drive():
         # threads should be spwaned only if a lock can be aquired.
         if __can_aquire_lock(config.get("lock_dir")):
             logger.info("Proceeding with saberx run")
-            worker_and_run_success = threadExecuter.spawn_workers(os.path.join(config.get("lock_dir"), LOCK_FILE))
+            worker_and_run_success = threadExecuter.spawn_workers(
+                os.path.join(config.get("lock_dir"), LOCK_FILE))
             if not worker_and_run_success:
 
                 '''
-                    Either lock could not be aquired or release failed. Issue has been logged.
+                    Either lock could not be aquired or release failed. 
+                    Issue has been logged.
+
                     Exit SaberX
                 '''
                 exit(2)
@@ -116,11 +121,12 @@ def __clear_existing_lock(lock_dir, logger):
     except Exception as e:
 
         '''
-            Unable to clear stale lock. Log issue. Send false. Stale locks muct be removed
-            or else runs wont take place
+            Unable to clear stale lock. Log issue. Send false. Stale locks muct 
+            be removed or else runs wont take place
         '''
 
-        logger.critical("Unable to remove lock file : Exeption : {}".format(str(e)))
+        logger.critical(
+            "Unable to remove lock file : Exeption : {}".format(str(e)))
 
         return False
 
@@ -152,7 +158,8 @@ def __load_config():
     """
         **Method for loading config into python dict**
 
-        This method parses the conf file and creates the corresponding python dict
+        This method parses the conf file and creates the corresponding python 
+        dict
 
         Returns:
             dict : Whether lock could be cleared
@@ -198,8 +205,9 @@ def __setup_logging(log_file):
     logger.setLevel(logging.DEBUG)
     logger_handler = logging.FileHandler(log_file)
     logger_handler.setLevel(logging.DEBUG)
-    logger_formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
-                                         datefmt='%Y-%m-%d %H:%M:%S')
+    logger_formatter = logging.Formatter(
+        fmt='%(asctime)s %(levelname)-8s %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S')
     logger_handler.setFormatter(logger_formatter)
     logger.addHandler(logger_handler)
 

@@ -9,7 +9,8 @@ class TestShellExecuter:
 
         shellExecutor = ShellExecutor(command_list="")
 
-        status, output, proc_exit_code = shellExecutor.execute_shell_single(command)
+        status, output, proc_exit_code = \
+            shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code == 0
         assert status == True
@@ -25,7 +26,8 @@ class TestShellExecuter:
 
         command = "cat shelltest"
 
-        status, output, proc_exit_code = shellExecutor.execute_shell_single(command)
+        status, output, proc_exit_code = \
+            shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code == 0
         assert "test" in output
@@ -33,7 +35,8 @@ class TestShellExecuter:
 
         command = "cat invalid"
 
-        status, output, proc_exit_code = shellExecutor.execute_shell_single(command)
+        status, output, proc_exit_code = \
+            shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code != 0
         assert status == False

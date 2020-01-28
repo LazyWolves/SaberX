@@ -18,7 +18,10 @@ class FileTrigger(TriggerBase):
             **Method for initialing File trigger**
 
         """
-        super(FileTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(FileTrigger, self).__init__(
+            type=kwargs.get("type"), 
+            check=kwargs.get("check"), 
+            negate=kwargs.get("negate"))
 
         if kwargs.get("regex"):
             self.regex = kwargs.get("regex")
@@ -54,7 +57,11 @@ class FileTrigger(TriggerBase):
             return self.eval_negate(triggered, error)
 
         if self.check == "regex":
-            triggered, error = FileHandler.search_keyword(path=self.path, limit=self.limit, position=self.position, regex=self.regex)
+            triggered, error = FileHandler.search_keyword(
+                path=self.path, 
+                limit=self.limit, 
+                position=self.position, 
+                regex=self.regex)
             return self.eval_negate(triggered, error)
 
     def sanitise(self):

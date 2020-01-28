@@ -22,7 +22,9 @@ class TestActionExecuter:
             ]
         }
 
-        status = ActionExecuter.execute_action(action=action, thread_lock=threading.Lock())
+        status = ActionExecuter.execute_action(
+            action=action, 
+            thread_lock=threading.Lock())
 
         assert status == True
 

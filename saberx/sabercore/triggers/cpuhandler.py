@@ -18,8 +18,8 @@ class CPUHandler:
         """
             **Method for comparing given count with current cpu load everage.**
 
-            Thos metho takes the current value and the threshold for load average
-            and performs the desired operation.
+            Thos metho takes the current value and the threshold for load 
+            average and performs the desired operation.
 
             Args:
                 current (Float) : Current value of load average
@@ -43,8 +43,8 @@ class CPUHandler:
         """
             **Method to check loadaverage**
 
-            This method evaluates the trigger param and descied whether the trigger
-            is fired or not.
+            This method evaluates the trigger param and descied whether the 
+            trigger is fired or not.
 
             Args:
                 kwargs (object) : Object containing thresholds and operation
@@ -63,7 +63,8 @@ class CPUHandler:
 
         # evaluate the condition for each component of load average
         for value in thresholds:
-            final_result = final_result and CPUHandler.__operate(loadavg[index], value, operation)
+            final_result = final_result and CPUHandler.__operate(
+                loadavg[index], value, operation)
             index += 1
 
         return final_result, None

@@ -19,7 +19,9 @@ class CPUTrigger(TriggerBase):
             **Method for initialing CPU trigger**
 
         """
-        super(CPUTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(CPUTrigger, self).__init__(
+            type=kwargs.get("type"), check=kwargs.get("check"), 
+            negate=kwargs.get("negate"))
 
         self.operation = kwargs.get("operation", ">")
 
@@ -43,7 +45,8 @@ class CPUTrigger(TriggerBase):
         if not self.sanitise():
             return False, "INVALID_ARGUMENTS"
 
-        triggered, error = CPUHandler.check_loadavg(operation=self.operation, thresholds=self.threshold)
+        triggered, error = CPUHandler.check_loadavg(
+            operation=self.operation, thresholds=self.threshold)
         return self.eval_negate(triggered, error)
 
     def sanitise(self):

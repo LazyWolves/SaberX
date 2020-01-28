@@ -17,10 +17,11 @@ class MemoryHandler:
     def __operate(current, count, operator):
 
         """
-            **Method for comparing given count with current memory metric value.**
+            **Method for comparing given count with current memory metric 
+            value.**
 
-            This method takes the current value and the threshold for memory metric
-            and performs the desired operation.
+            This method takes the current value and the threshold for memory 
+            metric and performs the desired operation.
 
             Args:
                 current (Float) : Current value of memory metric
@@ -51,7 +52,8 @@ class MemoryHandler:
                 check (string): Type of check : virtial | swap
 
             Returns:
-                psutil method : psutl method to get virtual or swap memory values.
+                psutil method : psutl method to get virtual or swap memory 
+                values.
         """
 
         MEM_TYPES = {
@@ -93,4 +95,5 @@ class MemoryHandler:
 
 
 if __name__ == "__main__":
-    print(MemoryHandler.check_mem(check_type="swap", attr="free", threshold=1, operator=">"))
+    print(MemoryHandler.check_mem(
+        check_type="swap", attr="free", threshold=1, operator=">"))

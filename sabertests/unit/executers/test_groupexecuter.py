@@ -39,7 +39,8 @@ class TestGroupExecuter:
             ]
         }
 
-        status = GroupExecuter.execute_group(group=group, thread_lock=threading.Lock())
+        status = GroupExecuter.execute_group(
+            group=group, thread_lock=threading.Lock())
 
         assert status == True
 

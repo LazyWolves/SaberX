@@ -14,7 +14,10 @@ class TCPTrigger(TriggerBase):
 
     """
     def __init__(self, **kwargs):
-        super(TCPTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(TCPTrigger, self).__init__(
+            type=kwargs.get("type"), 
+            check=kwargs.get("check"), 
+            negate=kwargs.get("negate"))
 
         self.host = kwargs.get("host", "127.0.0.1")
         self.port = kwargs.get("port", 80)
@@ -41,7 +44,14 @@ class TCPTrigger(TriggerBase):
         if not self.sanitise():
             return False, "IMPROPER_ARGUMENTS"
 
-        trigerred, error = TCPHandler.check_connection(host=self.host, port=self.port, timeout=self.timeout, attempts=self.attempts, threshold=self.threshold, check_type=self.check, ssl=self.ssl)
+        trigerred, error = TCPHandler.check_connection(
+            host=self.host, 
+            port=self.port, 
+            timeout=self.timeout, 
+            attempts=self.attempts, 
+            threshold=self.threshold, 
+            check_type=self.check, 
+            ssl=self.ssl)
 
         return self.eval_negate(trigerred, error)
 
