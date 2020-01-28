@@ -28,13 +28,13 @@ and read from tail features with limit.
         file_name = "filetrigger.test"
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="regex",
-                        path=file_name,
-                        regex="func[a-z]io[mmn]",
-                        limit=10,
-                        position="head"
-                    )
+            type="FILE_TRIGGER",
+            check="regex",
+            path=file_name,
+            regex="func[a-z]io[mmn]",
+            limit=10,
+            position="head"
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -42,13 +42,13 @@ and read from tail features with limit.
         assert error == None
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="regex",
-                        path=file_name,
-                        regex="testing",
-                        limit=1,
-                        position="head"
-                    )
+            type="FILE_TRIGGER",
+            check="regex",
+            path=file_name,
+            regex="testing",
+            limit=1,
+            position="head"
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -56,13 +56,13 @@ and read from tail features with limit.
         assert error == None
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="regex",
-                        path=file_name,
-                        regex=".*trigger",
-                        limit=2,
-                        position="tail"
-                    )
+            type="FILE_TRIGGER",
+            check="regex",
+            path=file_name,
+            regex=".*trigger",
+            limit=2,
+            position="tail"
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -70,13 +70,13 @@ and read from tail features with limit.
         assert error == None
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="regex",
-                        path=file_name,
-                        regex="dumped",
-                        limit=2,
-                        position="tail"
-                    )
+            type="FILE_TRIGGER",
+            check="regex",
+            path=file_name,
+            regex="dumped",
+            limit=2,
+            position="tail"
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -91,10 +91,10 @@ and read from tail features with limit.
         file_name = "./filetrigger.test"
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="present",
-                        path=file_name,
-                    )
+            type="FILE_TRIGGER",
+            check="present",
+            path=file_name,
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -107,10 +107,10 @@ and read from tail features with limit.
         self.create_file()
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="present",
-                        path="/home/travis/invalid.txt",
-                    )
+            type="FILE_TRIGGER",
+            check="present",
+            path="/home/travis/invalid.txt",
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -123,10 +123,10 @@ and read from tail features with limit.
         self.create_empty()
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="empty",
-                        path=file_name,
-                    )
+            type="FILE_TRIGGER",
+            check="empty",
+            path=file_name,
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 
@@ -138,10 +138,10 @@ and read from tail features with limit.
         self.create_file()
 
         fileTrigger = FileTrigger(
-                        type="FILE_TRIGGER",
-                        check="empty",
-                        path=file_name,
-                    )
+            type="FILE_TRIGGER",
+            check="empty",
+            path=file_name,
+        )
 
         trigerred, error = fileTrigger.fire_trigger()
 

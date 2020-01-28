@@ -4,11 +4,11 @@ class TestCPUTrigger:
 
     def test_cputrigger(self):
         cpuTrigger = CPUTrigger(
-                        type="CPU_TRIGGER",
-                        check="loadaverage",
-                        operation=">=",
-                        threshold=[0.0, 0.0, 0.0]
-                    )
+            type="CPU_TRIGGER",
+            check="loadaverage",
+            operation=">=",
+            threshold=[0.0, 0.0, 0.0]
+        )
 
         trigerred, error = cpuTrigger.fire_trigger()
 
@@ -16,11 +16,11 @@ class TestCPUTrigger:
         assert error == None
 
         cpuTrigger = CPUTrigger(
-                        type="CPU_TRIGGER",
-                        check="loadaverage",
-                        operation=">=",
-                        threshold=["invalid", 0.0, 0.0]
-                    )
+            type="CPU_TRIGGER",
+            check="loadaverage",
+            operation=">=",
+            threshold=["invalid", 0.0, 0.0]
+        )
 
         trigerred, error = cpuTrigger.fire_trigger()
 

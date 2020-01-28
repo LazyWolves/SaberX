@@ -42,9 +42,9 @@ class TestShellExecuter:
     def test_shell_executer_list(self):
 
         command_list = [
-                            "echo test>shelltest",
-                            "echo test2>shelltest2"
-                        ]
+            "echo test>shelltest",
+            "echo test2>shelltest2"
+        ]
 
         shellExecutor = ShellExecutor(command_list=command_list)
 
@@ -61,9 +61,9 @@ class TestShellExecuter:
         os.unlink("shelltest2")
 
         command_list = [
-                            "cat invalid",
-                            "echo test>shelltest"
-                    ]
+            "cat invalid",
+            "echo test>shelltest"
+        ]
 
         shellExecutor = ShellExecutor(command_list=command_list)
 

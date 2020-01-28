@@ -4,12 +4,12 @@ class TestMemoryTrigger:
     
     def test_memory_trigger(self):
         memoryTrigger = MemoryTrigger(
-                        type="MEMORY_TRIGGER",
-                        attr="used",
-                        threshold=10.0,
-                        operation='>',
-                        check="virtual"
-                    )
+            type="MEMORY_TRIGGER",
+            attr="used",
+            threshold=10.0,
+            operation='>',
+            check="virtual"
+        )
         
         triggered, error = memoryTrigger.fire_trigger()
 
@@ -17,12 +17,12 @@ class TestMemoryTrigger:
         assert error == None
 
         memoryTrigger = MemoryTrigger(
-                        type="MEMORY_TRIGGER",
-                        attr="used",
-                        threshold=0.0,
-                        operation='>=',
-                        check="swap"
-                    )
+            type="MEMORY_TRIGGER",
+            attr="used",
+            threshold=0.0,
+            operation='>=',
+            check="swap"
+        )
         
         triggered, error = memoryTrigger.fire_trigger()
 
