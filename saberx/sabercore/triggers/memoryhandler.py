@@ -84,7 +84,7 @@ class MemoryHandler:
         check = MemoryHandler.get_mem_type(check_type)
 
         metrics = check()
-        attr_val =  getattr(metrics, attr)
+        attr_val = getattr(metrics, attr)
 
         check_result = MemoryHandler.__operate(attr_val, threshold, operator)
 

@@ -45,11 +45,11 @@ class FileTrigger(TriggerBase):
             return False, "IMPROPER_ARGUMENTS"
 
         if self.check == "present":
-            triggered, error =  FileHandler.is_present(self.path)
+            triggered, error = FileHandler.is_present(self.path)
             return self.eval_negate(triggered, error)
 
         if self.check == "empty":
-            triggered, error =  FileHandler.is_empty(self.path)
+            triggered, error = FileHandler.is_empty(self.path)
             return self.eval_negate(triggered, error)
 
         if self.check == "regex":
