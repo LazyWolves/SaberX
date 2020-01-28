@@ -91,7 +91,7 @@ class ThreadExecuter:
             Returns:
                 None : Returns nothing
         """
-        group_status = GroupExecuter.execute_group(
+        GroupExecuter.execute_group(
             group=group, thread_lock=self.__lock, logger=logger)
 
     def spawn_workers(self, lock_file):
