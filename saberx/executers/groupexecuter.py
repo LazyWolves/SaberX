@@ -6,6 +6,7 @@
 
 from saberx.executers.actionexecuter import ActionExecuter
 
+
 class GroupExecuter(object):
 
     """

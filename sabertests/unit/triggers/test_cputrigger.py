@@ -1,5 +1,6 @@
 from saberx.sabercore.triggers.cputrigger import CPUTrigger
 
+
 class TestCPUTrigger:
 
     def test_cputrigger(self):

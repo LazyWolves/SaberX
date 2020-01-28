@@ -1,6 +1,7 @@
 import os
 from saberx.sabercore.shellexecutor import ShellExecutor
 
+
 class TestShellExecuter:
     def test_shell_executer_single(self):
 
@@ -38,6 +39,7 @@ class TestShellExecuter:
         assert status == False
 
         os.unlink("./shelltest")
+
 
     def test_shell_executer_list(self):
 

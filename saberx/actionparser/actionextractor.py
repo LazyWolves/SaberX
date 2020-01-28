@@ -1,6 +1,7 @@
 import yaml
 import json
 
+
 class ActionExtractor:
 
     def __init__(self, **kwargs):

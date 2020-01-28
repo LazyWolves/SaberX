@@ -1,5 +1,6 @@
 from saberx.sabercore.triggers.tcptrigger import TCPTrigger
 
+
 class TestTCPTrigger:
     
     def test_non_ssl(self):
@@ -44,6 +45,7 @@ class TestTCPTrigger:
 
         assert triggered == True
         assert error == None
+
 
     def test_ssl(self):
         tcpTrigger = TCPTrigger(

@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .cpuhandler import CPUHandler
 
+
 class CPUTrigger(TriggerBase):
 
     """

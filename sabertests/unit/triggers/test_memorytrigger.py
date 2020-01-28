@@ -1,5 +1,6 @@
 from saberx.sabercore.triggers.memorytrigger import MemoryTrigger
 
+
 class TestMemoryTrigger:
     
     def test_memory_trigger(self):

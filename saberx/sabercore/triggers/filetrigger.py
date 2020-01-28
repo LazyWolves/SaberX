@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .filehandler import FileHandler
 
+
 class FileTrigger(TriggerBase):
 
     """

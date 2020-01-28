@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .processhandler import ProcessHandler
 
+
 class ProcessTrigger(TriggerBase):
 
     """

@@ -1,5 +1,6 @@
 from saberx.sabercore.triggers.processtrigger import ProcessTrigger
 
+
 class TestProcessTrigger:
 
     def test_process_present(self):

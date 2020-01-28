@@ -1,6 +1,7 @@
 from saberx.sabercore.triggers.filetrigger import FileTrigger
 import os
 
+
 class TestFileTrigger:
 
     def create_file(self):

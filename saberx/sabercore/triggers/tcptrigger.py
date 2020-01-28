@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .tcphandler import TCPHandler
 
+
 class TCPTrigger(TriggerBase):
 
     """

@@ -12,11 +12,13 @@ import optparse
 import os
 import logging
 
+
 # global constants used by driver
 CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
 LOG_FILE = "/var/log/saberx/saberx.log"
 SLEEP_PERIOD = 10
+
 
 def drive():
     """
@@ -122,6 +124,7 @@ def __clear_existing_lock(lock_dir, logger):
 
         return False
 
+
 def __can_aquire_lock(lock_dir):
     """
         **Method for checking if lock can be aquired**
@@ -143,6 +146,7 @@ def __can_aquire_lock(lock_dir):
         return False
 
     return True
+
 
 def __load_config():
     """
@@ -166,6 +170,7 @@ def __load_config():
 
     return config
 
+
 def __sanitize_config(config):
 
     '''
@@ -173,6 +178,7 @@ def __sanitize_config(config):
     '''
     
     return True
+
 
 def __setup_logging(log_file):
     """
