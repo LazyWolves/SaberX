@@ -91,4 +91,4 @@ class MemoryHandler:
         return check_result, None
 
 if __name__ == "__main__":
-    print (MemoryHandler.check_mem(check_type="swap", attr="free", threshold=1, operator=">"))
+    print(MemoryHandler.check_mem(check_type="swap", attr="free", threshold=1, operator=">"))

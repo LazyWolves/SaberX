@@ -197,4 +197,4 @@ class ProcessHandler:
 
 
 if __name__ == "__main__":
-    print (ProcessHandler.check_cmdline_count("/usr/sbin/haproxy", 2, "<="))
+    print(ProcessHandler.check_cmdline_count("/usr/sbin/haproxy", 2, "<="))

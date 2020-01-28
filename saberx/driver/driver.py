@@ -64,7 +64,7 @@ def drive():
         '''
             Issue has already been logged. Existting Saberx
         '''
-        exit (2)
+        exit(2)
 
     # get the sleep time from conf if available
     sleep_period = int(config.get("sleep_period", SLEEP_PERIOD))
