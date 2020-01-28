@@ -193,7 +193,7 @@ def __setup_logging(log_file):
     logger_handler = logging.FileHandler(log_file)
     logger_handler.setLevel(logging.DEBUG)
     logger_formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
-                            datefmt='%Y-%m-%d %H:%M:%S')
+                                         datefmt='%Y-%m-%d %H:%M:%S')
     logger_handler.setFormatter(logger_formatter)
     logger.addHandler(logger_handler)
 
