@@ -1,6 +1,5 @@
 [flake8]
 ignore = 
-   E713
    F401
    F841
    W191

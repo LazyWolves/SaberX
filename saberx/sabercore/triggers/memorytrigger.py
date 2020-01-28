@@ -76,7 +76,7 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if not self.check in self.valid_checks:
+        if self.check not in self.valid_checks:
 
             '''
                 Log error
@@ -90,7 +90,7 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if not self.attr in self.valid_attrs:
+        if self.attr not in self.valid_attrs:
 
             '''
                 Log error
@@ -104,7 +104,7 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if not self.operation in self.valid_operations:
+        if self.operation not in self.valid_operations:
 
             '''
                 Log error
