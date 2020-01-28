@@ -162,5 +162,6 @@ class FileHandler:
         else:
             return FileHandler.read_from_tail(path, regex, limit)
 
+
 if __name__ == "__main__":
     FileHandler.read_from_tail("filetrigger.py", '.*', 10)

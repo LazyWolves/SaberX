@@ -30,5 +30,6 @@ class ActionExtractor:
     def get_action_groups(self):
         return self.action_groups
 
+
 if __name__ == "__main__":
     ActionExtractor(configpath="test.yaml")

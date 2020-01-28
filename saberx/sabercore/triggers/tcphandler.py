@@ -120,5 +120,6 @@ class TCPHandler:
 
         return False, None
 
+
 if __name__ == "__main__":
     print(TCPHandler.check_connection(host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))
