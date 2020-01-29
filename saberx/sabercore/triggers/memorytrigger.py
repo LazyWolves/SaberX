@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .memoryhandler import MemoryHandler
 
+
 class MemoryTrigger(TriggerBase):
 
     """
@@ -17,12 +18,15 @@ class MemoryTrigger(TriggerBase):
             **Method for initialing CPU trigger**
 
         """
-        super(MemoryTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(MemoryTrigger, self).__init__(
+            type=kwargs.get("type"),
+            check=kwargs.get("check"),
+            negate=kwargs.get("negate"))
 
         self.attr = kwargs.get("attr", "used")
         self.operation = kwargs.get("operation", ">")
 
-        if kwargs.get("threshold") != None:
+        if kwargs.get("threshold") is not None:
             self.threshold = kwargs.get("threshold")
 
         self.valid_checks = ["virtual", "swap"]
@@ -43,7 +47,11 @@ class MemoryTrigger(TriggerBase):
         if not self.sanitise():
             return False, "INVALID_ARGUMENTS"
 
-        triggered, error = MemoryHandler.check_mem(check_type=self.check, attr=self.attr, operation=self.operation, threshold=self.threshold)
+        triggered, error = MemoryHandler.check_mem(
+            check_type=self.check,
+            attr=self.attr,
+            operation=self.operation,
+            threshold=self.threshold)
         return self.eval_negate(triggered, error)
 
     def sanitise(self):
@@ -68,7 +76,7 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if not self.check in self.valid_checks:
+        if self.check not in self.valid_checks:
 
             '''
                 Log error
@@ -82,7 +90,7 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if not self.attr in self.valid_attrs:
+        if self.attr not in self.valid_attrs:
 
             '''
                 Log error
@@ -96,14 +104,14 @@ class MemoryTrigger(TriggerBase):
             '''
             return False
 
-        if not self.operation in self.valid_operations:
+        if self.operation not in self.valid_operations:
 
             '''
                 Log error
             '''
             return False
 
-        if self.threshold == None:
+        if self.threshold is None:
 
             '''
                 Log error

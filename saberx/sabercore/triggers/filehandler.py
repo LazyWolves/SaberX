@@ -6,7 +6,7 @@
 import os
 from itertools import islice
 import re
-import traceback
+
 
 class FileHandler:
 
@@ -134,7 +134,8 @@ class FileHandler:
             execute the trigger
 
             Args:
-                kwargs (dict): Dict containing path, pattern, limit and position to read the file from
+                kwargs (dict): Dict containing path, pattern, limit and
+                position to read the file from
 
             Returns:
                 bool, string: status, error if any
@@ -160,6 +161,7 @@ class FileHandler:
             return FileHandler.read_from_head(path, regex, limit)
         else:
             return FileHandler.read_from_tail(path, regex, limit)
+
 
 if __name__ == "__main__":
     FileHandler.read_from_tail("filetrigger.py", '.*', 10)

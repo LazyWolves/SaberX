@@ -3,8 +3,8 @@
    :synopsis: Module for performing the memory trigger operation.
 """
 
-import os
 import psutil
+
 
 class MemoryHandler:
 
@@ -16,10 +16,11 @@ class MemoryHandler:
     def __operate(current, count, operator):
 
         """
-            **Method for comparing given count with current memory metric value.**
+            **Method for comparing given count with current memory metric
+            value.**
 
-            This method takes the current value and the threshold for memory metric
-            and performs the desired operation.
+            This method takes the current value and the threshold for memory
+            metric and performs the desired operation.
 
             Args:
                 current (Float) : Current value of memory metric
@@ -50,7 +51,8 @@ class MemoryHandler:
                 check (string): Type of check : virtial | swap
 
             Returns:
-                psutil method : psutl method to get virtual or swap memory values.
+                psutil method : psutl method to get virtual or swap memory
+                values.
         """
 
         MEM_TYPES = {
@@ -84,11 +86,13 @@ class MemoryHandler:
         check = MemoryHandler.get_mem_type(check_type)
 
         metrics = check()
-        attr_val =  getattr(metrics, attr)
+        attr_val = getattr(metrics, attr)
 
         check_result = MemoryHandler.__operate(attr_val, threshold, operator)
 
         return check_result, None
 
+
 if __name__ == "__main__":
-    print (MemoryHandler.check_mem(check_type="swap", attr="free", threshold=1, operator=">"))
+    print(MemoryHandler.check_mem(
+        check_type="swap", attr="free", threshold=1, operator=">"))

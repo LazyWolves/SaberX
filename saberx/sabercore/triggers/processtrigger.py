@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .processhandler import ProcessHandler
 
+
 class ProcessTrigger(TriggerBase):
 
     """
@@ -17,7 +18,10 @@ class ProcessTrigger(TriggerBase):
             **Method for initialing memory trigger**
 
         """
-        super(ProcessTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(ProcessTrigger, self).__init__(
+            type=kwargs.get("type"),
+            check=kwargs.get("check"),
+            negate=kwargs.get("negate"))
 
         if kwargs.get("regex"):
             self.regex = kwargs.get("regex")
@@ -42,15 +46,17 @@ class ProcessTrigger(TriggerBase):
             return False, "INVALID_ARGUMENTS"
 
         if self.check == "name":
-            if self.count != None:
-                triggered, error = ProcessHandler.check_name_count(self.regex, self.count, self.operation)
+            if self.count is not None:
+                triggered, error = ProcessHandler.check_name_count(
+                    self.regex, self.count, self.operation)
                 return self.eval_negate(triggered, error)
             triggered, error = ProcessHandler.check_name(self.regex)
             return self.eval_negate(triggered, error)
 
         if self.check == "cmdline":
             if self.count:
-                triggered, error = ProcessHandler.check_cmdline_count(self.regex, self.count, self.operation)
+                triggered, error = ProcessHandler.check_cmdline_count(
+                    self.regex, self.count, self.operation)
                 return self.eval_negate(triggered, error)
             triggered, error = ProcessHandler.check_cmdline(self.regex)
             return self.eval_negate(triggered, error)

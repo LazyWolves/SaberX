@@ -6,6 +6,7 @@
 from .triggerbase import TriggerBase
 from .cpuhandler import CPUHandler
 
+
 class CPUTrigger(TriggerBase):
 
     """
@@ -18,7 +19,9 @@ class CPUTrigger(TriggerBase):
             **Method for initialing CPU trigger**
 
         """
-        super(CPUTrigger, self).__init__(type=kwargs.get("type"), check=kwargs.get("check"), negate=kwargs.get("negate"))
+        super(CPUTrigger, self).__init__(
+            type=kwargs.get("type"), check=kwargs.get("check"),
+            negate=kwargs.get("negate"))
 
         self.operation = kwargs.get("operation", ">")
 
@@ -28,7 +31,7 @@ class CPUTrigger(TriggerBase):
         self.valid_operations = ["=", "<", ">", "<=", ">="]
         self.valid_checks = ["loadaverage"]
 
-    def  fire_trigger(self):
+    def fire_trigger(self):
 
         """
             **Method to fire the trigger**
@@ -42,7 +45,8 @@ class CPUTrigger(TriggerBase):
         if not self.sanitise():
             return False, "INVALID_ARGUMENTS"
 
-        triggered, error = CPUHandler.check_loadavg(operation=self.operation, thresholds=self.threshold)
+        triggered, error = CPUHandler.check_loadavg(
+            operation=self.operation, thresholds=self.threshold)
         return self.eval_negate(triggered, error)
 
     def sanitise(self):
@@ -74,7 +78,7 @@ class CPUTrigger(TriggerBase):
             '''
             return False
 
-        if not self.check in self.valid_checks:
+        if self.check not in self.valid_checks:
 
             '''
                 Log error

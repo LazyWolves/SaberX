@@ -11,6 +11,7 @@ from saberx.sabercore.triggers.memorytrigger import MemoryTrigger
 from saberx.sabercore.triggers.tcptrigger import TCPTrigger
 from saberx.sabercore.shellexecutor import ShellExecutor
 
+
 class ActionExecuter(object):
 
     """
@@ -18,15 +19,15 @@ class ActionExecuter(object):
         This class mostly comrises of status function.
     """
 
-
     @staticmethod
     def execute_action(**kwargs):
 
         """
             **Method to execute a given action**
 
-            This method executes a given action. It fires the associated trigger using the
-            required trigger handler if trigger is successfull, executes the desired commands.
+            This method executes a given action. It fires the associated
+            trigger using the required trigger handler if trigger is
+            successfull, executes the desired commands.
 
             The layout of a action will be as follows:
 
@@ -77,11 +78,14 @@ class ActionExecuter(object):
         if error:
 
             '''
-                Log the error and return False. Consider the trgger as a failure.
+                Log the error and return False. Consider the trgger as a
+                failure.
             '''
 
             if logger:
-                logger.critical("Action {actionname} failed with error : {error}".format(actionname=action_name, error=str(error)))
+                logger.critical(
+                    "Action {actionname} failed with error : {error}"
+                    .format(actionname=action_name, error=str(error)))
 
             return False
 

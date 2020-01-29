@@ -1,6 +1,7 @@
 import os
 from saberx.sabercore.shellexecutor import ShellExecutor
 
+
 class TestShellExecuter:
     def test_shell_executer_single(self):
 
@@ -8,10 +9,11 @@ class TestShellExecuter:
 
         shellExecutor = ShellExecutor(command_list="")
 
-        status, output, proc_exit_code = shellExecutor.execute_shell_single(command)
+        status, output, proc_exit_code = \
+            shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code == 0
-        assert status == True
+        assert status
 
         files = os.listdir("./")
 
@@ -24,33 +26,35 @@ class TestShellExecuter:
 
         command = "cat shelltest"
 
-        status, output, proc_exit_code = shellExecutor.execute_shell_single(command)
+        status, output, proc_exit_code = \
+            shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code == 0
         assert "test" in output
-        assert status == True
+        assert status
 
         command = "cat invalid"
 
-        status, output, proc_exit_code = shellExecutor.execute_shell_single(command)
+        status, output, proc_exit_code = \
+            shellExecutor.execute_shell_single(command)
 
         assert proc_exit_code != 0
-        assert status == False
+        assert not status
 
         os.unlink("./shelltest")
 
     def test_shell_executer_list(self):
 
         command_list = [
-                            "echo test>shelltest",
-                            "echo test2>shelltest2"
-                        ]
+            "echo test>shelltest",
+            "echo test2>shelltest2"
+        ]
 
         shellExecutor = ShellExecutor(command_list=command_list)
 
         status = shellExecutor.execute_shell_list()
 
-        assert status == True
+        assert status
 
         files = os.listdir("./")
 
@@ -61,15 +65,15 @@ class TestShellExecuter:
         os.unlink("shelltest2")
 
         command_list = [
-                            "cat invalid",
-                            "echo test>shelltest"
-                    ]
+            "cat invalid",
+            "echo test>shelltest"
+        ]
 
         shellExecutor = ShellExecutor(command_list=command_list)
 
         status = shellExecutor.execute_shell_list()
 
-        assert status == False
+        assert not status
 
         files = os.listdir("./")
 

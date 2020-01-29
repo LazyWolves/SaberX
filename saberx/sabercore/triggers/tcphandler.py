@@ -3,10 +3,9 @@
    :synopsis: Module for evaluating tcptrigger trigger.
 """
 
-import os
 import socket
 import ssl
-import traceback
+
 
 class TCPHandler:
 
@@ -73,9 +72,8 @@ class TCPHandler:
         except socket.error:
             return False
 
-
     @staticmethod
-    def  check_connection(**kwargs):
+    def check_connection(**kwargs):
 
         """
             **Method to evaluate the TCP trigger**
@@ -85,7 +83,8 @@ class TCPHandler:
             host.
 
             Args:
-                kwargs (dict): dict containing host, port, ssl, timeout, attempts, threshold, check_type
+                kwargs (dict): dict containing host, port, ssl, timeout,
+                attempts, threshold, check_type
 
             Returns:
                 bool, error: status, error if any
@@ -97,7 +96,6 @@ class TCPHandler:
         attemps = kwargs.get("attempts")
         threshold = kwargs.get("threshold")
         check_type = kwargs.get("check_type")
-
 
         if ssl:
             check = TCPHandler.check_tcp_ssl
@@ -121,5 +119,7 @@ class TCPHandler:
 
         return False, None
 
+
 if __name__ == "__main__":
-    print (TCPHandler.check_connection(host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))
+    print(TCPHandler.check_connection(
+        host="www.media.net", port=1111, check_type="tcp_connect", attempts=2))

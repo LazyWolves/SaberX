@@ -12,11 +12,13 @@ import optparse
 import os
 import logging
 
+
 # global constants used by driver
 CONFIG_FILE = "/etc/saberx/saberx.conf"
 LOCK_FILE = "saberx.lock"
 LOG_FILE = "/var/log/saberx/saberx.log"
 SLEEP_PERIOD = 10
+
 
 def drive():
     """
@@ -51,7 +53,9 @@ def drive():
 
     logger = __setup_logging(LOG_FILE)
 
-    actionExtractor = ActionExtractor(configpath=config.get("action_plan"), logger=logger)
+    actionExtractor = ActionExtractor(
+        configpath=config.get("action_plan"),
+        logger=logger)
     if not actionExtractor.action_plan_loaded:
 
         '''
@@ -64,7 +68,7 @@ def drive():
         '''
             Issue has already been logged. Existting Saberx
         '''
-        exit (2)
+        exit(2)
 
     # get the sleep time from conf if available
     sleep_period = int(config.get("sleep_period", SLEEP_PERIOD))
@@ -78,11 +82,14 @@ def drive():
         # threads should be spwaned only if a lock can be aquired.
         if __can_aquire_lock(config.get("lock_dir")):
             logger.info("Proceeding with saberx run")
-            worker_and_run_success = threadExecuter.spawn_workers(os.path.join(config.get("lock_dir"), LOCK_FILE))
+            worker_and_run_success = threadExecuter.spawn_workers(
+                os.path.join(config.get("lock_dir"), LOCK_FILE))
             if not worker_and_run_success:
 
                 '''
-                    Either lock could not be aquired or release failed. Issue has been logged.
+                    Either lock could not be aquired or release failed.
+                    Issue has been logged.
+
                     Exit SaberX
                 '''
                 exit(2)
@@ -114,13 +121,15 @@ def __clear_existing_lock(lock_dir, logger):
     except Exception as e:
 
         '''
-            Unable to clear stale lock. Log issue. Send false. Stale locks muct be removed
-            or else runs wont take place
+            Unable to clear stale lock. Log issue. Send false. Stale locks muct
+            be removed or else runs wont take place
         '''
 
-        logger.critical("Unable to remove lock file : Exeption : {}".format(str(e)))
+        logger.critical(
+            "Unable to remove lock file : Exeption : {}".format(str(e)))
 
         return False
+
 
 def __can_aquire_lock(lock_dir):
     """
@@ -144,11 +153,13 @@ def __can_aquire_lock(lock_dir):
 
     return True
 
+
 def __load_config():
     """
         **Method for loading config into python dict**
 
-        This method parses the conf file and creates the corresponding python dict
+        This method parses the conf file and creates the corresponding python
+        dict
 
         Returns:
             dict : Whether lock could be cleared
@@ -166,13 +177,15 @@ def __load_config():
 
     return config
 
+
 def __sanitize_config(config):
 
     '''
         sanitize the config and log issues
     '''
-    
+
     return True
+
 
 def __setup_logging(log_file):
     """
@@ -192,12 +205,14 @@ def __setup_logging(log_file):
     logger.setLevel(logging.DEBUG)
     logger_handler = logging.FileHandler(log_file)
     logger_handler.setLevel(logging.DEBUG)
-    logger_formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s',
-                            datefmt='%Y-%m-%d %H:%M:%S')
+    logger_formatter = logging.Formatter(
+        fmt='%(asctime)s %(levelname)-8s %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S')
     logger_handler.setFormatter(logger_formatter)
     logger.addHandler(logger_handler)
 
     return logger
+
 
 if __name__ == "__main__":
     drive()
