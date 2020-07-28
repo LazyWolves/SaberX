@@ -18,6 +18,25 @@ ports).
 
 ## Getting started with SaberX
 
+## Prerequisites for installation
+
+One of the dependencies that SaberX tries to install is psutil which needs gcc and python3-dev (python3-devel 
+for Redhat based systems) installed.
+Incase you do not have them installed in your system, use the below command to install them before installing SaberX.
+
+For Linux Ubuntu / Debian:
+
+```
+sudo apt-get install gcc python3-dev
+
+```
+For Linux Redhat / CentOS:
+
+```
+sudo yum install gcc python3-devel
+
+```
+
 ### Installing SaberX
 
 SaberX can be simply installed using following steps:
